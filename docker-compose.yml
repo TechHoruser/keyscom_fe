@@ -1,0 +1,13 @@
+version: '3'
+services:
+  angular:
+    build:
+      context: ./
+      dockerfile: ./.docker/Dockerfile
+    ports:
+      - "4200:4200"
+    container_name: angular
+    entrypoint: ./.docker/run.sh
+    volumes:
+       - .:/var/www/html/keyscom
+       - ./node_modules:/var/www/html/keyscom/node_modules

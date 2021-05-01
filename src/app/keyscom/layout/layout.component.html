@@ -1,0 +1,58 @@
+<mat-sidenav-container class="app-container">
+  <mat-sidenav #draw
+               [mode]="mobileQuery.matches ? 'over' : 'side'"
+               [fixedInViewport]="mobileQuery.matches"
+               [opened]="!mobileQuery.matches"
+               role="navigation">
+    <div class="mat-sidenav">
+      <div class="sidenav-top">
+        <div class="sidenav-header sidenav-row">
+          <a mat-list-item href="/dashboard">
+            <div class="left">
+              <img class="combined-shape" src="assets/combined-shape.svg" alt="combined shape">
+              <img src="assets/shape.svg" alt="shape">
+            </div>
+          </a>
+          <div class="right" (click)="draw.toggle()">
+            <fa-icon [icon]="faAngleLeft"></fa-icon>
+          </div>
+        </div>
+        <mat-accordion class="sidenav-links">
+          <mat-nav-list>
+            <a mat-list-item routerLink="/dashboard">
+              <div class="menu-option active">
+                <div class="icon icon-fill" aria-label="My icon" [inlineSVG]="'/assets/icons/icon-navbar-v-rtrage.svg'"></div>
+                <div class="text">Verträge</div>
+                <div class="active-icon"><fa-icon [icon]="faChevronRight"></fa-icon></div>
+              </div>
+            </a>
+          </mat-nav-list>
+        </mat-accordion>
+      </div>
+      <div class="sidenav-bottom">
+        <div>
+          <img *ngIf="userInfo" [src]="userInfo.avatar" [attr.alt]="userInfo.name" class="avatar"/>
+          <h4 *ngIf="userInfo">{{userInfo.name}}</h4>
+        </div>
+        <a mat-icon-button aria-label="Logout" href="/logout">
+          <div id="icon-logout" class="icon-fill icon-stroke" aria-label="Exit" [inlineSVG]="'/assets/icons/ico-log-out.svg'"></div>
+        </a>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div *ngIf="!draw.opened"
+         (click)="draw.toggle()"
+         id="show-sidenav">
+      <fa-icon [icon]="faAngleRight"></fa-icon>
+    </div>
+    <div class="p-3" [ngClass]="draw.opened?'sidenav-opened':'sidenav-closed'">
+      <router-outlet></router-outlet>
+    </div>
+    <div *ngIf="loaderService.isLoading()">
+      <div class="loading-spinner">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
