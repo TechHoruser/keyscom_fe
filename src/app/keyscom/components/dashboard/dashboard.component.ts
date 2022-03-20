@@ -1,8 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
-import {environment} from '../../../environments/environment';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
-import {UserPermissionsConstants} from '../../shared/auth/user-permissions.constants';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +11,6 @@ import {UserPermissionsConstants} from '../../shared/auth/user-permissions.const
 export class DashboardComponent implements AfterViewInit {
   paginatorSize: number = environment.DEFAULT_PAGINATOR_SIZE;
   paginatorSizeOptions: number[] = environment.DEFAULT_PAGINATOR_SIZE_OPTIONS;
-  userPermissions = UserPermissionsConstants;
 
   constructor(
     private router: Router,
@@ -22,6 +20,5 @@ export class DashboardComponent implements AfterViewInit {
     translateService.setDefaultLang(environment.LANG_DEFAULT);
   }
 
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void {}
 }

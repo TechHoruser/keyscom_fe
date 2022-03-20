@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -16,18 +16,22 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {environment} from '../../environments/environment';
-import { CallbackComponent } from './component/callback/callback.component';
+import {CallbackComponent} from './component/callback/callback.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import {LoginComponent} from './component/login/login.component';
 
 @NgModule({
-  declarations: [CallbackComponent],
+  declarations: [
+    LoginComponent,
+    CallbackComponent,
+  ],
   imports: [
     CommonModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
+        useFactory: (http) => new TranslateHttpLoader(http, './assets/i18n/', '.json'),
         deps: [HttpClient]
       }
     }),
@@ -66,8 +70,4 @@ import {MatIconModule} from '@angular/material/icon';
     {provide: MAT_DATE_LOCALE, useValue: environment.LANG_DEFAULT}
   ]
 })
-export class SharedModule { }
-
-export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+export class SharedModule {}

@@ -1,12 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
-import {environment} from '../environments/environment';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,17 +15,6 @@ import {environment} from '../environments/environment';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AuthModule.forRoot({
-      ...environment.AUTH,
-      httpInterceptor: {
-        allowedList: [
-          environment.API_HOST + '/api/*'
-        ]
-      }
-    })
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

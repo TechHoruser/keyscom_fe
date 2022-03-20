@@ -1,5 +1,4 @@
 #!/bin/sh
 
-npm install --also=dev
-npm start -- --host 0.0.0.0 --publicHost keyscom.local --disable-host-check
-
+npm install --also=dev && \
+npm start -- --host 0.0.0.0 --public-host keyscom.local --disable-host-check

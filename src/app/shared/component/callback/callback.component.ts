@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {STORAGE_LAST_URL} from '../../auth/authguard.service';
+import {STORAGE_LAST_URL} from '../../auth/auth.guard';
 
 @Component({
   selector: 'app-callback',
@@ -17,5 +17,4 @@ export class CallbackComponent implements OnInit {
     const lastUrl = localStorage.getItem(STORAGE_LAST_URL) ?? '/';
     this.route.navigate([lastUrl]);
   }
-
 }

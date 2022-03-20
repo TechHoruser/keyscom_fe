@@ -1,21 +1,26 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {CallbackComponent} from './shared/component/callback/callback.component';
 import {LayoutComponent} from './keyscom/layout/layout.component';
-import {AuthGuardService} from './shared/auth/authguard.service';
+import {AuthGuard} from './shared/auth/auth.guard';
+import {LoginComponent} from './shared/component/login/login.component';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'callback',
+    component: CallbackComponent
+  },
   {
     path: '',
     component: LayoutComponent,
     loadChildren: () =>
       import('./keyscom/keyscom.module').then(m => m.KeyscomModule),
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuard]
   },
-  {
-    path: 'callback',
-    component: CallbackComponent
-  }
 ];
 
 @NgModule({

@@ -1,33 +1,32 @@
 import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
-import {AuthService} from '@auth0/auth0-angular';
 import {MediaMatcher} from '@angular/cdk/layout';
-import {faAngleLeft, faAngleRight, faChevronRight, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faAngleLeft, faAngleRight, faChevronRight, faSignOut, faUser} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
-import {UserInfoService} from '../services/user-info.service';
-import {UserInfo} from '../models/user-info.model';
 import {LoaderService} from '../services/loader.service';
 import {APP_BASE_HREF} from '@angular/common';
 import {AppConfigService} from '../../shared/services/app-config.service';
+import {AuthenticationService} from '../../shared/auth/authentication.service';
+import {User} from '../../shared/auth/user.model';
 
 @Component({
-  selector: 'app-app-layout',
-  templateUrl: './app-layout.component.html',
-  styleUrls: ['./app-layout.component.scss']
+  selector: 'app-layout',
+  templateUrl: './layout.component.html',
+  styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
   faAngleRight = faAngleRight;
   faAngleLeft = faAngleLeft;
   faUser = faUser;
   faChevronRight = faChevronRight;
+  faSignOut = faSignOut;
   mobileQuery: MediaQueryList;
-  userInfo: UserInfo;
+  user: User;
   private readonly mobileQueryListener: () => void;
 
   constructor(
     @Inject(APP_BASE_HREF) public baseHref: string,
     private router: Router,
-    private authService: AuthService,
-    private userInfoService: UserInfoService,
+    private authService: AuthenticationService,
     public loaderService: LoaderService,
     changeDetectorRef: ChangeDetectorRef,
     public appConfig: AppConfigService,
@@ -40,18 +39,10 @@ export class LayoutComponent implements OnInit {
     } else {
       this.mobileQuery.addListener(this.mobileQueryListener);
     }
+    console.log('test');
   }
 
   ngOnInit(): void {
-    this.onInitLoad();
+    this.authService.currentUser.subscribe(user => this.user = user);
   }
-
-  private async onInitLoad(): Promise<void> {
-    this.userInfo = await this.userInfoService.getUserInfo();
-  }
-
-  toHome(): void {
-    this.router.navigate(['/']);
-  }
-
 }
