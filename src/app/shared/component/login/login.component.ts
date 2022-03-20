@@ -4,9 +4,9 @@ import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements AfterViewInit {
   paginatorSize: number = environment.DEFAULT_PAGINATOR_SIZE;

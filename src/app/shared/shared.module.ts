@@ -20,6 +20,10 @@ import {CallbackComponent} from './component/callback/callback.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {LoginComponent} from './component/login/login.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -31,10 +35,14 @@ import {LoginComponent} from './component/login/login.component';
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (http) => new TranslateHttpLoader(http, './assets/i18n/', '.json'),
+        useFactory: (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json'),
         deps: [HttpClient]
       }
     }),
+    FontAwesomeModule,
+    MatExpansionModule,
+    MatListModule,
+    MatSidenavModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -51,6 +59,7 @@ import {LoginComponent} from './component/login/login.component';
   ],
   exports: [
     TranslateModule,
+    FontAwesomeModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -62,6 +71,9 @@ import {LoginComponent} from './component/login/login.component';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatExpansionModule,
+    MatListModule,
+    MatSidenavModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule
   ],
