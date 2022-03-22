@@ -39,7 +39,6 @@ export class LayoutComponent implements OnInit {
     } else {
       this.mobileQuery.addListener(this.mobileQueryListener);
     }
-    console.log('test');
   }
 
   ngOnInit(): void {

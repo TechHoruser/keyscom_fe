@@ -33,6 +33,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
   imports: [
     CommonModule,
     TranslateModule.forRoot({
+      defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json'),
