@@ -16,12 +16,14 @@
     "@angular/common": "*",
     "@angular/compiler": "*",
     "@angular/core": "*",
+    "@angular/flex-layout": "^13.0.0-beta.38",
     "@angular/forms": "*",
     "@angular/material": "*",
     "@angular/material-moment-adapter": "*",
     "@angular/platform-browser": "*",
     "@angular/platform-browser-dynamic": "*",
     "@angular/router": "*",
+    "@auth0/angular-jwt": "^5.0.2",
     "@bootstrap-styled/v4": "*",
     "@fortawesome/angular-fontawesome": "*",
     "@fortawesome/free-solid-svg-icons": "*",
@@ -37,6 +39,7 @@
     "@types/jasmine": "*",
     "@types/jasminewd2": "*",
     "codelyzer": "*",
+    "eslint": "*",
     "jasmine-core": "*",
     "jasmine-spec-reporter": "*",
     "karma": "*",
@@ -46,7 +49,6 @@
     "karma-jasmine-html-reporter": "*",
     "protractor": "*",
     "ts-node": "*",
-    "eslint": "*",
     "typescript": "*"
   }
 }

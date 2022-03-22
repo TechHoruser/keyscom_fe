@@ -8,73 +8,18 @@
   .menu-option {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     width: 100%;
-    margin: 5px;
-
-    .icon {
-      display: flex;
-      margin: 0 .7em;
-
-      &.icon-fill ::ng-deep svg {
-        g {
-          fill: $light_icon_color;
-        }
-
-        path {
-          fill: $light_icon_color;
-        }
-      }
-
-      &.icon-stroke ::ng-deep svg {
-        g {
-          stroke: $light_icon_color;
-        }
-
-        path {
-          stroke: $light_icon_color;
-        }
-      }
-    }
+    padding: 0.1em .5em;
 
     .text {
       font-weight: bold;
     }
 
-    .active-icon {
-      justify-content: flex-end;
-      display: flex;
-      width: 100%;
-      padding-right: .75em;
-      color: $menu_light_primary_color;
-    }
-
     &.active {
       border-left: solid .2em $menu_primary_color;
-      margin: .5em 0;
-
-      .icon {
-        &.icon-fill ::ng-deep svg {
-          g {
-            fill: $menu_primary_color;
-          }
-
-          path {
-            fill: $menu_primary_color;
-          }
-        }
-        &.icon-stroke ::ng-deep svg {
-          g {
-            stroke: $menu_primary_color;
-          }
-
-          path {
-            stroke: $menu_primary_color;
-          }
-        }
-      }
+      padding-left: 0.3em;
     }
-
   }
 }
 
@@ -82,9 +27,8 @@ mat-sidenav-container {
   height: 100%;
 
   mat-sidenav {
-    width: 18em;
     background-color: $default_bg;
-    border-right-width: 0px;
+    border-right-width: 0;
     box-shadow: $box-shadow;
 
     .mat-sidenav {
@@ -104,14 +48,6 @@ mat-sidenav-container {
 
     .mat-list-base {
       padding: 0;
-
-      ::ng-deep .mat-list-item .mat-list-item-content {
-        padding: 0;
-      }
-    }
-
-    ::ng-deep .mat-expansion-panel-body {
-      padding: 0;
     }
 
     .sidenav-header {
@@ -125,9 +61,8 @@ mat-sidenav-container {
         display: flex;
         align-items: center;
 
-        .combined-shape {
-          margin: 0 1em;
-          width: 40px;
+        .logo {
+          width: 200px;
           height: 40px;
         }
       }
@@ -169,22 +104,11 @@ mat-sidenav-container {
       justify-content: space-between;
       padding: 2em 1em;
       align-items: center;
-      background-color: $highlight_content_bg_color;
+      background-color: $menu_highlight_content_bg_color;
 
       &>div {
         display: flex;
         align-items: center;
-
-        .avatar {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 1em;
-          width: 2.8em;
-          height: 2.8em;
-          border-radius: .3em;
-          background-color: rgba($menu_primary_color, .1);
-        }
 
         h4 {
           padding-left: 6px;
@@ -236,7 +160,6 @@ mat-sidenav-container {
   }
 }
 
-/* my-loader.component.css */
 .loading-spinner{
   background-color: #0000001f;
   position: absolute;

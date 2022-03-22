@@ -8,6 +8,10 @@ import {Observable} from 'rxjs';
 export class UserService {
   constructor(private http: HttpClient) { }
 
+  login(user: any): Observable<any> {
+    return this.http.post(`${environment.API_HOST}/login_check`, user);
+  }
+
   getAll(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.API_HOST}/users`);
   }

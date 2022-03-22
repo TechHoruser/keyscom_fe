@@ -8,7 +8,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
@@ -20,14 +20,18 @@ import {CallbackComponent} from './component/callback/callback.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {LoginComponent} from './component/login/login.component';
+import {LogoutComponent} from './component/logout/logout.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatCardModule} from '@angular/material/card';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
     LoginComponent,
+    LogoutComponent,
     CallbackComponent,
   ],
   imports: [
@@ -43,6 +47,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     FontAwesomeModule,
     MatExpansionModule,
     MatListModule,
+    MatCardModule,
     MatSidenavModule,
     MatTableModule,
     MatPaginatorModule,
@@ -56,11 +61,17 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatIconModule,
-    ReactiveFormsModule
+    MatExpansionModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    FormsModule,
   ],
   exports: [
     TranslateModule,
     FontAwesomeModule,
+    MatListModule,
+    MatCardModule,
+    MatSidenavModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -70,13 +81,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatMomentDateModule,
     MatSelectModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     MatToolbarModule,
     MatIconModule,
     MatExpansionModule,
-    MatListModule,
-    MatSidenavModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    FlexLayoutModule,
   ],
   providers: [
     {provide: MAT_DATE_FORMATS, useValue: environment.MATERIAL_DATEPICKER_FORMATS},

@@ -3,11 +3,11 @@ import {AuthenticationService} from '../../auth/authentication.service';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.scss']
 })
-export class LoginComponent {
+export class LogoutComponent {
   email: string;
   password: string;
 
@@ -16,13 +16,8 @@ export class LoginComponent {
     private route: Router,
   ) {
     authenticationService.currentUser.subscribe((user) => {
-      if (user) {
-        this.route.navigate(['/callback']);
-      }
+      this.route.navigate(['/login']);
     });
-  }
-
-  login(): void {
-    this.authenticationService.login(this.email, this.password).subscribe();
+    this.authenticationService.logout();
   }
 }

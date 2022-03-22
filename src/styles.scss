@@ -1,7 +1,7 @@
 @import 'variables';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: $main_font_family; }
 
 .mat-form-field {
   width: 100%;
@@ -19,4 +19,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       }
     }
   }
+}
+
+.mat-button,
+.mat-raised-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-flat-button,
+.mat-fab,
+.mat-mini-fab,
+.mat-form-field,
+.mat-card,
+{
+  font-family: $main_font_family;
+}
+
+.mat-button.mat-accent, .mat-icon-button.mat-accent, .mat-stroked-button.mat-accent {
+  color: inherit;
+}
+
+.mat-stroked-button {
+  border: 1px solid currentColor;
+  line-height: 54px;
+  background: $color_primary_button;
+}
+
+.mat-drawer-inner-container {
+  overflow: clip !important;
 }

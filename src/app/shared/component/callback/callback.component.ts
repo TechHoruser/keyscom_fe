@@ -14,7 +14,7 @@ export class CallbackComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const lastUrl = localStorage.getItem(STORAGE_LAST_URL) ?? '/';
+    const lastUrl = localStorage.getItem(STORAGE_LAST_URL) ?? '/dashboard';
     this.route.navigate([lastUrl]);
   }
 }

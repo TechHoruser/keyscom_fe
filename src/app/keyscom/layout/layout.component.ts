@@ -1,10 +1,8 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {faAngleLeft, faAngleRight, faChevronRight, faSignOut, faUser} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 import {LoaderService} from '../services/loader.service';
-import {APP_BASE_HREF} from '@angular/common';
-import {AppConfigService} from '../../shared/services/app-config.service';
 import {AuthenticationService} from '../../shared/auth/authentication.service';
 import {User} from '../../shared/auth/user.model';
 
@@ -13,7 +11,7 @@ import {User} from '../../shared/auth/user.model';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent {
   faAngleRight = faAngleRight;
   faAngleLeft = faAngleLeft;
   faUser = faUser;
@@ -24,12 +22,10 @@ export class LayoutComponent implements OnInit {
   private readonly mobileQueryListener: () => void;
 
   constructor(
-    @Inject(APP_BASE_HREF) public baseHref: string,
     private router: Router,
     private authService: AuthenticationService,
     public loaderService: LoaderService,
     changeDetectorRef: ChangeDetectorRef,
-    public appConfig: AppConfigService,
     media: MediaMatcher
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -39,9 +35,7 @@ export class LayoutComponent implements OnInit {
     } else {
       this.mobileQuery.addListener(this.mobileQueryListener);
     }
-  }
 
-  ngOnInit(): void {
-    this.authService.currentUser.subscribe(user => this.user = user);
+    this.user = this.authService.currentUserValue;
   }
 }

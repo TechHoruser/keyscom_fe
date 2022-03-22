@@ -4,13 +4,16 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {User} from './user.model';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+  ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -20,11 +23,13 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string): Observable<any>
+  login(username: string, password: string): Observable<User>
   {
-    return this.http.post<any>(`${environment.API_HOST}/check_login`, { username, password })
-      .pipe(map(user => {
+    return this.http.post<any>(`${environment.API_HOST}/login_check`, { username, password })
+      .pipe(map(response => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
+        const user = (new JwtHelperService()).decodeToken(response.token);
+        user.token = response.token;
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
         return user;
