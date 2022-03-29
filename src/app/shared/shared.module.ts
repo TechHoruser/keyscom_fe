@@ -27,6 +27,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCardModule} from '@angular/material/card';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatListModule,
     MatCardModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -72,6 +74,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatListModule,
     MatCardModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

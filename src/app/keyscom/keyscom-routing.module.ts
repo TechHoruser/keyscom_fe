@@ -12,6 +12,11 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
   },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./components/user/user-routing.module').then(m => m.UserRoutingModule),
+  },
 ];
 
 @NgModule({
