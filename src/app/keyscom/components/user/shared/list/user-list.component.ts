@@ -16,7 +16,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   private subs = new Subscription();
 
-  displayedColumns: string[] = ['email', 'name'];
+  displayedColumns: string[] = ['email', 'firstName', 'lastName'];
 
   public dataSource: MatTableDataSource<User>;
 
@@ -30,6 +30,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subs.add(this.userService.getAll()
       .subscribe((res) => {
+        console.log(res);
         this.dataArray = res.results;
         this.dataSource = new MatTableDataSource<User>(this.dataArray);
         this.dataSource.paginator = this.paginator;
