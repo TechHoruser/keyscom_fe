@@ -1,21 +1,21 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {ProfileComponent} from './components/profile/profile.component';
+import {LayoutComponent} from './modules/shared/components/layout/layout.component';
+import {AuthGuard} from './modules/auth/services/auth.guard';
 
 const routes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./modules/dashboard/dashboard-routing.module').then(m => m.DashboardRoutingModule),
   },
   {
     path: 'user',
+    component: LayoutComponent,
     loadChildren: () =>
-      import('./components/user/user-routing.module').then(m => m.UserRoutingModule),
+      import('./modules/user/user-routing.module').then(m => m.UserRoutingModule),
+    canActivate: [AuthGuard],
   },
 ];
 
@@ -23,4 +23,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class KeyscomRoutingModule { }
+
+export class KeyscomRoutingModule {}
