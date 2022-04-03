@@ -5,6 +5,11 @@ import {AuthGuard} from './modules/auth/services/auth.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
+  },
+  {
     path: 'dashboard',
     component: LayoutComponent,
     loadChildren: () =>

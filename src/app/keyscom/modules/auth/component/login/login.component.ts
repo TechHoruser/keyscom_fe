@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
 
 @Component({
@@ -14,10 +14,12 @@ export class LoginComponent {
   constructor(
     public authenticationService: AuthenticationService,
     private route: Router,
+    private activatedRoute: ActivatedRoute,
   ) {
     authenticationService.currentUser.subscribe((user) => {
       if (user) {
-        this.route.navigate(['/callback']);
+        this.activatedRoute.queryParams
+          .subscribe(params => this.route.navigate([params.returnUrl ?? '']));
       }
     });
   }

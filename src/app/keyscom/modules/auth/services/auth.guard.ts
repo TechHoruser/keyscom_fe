@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthenticationService} from './authentication.service';
 
-export const STORAGE_LAST_URL = 'lastUrl';
+const STORAGE_LAST_URL = 'lastUrl';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -15,12 +15,25 @@ export class AuthGuard implements CanActivate {
   {
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
-      // logged in so return true
       return true;
     }
 
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
     return false;
+  }
+
+  getLastUrl(): string
+  {
+    return localStorage.getItem(STORAGE_LAST_URL) ?? '/dashboard';
+  }
+
+  setLastUrl(url: string): void
+  {
+    localStorage.setItem(STORAGE_LAST_URL, url);
+  }
+
+  goToLastUrl(): void
+  {
+    this.router.navigate([this.getLastUrl()]);
   }
 }

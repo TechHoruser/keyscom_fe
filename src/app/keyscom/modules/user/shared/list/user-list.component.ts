@@ -30,7 +30,6 @@ export class UserListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subs.add(this.userService.getAll()
       .subscribe((res) => {
-        console.log(res);
         this.dataArray = res.results;
         this.dataSource = new MatTableDataSource<User>(this.dataArray);
         this.dataSource.paginator = this.paginator;
