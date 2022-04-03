@@ -29,6 +29,7 @@
     "@fortawesome/free-solid-svg-icons": "*",
     "@ngx-translate/core": "*",
     "@ngx-translate/http-loader": "*",
+    "mdb-ui-kit": "^3.11.0",
     "moment": "*",
     "rxjs": "*"
   },
