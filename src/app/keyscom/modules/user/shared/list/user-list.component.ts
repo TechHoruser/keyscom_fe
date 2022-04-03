@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
+import {faPencilAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -13,10 +14,11 @@ import {UserService} from '../../services/user.service';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit, OnDestroy {
-
+  faPencilAlt = faPencilAlt;
+  faTrashAlt = faTrashAlt;
   private subs = new Subscription();
 
-  displayedColumns: string[] = ['email', 'firstName', 'lastName'];
+  displayedColumns: string[] = ['email', 'firstName', 'lastName', 'actions'];
 
   public dataSource: MatTableDataSource<User>;
 
