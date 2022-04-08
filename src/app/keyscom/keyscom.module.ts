@@ -5,7 +5,8 @@ import {AuthModule} from './modules/auth/auth.module';
 import {DashboardModule} from './modules/dashboard/dashboard.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from './modules/auth/services/jwt.interceptor';
-import {ErrorInterceptor} from './modules/auth/services/error.interceptor';
+import {ErrorInterceptor as ErrorInterceptorUnauthorized} from './modules/auth/services/error.interceptor';
+import {ErrorInterceptor as ErrorInterceptorInternalServer} from './modules/error/services/error.interceptor';
 
 @NgModule({
   imports: [
@@ -24,7 +25,12 @@ import {ErrorInterceptor} from './modules/auth/services/error.interceptor';
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
+      useClass: ErrorInterceptorUnauthorized,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorInternalServer,
       multi: true,
     },
   ],

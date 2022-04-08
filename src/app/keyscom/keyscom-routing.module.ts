@@ -10,6 +10,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'error',
+    loadChildren: () =>
+      import('./modules/error/error-routing.module').then(m => m.ErrorRoutingModule),
+  },
+  {
     path: 'dashboard',
     component: LayoutComponent,
     loadChildren: () =>
