@@ -27,6 +27,13 @@ const routes: Routes = [
       import('./modules/user/user-routing.module').then(m => m.UserRoutingModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'client',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./modules/client/client-routing.module').then(m => m.ClientRoutingModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

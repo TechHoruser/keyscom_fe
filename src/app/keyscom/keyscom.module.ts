@@ -7,12 +7,16 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from './modules/auth/services/jwt.interceptor';
 import {ErrorInterceptor as ErrorInterceptorUnauthorized} from './modules/auth/services/error.interceptor';
 import {ErrorInterceptor as ErrorInterceptorInternalServer} from './modules/error/services/error.interceptor';
+import {ClientModule} from './modules/client/client.module';
+import {DialogModule} from './modules/dialog/dialog.module';
 
 @NgModule({
   imports: [
     DashboardModule,
     UserModule,
+    ClientModule,
     AuthModule,
+    DialogModule,
   ],
   exports: [
     KeyscomRoutingModule,
