@@ -4,7 +4,6 @@ import {faListAlt, faPencilAlt, faTrashAlt} from '@fortawesome/free-solid-svg-ic
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Client} from '../../../../models/client.model';
 import {ClientService} from '../../services/client.service';
 import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.service';
@@ -31,7 +30,6 @@ export class ClientListComponent implements OnInit, OnDestroy {
 
   constructor(
     private clientService: ClientService,
-    private snackBar: MatSnackBar,
     private dialogService: ConfirmDialogService,
   ) { }
 
@@ -49,13 +47,6 @@ export class ClientListComponent implements OnInit, OnDestroy {
     if (this.subs) {
       this.subs.unsubscribe();
     }
-  }
-
-  public openRecord(id: number, name: string): void {
-    this.snackBar.open(`Record ${id} ${name} `, 'Close', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
   }
 
   delete(): void

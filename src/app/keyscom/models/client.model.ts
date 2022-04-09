@@ -1,4 +1,4 @@
 export class Client {
-  id: string;
+  uuid: string;
   name: string;
 }
