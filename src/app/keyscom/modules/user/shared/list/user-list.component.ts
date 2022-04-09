@@ -4,7 +4,6 @@ import {faPencilAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {User} from '../../../../models/user.model';
 import {UserService} from '../../services/user.service';
 
@@ -27,7 +26,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   private dataArray: any;
 
-  constructor(private userService: UserService, private snackBar: MatSnackBar) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.subs.add(this.userService.getAll()
@@ -43,12 +42,5 @@ export class UserListComponent implements OnInit, OnDestroy {
     if (this.subs) {
       this.subs.unsubscribe();
     }
-  }
-
-  public openRecord(id: number, name: string): void {
-    this.snackBar.open(`Record ${id} ${name} `, 'Close', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
   }
 }

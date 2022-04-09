@@ -9,12 +9,16 @@ import {ErrorInterceptor as ErrorInterceptorUnauthorized} from './modules/auth/s
 import {ErrorInterceptor as ErrorInterceptorInternalServer} from './modules/error/services/error.interceptor';
 import {ClientModule} from './modules/client/client.module';
 import {DialogModule} from './modules/dialog/dialog.module';
+import {ProjectModule} from './modules/project/project.module';
+import {MachineModule} from './modules/machine/machine.module';
 
 @NgModule({
   imports: [
     DashboardModule,
     UserModule,
     ClientModule,
+    ProjectModule,
+    MachineModule,
     AuthModule,
     DialogModule,
   ],

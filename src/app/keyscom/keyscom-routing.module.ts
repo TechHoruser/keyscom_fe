@@ -34,6 +34,20 @@ const routes: Routes = [
       import('./modules/client/client-routing.module').then(m => m.ClientRoutingModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'project',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./modules/project/project-routing.module').then(m => m.ProjectRoutingModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'machine',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./modules/machine/machine-routing.module').then(m => m.MachineRoutingModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

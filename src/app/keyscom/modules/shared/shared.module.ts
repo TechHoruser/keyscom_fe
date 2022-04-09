@@ -29,6 +29,10 @@ import {environment} from '../../../../environments/environment';
 import {LayoutComponent} from './components/layout/layout.component';
 import {RouterModule} from '@angular/router';
 import {MatDialogModule} from '@angular/material/dialog';
+import {IConfig, NgxMaskModule} from 'ngx-mask';
+
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
@@ -69,6 +73,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         deps: [HttpClient]
       }
     }),
+    NgxMaskModule.forRoot(options),
   ],
   exports: [
     CommonModule,
@@ -97,6 +102,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ReactiveFormsModule,
     RouterModule,
     TranslateModule,
+    NgxMaskModule,
   ],
   providers: [
     {provide: MAT_DATE_FORMATS, useValue: environment.MATERIAL_DATEPICKER_FORMATS},
