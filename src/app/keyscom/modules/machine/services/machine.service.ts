@@ -20,34 +20,21 @@ export class MachineService {
     const returnParams = {};
     Object.keys(params).forEach(paramKey => {
       const paramValue = params[paramKey];
+      paramKey = isRoot ? paramKey : `[${paramKey}]`;
       if (typeof paramValue === 'object') {
         const queryStringArray = this.convertAnyToHttp(paramValue, false);
         Object.keys(queryStringArray).forEach(queryStringArrayKey => {
-          if (isRoot) {
-            returnParams[`${paramKey}${queryStringArrayKey}`] = queryStringArray[queryStringArrayKey];
-          } else {
-            returnParams[`[${paramKey}]${queryStringArrayKey}`] = queryStringArray[queryStringArrayKey];
-          }
+          returnParams[`${paramKey}${queryStringArrayKey}`] = queryStringArray[queryStringArrayKey];
         });
       } else if (Array.isArray(paramValue)) {
         paramValue.forEach((paramSubValue, paramSubValueIndex) => {
-          if (typeof paramSubValue === 'object') {
-            const queryStringArray = this.convertAnyToHttp(paramSubValue, false);
-            Object.keys(queryStringArray).forEach(queryStringArrayKey => {
-              returnParams[`[${paramSubValueIndex}]${queryStringArrayKey}`] = queryStringArray[queryStringArrayKey];
-            });
-          } else if (Array.isArray(paramSubValue)) {
-            console.log('pending to develop');
-          } else {
-            returnParams[`[${paramSubValueIndex}]`] = paramSubValue;
-          }
+          const queryStringArray = this.convertAnyToHttp(paramSubValue, false);
+          Object.keys(queryStringArray).forEach(queryStringArrayKey => {
+            returnParams[`[${paramSubValueIndex}]${queryStringArrayKey}`] = queryStringArray[queryStringArrayKey];
+          });
         });
       } else {
-        if (isRoot) {
-          returnParams[paramKey] = paramValue;
-        } else {
-          returnParams[`[${paramKey}]`] = paramValue;
-        }
+        returnParams[paramKey] = paramValue;
       }
     });
     return returnParams;

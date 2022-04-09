@@ -63,7 +63,7 @@ export class MachineListComponent implements OnInit, OnDestroy {
 
     this.filterMachine.valueChanges
       .pipe(
-        debounceTime(500),
+        debounceTime(400),
         distinctUntilChanged()
       )
       .subscribe(() => {
