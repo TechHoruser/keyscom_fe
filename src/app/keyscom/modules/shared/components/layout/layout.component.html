@@ -2,7 +2,7 @@
   <mat-sidenav #draw
                [mode]="mobileQuery.matches ? 'over' : 'side'"
                [fixedInViewport]="mobileQuery.matches"
-               [opened]="!mobileQuery.matches"
+               [opened]="opened"
                role="navigation">
     <div class="mat-sidenav">
       <div class="sidenav-top">
@@ -12,7 +12,7 @@
               <img class="logo" src="assets/logo.svg" alt="combined shape">
             </div>
           </a>
-          <div class="right" (click)="draw.toggle()">
+          <div class="right" (click)="draw.toggle() && toggle()">
             <fa-icon [icon]="faAngleLeft"></fa-icon>
           </div>
         </div>
@@ -63,7 +63,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div *ngIf="!draw.opened"
-         (click)="draw.toggle()"
+         (click)="draw.toggle() && toggle()"
          id="show-sidenav">
       <fa-icon [icon]="faAngleRight"></fa-icon>
     </div>
