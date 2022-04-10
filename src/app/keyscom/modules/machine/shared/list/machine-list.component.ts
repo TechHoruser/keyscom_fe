@@ -7,7 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Machine} from '../../../../models/machine.model';
 import {MachineService} from '../../services/machine.service';
 import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-machine-list',
@@ -54,9 +54,9 @@ export class MachineListComponent implements OnInit, OnDestroy {
   private initializeFilterForm(): void
   {
     this.filterMachine = new FormGroup({
-      name: new FormControl('', Validators.minLength(2)),
-      domain: new FormControl('', Validators.minLength(2)),
-      ip: new FormControl('', Validators.minLength(2)),
+      name: new FormControl(''),
+      domain: new FormControl(''),
+      ip: new FormControl(''),
     });
 
     this.filterMachineLastRawValue = JSON.stringify(this.filterMachine.getRawValue());
