@@ -1,1 +1,72 @@
+<div>
+  <div class="row">
+    <div class="col-xl-3 col-lg-6 col-md-12">
+      <mat-card class="example-card">
+        <mat-card-subtitle>Analytics</mat-card-subtitle>
+        <mat-card-title>Users</mat-card-title>
+        <mat-card-content>
+          <h2>23</h2>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-button routerLink="/user" >VIEW</button>
+          <button mat-button>DETAILS</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-12">
+      <mat-card class="example-card">
+        <mat-card-subtitle>Analytics</mat-card-subtitle>
+        <mat-card-title>Clients</mat-card-title>
+        <mat-card-content>
+          <h2>23</h2>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-button routerLink="/client" >VIEW</button>
+          <button mat-button>DETAILS</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-12">
+      <mat-card class="example-card">
+        <mat-card-subtitle>Analytics</mat-card-subtitle>
+        <mat-card-title>Projects</mat-card-title>
+        <mat-card-content>
+          <h2>23</h2>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-button routerLink="/project" >VIEW</button>
+          <button mat-button>DETAILS</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-12">
+      <mat-card class="example-card">
+        <mat-card-subtitle>Analytics</mat-card-subtitle>
+        <mat-card-title>Machines</mat-card-title>
+        <mat-card-content>
+          <h2>23</h2>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-button routerLink="/machine" >VIEW</button>
+          <button mat-button>DETAILS</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
 
+  <div class="row">
+    <div id="chart">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [title]="chartOptions.title"
+        [colors]="chartOptions.colors"
+      ></apx-chart>
+    </div>
+  </div>
+</div>

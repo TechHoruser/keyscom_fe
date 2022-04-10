@@ -31,6 +31,7 @@
     "@ngx-translate/http-loader": "*",
     "mdb-ui-kit": "^3.11.0",
     "moment": "*",
+    "ng-apexcharts": "^1.7.1",
     "ngx-mask": "^13.1.7",
     "rxjs": "*"
   },

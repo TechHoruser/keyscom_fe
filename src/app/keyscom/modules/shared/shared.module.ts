@@ -29,7 +29,9 @@ import {environment} from '../../../../environments/environment';
 import {LayoutComponent} from './components/layout/layout.component';
 import {RouterModule} from '@angular/router';
 import {MatDialogModule} from '@angular/material/dialog';
+import {BindQueryParamsDirective} from './services/bind-query-params.directive';
 import {IConfig, NgxMaskModule} from 'ngx-mask';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -65,6 +67,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatToolbarModule,
     ReactiveFormsModule,
     RouterModule,
+    NgApexchartsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
@@ -102,6 +105,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     ReactiveFormsModule,
     RouterModule,
     TranslateModule,
+    NgApexchartsModule,
     NgxMaskModule,
   ],
   providers: [
