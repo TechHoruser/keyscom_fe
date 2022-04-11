@@ -1,3 +1,4 @@
+export const DASHBOARD_CARD = '/dashboard-card';
 export const USER_LIST = '/user';
 export const CLIENT_LIST = '/client';
 export const PROJECT_LIST = '/project';

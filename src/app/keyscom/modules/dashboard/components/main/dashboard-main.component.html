@@ -5,12 +5,12 @@
         <mat-card-subtitle>Analytics</mat-card-subtitle>
         <mat-card-title>Users</mat-card-title>
         <mat-card-content>
-          <h2>23</h2>
+          <h2>{{cardsValues.users}}</h2>
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>
           <button mat-button routerLink="/user" >VIEW</button>
-          <button mat-button>DETAILS</button>
+          <button mat-button>CURRENT YEAR</button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -19,12 +19,12 @@
         <mat-card-subtitle>Analytics</mat-card-subtitle>
         <mat-card-title>Clients</mat-card-title>
         <mat-card-content>
-          <h2>23</h2>
+          <h2>{{cardsValues.clients}}</h2>
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>
           <button mat-button routerLink="/client" >VIEW</button>
-          <button mat-button>DETAILS</button>
+          <button mat-button>CURRENT YEAR</button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -33,12 +33,12 @@
         <mat-card-subtitle>Analytics</mat-card-subtitle>
         <mat-card-title>Projects</mat-card-title>
         <mat-card-content>
-          <h2>23</h2>
+          <h2>{{cardsValues.projects}}</h2>
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>
           <button mat-button routerLink="/project" >VIEW</button>
-          <button mat-button>DETAILS</button>
+          <button mat-button>CURRENT YEAR</button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -47,18 +47,18 @@
         <mat-card-subtitle>Analytics</mat-card-subtitle>
         <mat-card-title>Machines</mat-card-title>
         <mat-card-content>
-          <h2>23</h2>
+          <h2>{{cardsValues.machines}}</h2>
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>
           <button mat-button routerLink="/machine" >VIEW</button>
-          <button mat-button>DETAILS</button>
+          <button mat-button>CURRENT YEAR</button>
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" style="margin-top: 2em">
     <div id="chart">
       <apx-chart
         [series]="chartOptions.series"

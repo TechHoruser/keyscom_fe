@@ -40,12 +40,11 @@ export class LayoutComponent implements OnInit {
     }
 
     this.user = this.authService.currentUserValue;
-    this.opened = JSON.parse(localStorage.getItem(SIDENAV_IS_OPEN)) ?? !this.mobileQuery.matches;
   }
 
   public ngOnInit(): void
   {
-    this.opened = JSON.parse(localStorage.getItem(SIDENAV_IS_OPEN)) ?? true;
+    this.opened = JSON.parse(localStorage.getItem(SIDENAV_IS_OPEN)) ?? !this.mobileQuery.matches;
   }
 
   toggle(): void

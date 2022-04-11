@@ -39,6 +39,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
   declarations: [
     LayoutComponent,
+    BindQueryParamsDirective,
   ],
   imports: [
     CommonModule,
@@ -107,6 +108,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     TranslateModule,
     NgApexchartsModule,
     NgxMaskModule,
+    BindQueryParamsDirective,
   ],
   providers: [
     {provide: MAT_DATE_FORMATS, useValue: environment.MATERIAL_DATEPICKER_FORMATS},
