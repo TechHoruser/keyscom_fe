@@ -21,8 +21,9 @@ export class DashboardService {
     const loaderUuid1 = this.loaderService.showLoader();
 
     this.http.get<DashboardCards>(`${environment.API_HOST}${DASHBOARD_CARD}`)
-      .subscribe(res => {
+      .subscribe(async res => {
         this.dashboardCards.next(res);
+        await (new Promise(resolve => setTimeout(resolve, 350)));
         this.loaderService.hideLoader(loaderUuid1);
       });
   }
