@@ -22,12 +22,13 @@ export class LayoutComponent implements OnInit, AfterContentChecked {
   mobileQuery: MediaQueryList;
   user: User;
   opened: boolean;
+  loading: boolean;
   private mobileQueryListener: () => void;
 
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    public loaderService: LoaderService,
+    private loaderService: LoaderService,
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
   ) {}
@@ -42,6 +43,9 @@ export class LayoutComponent implements OnInit, AfterContentChecked {
     } else {
       this.mobileQuery.addListener(this.mobileQueryListener);
     }
+
+    this.loading = true;
+    this.loaderService.loading.subscribe(next => this.loading = next);
 
     this.user = this.authService.currentUserValue;
     this.opened = JSON.parse(localStorage.getItem(SIDENAV_IS_OPEN)) ?? !this.mobileQuery.matches;

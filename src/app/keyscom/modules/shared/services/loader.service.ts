@@ -1,21 +1,33 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {v4 as uuidv4} from 'uuid';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoaderService {
-  loading = false;
-  constructor() {}
+  private uuidArray: { [uuid: string]: boolean };
+  public loading: BehaviorSubject<boolean>;
 
-  public hideLoader(): void {
-    this.loading = false;
+  constructor() {
+    this.uuidArray = {};
+    this.loading = new BehaviorSubject<boolean>(true);
   }
 
-  public showLoader(): void {
-    this.loading = true;
+  public hideLoader(uuid?: string): void {
+    if (uuid) {
+      delete this.uuidArray[uuid];
+    } else {
+      this.uuidArray = {};
+    }
+
+    this.loading.next(Object.keys(this.uuidArray).length > 0);
   }
 
-  public isLoading(): boolean {
-    return this.loading;
+  public showLoader(): string {
+    this.loading.next(true);
+    const uuid = uuidv4();
+    this.uuidArray[uuid] = true;
+    return uuid;
   }
 }
