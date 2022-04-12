@@ -18,13 +18,12 @@ export class DashboardService {
   }
 
   updateCardsValues(): void {
-    this.loaderService.showLoader();
+    const loaderUuid1 = this.loaderService.showLoader();
+
     this.http.get<DashboardCards>(`${environment.API_HOST}${DASHBOARD_CARD}`)
       .subscribe(res => {
-        setTimeout(() => {
-          this.dashboardCards.next(res);
-          this.loaderService.hideLoader();
-        }, 2000);
+        this.dashboardCards.next(res);
+        this.loaderService.hideLoader(loaderUuid1);
       });
   }
 }
