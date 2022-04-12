@@ -26,13 +26,13 @@ export class DashboardMainComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-  ) {
+  ) {}
+
+  public ngOnInit(): void {
     this.apxSeries = new BehaviorSubject({});
     this.apxSeries.subscribe(() => this.loadChart());
     this.dashboardService.dashboardCards.subscribe((next) => this.cardsValues = next);
-  }
 
-  public ngOnInit(): void {
     this.dashboardService.updateCardsValues();
     // setInterval(() => this.apxSeries.next(this.getSeriesDataEmpty()), 5000);
   }
