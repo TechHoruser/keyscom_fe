@@ -3,8 +3,6 @@ import {BehaviorSubject} from 'rxjs';
 import {v4 as uuidv4} from 'uuid';
 import moment, {Moment} from 'moment/moment';
 
-const MINIMUM_LOADER_TIME = 400;
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +17,7 @@ export class LoaderService {
     this.firstShowMoment = moment();
   }
 
-  public hideLoader(uuid?: string): void {
+  public hideLoader(uuid?: string, minimumLoaderTime = 400): void {
     if (uuid) {
       delete this.uuidArray[uuid];
     } else {
@@ -27,7 +25,7 @@ export class LoaderService {
     }
 
     if (Object.keys(this.uuidArray).length === 0) {
-      const timeToWait = MINIMUM_LOADER_TIME - moment().diff(this.firstShowMoment);
+      const timeToWait = minimumLoaderTime - moment().diff(this.firstShowMoment);
       console.log(timeToWait);
 
       setTimeout(() => {

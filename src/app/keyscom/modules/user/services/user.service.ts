@@ -15,15 +15,6 @@ export class UserService {
   ) { }
 
   getAll(): Observable<PaginationModel<User>> {
-    let uuid1: string;
-    let uuid2: string;
-    let uuid3: string;
-    setTimeout(() => uuid1 = this.loaderService.showLoader(), 1200);
-    setTimeout(() => this.loaderService.hideLoader(uuid1), 1750);
-    setTimeout(() => uuid2 = this.loaderService.showLoader(), 1800);
-    setTimeout(() => uuid3 = this.loaderService.showLoader(), 2000);
-    setTimeout(() => this.loaderService.hideLoader(uuid3), 2100);
-    setTimeout(() => this.loaderService.hideLoader(uuid2), 2300);
     return this.http.get<PaginationModel<User>>(`${environment.API_HOST}${USER_LIST}`);
   }
 }
