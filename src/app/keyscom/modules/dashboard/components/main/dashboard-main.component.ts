@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexTitleSubtitle, ChartComponent} from 'ng-apexcharts';
+import {Component, OnInit} from '@angular/core';
+import {ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexTitleSubtitle} from 'ng-apexcharts';
 import moment, {Moment} from 'moment/moment';
-import {BehaviorSubject} from 'rxjs';
 import {DashboardService} from '../../services/dashboard.service';
 import {DashboardCards} from '../../../../models/dashboard-cards.model';
 
@@ -19,24 +18,19 @@ export type ChartOptions = {
   styleUrls: ['./dashboard-main.component.scss']
 })
 export class DashboardMainComponent implements OnInit {
-  @ViewChild('chart') chart: ChartComponent;
   public cardsValues?: DashboardCards;
   public chartOptions: Partial<ChartOptions>;
-  private apxSeries: BehaviorSubject<{}>;
-  public printDetails: boolean;
 
   constructor(
     private dashboardService: DashboardService,
   ) {}
 
   public ngOnInit(): void {
-    this.printDetails = false;
-    this.apxSeries = new BehaviorSubject({});
-    this.apxSeries.subscribe((data) => this.loadChart(data));
     this.dashboardService.dashboardCards.subscribe((next) => this.cardsValues = next);
     this.dashboardService.dashboardNewEntitiesByDay.subscribe((next) => {
-      this.loadChart(next);
-      this.printDetails = true;
+      if (next !== null) {
+        this.loadChart(next);
+      }
     });
 
     this.dashboardService.updateCardsValues();

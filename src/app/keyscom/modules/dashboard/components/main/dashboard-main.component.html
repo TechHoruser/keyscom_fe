@@ -59,7 +59,7 @@
   </div>
 
   <div class="row" style="margin-top: 2em">
-    <div *ngIf="printDetails" id="chart">
+    <div *ngIf="chartOptions">
       <apx-chart
         [series]="chartOptions.series"
         [chart]="chartOptions.chart"
