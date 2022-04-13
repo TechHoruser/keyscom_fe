@@ -23,19 +23,23 @@ export class DashboardMainComponent implements OnInit {
   public cardsValues?: DashboardCards;
   public chartOptions: Partial<ChartOptions>;
   private apxSeries: BehaviorSubject<{}>;
+  public printDetails: boolean;
 
   constructor(
     private dashboardService: DashboardService,
   ) {}
 
   public ngOnInit(): void {
+    this.printDetails = false;
     this.apxSeries = new BehaviorSubject({});
     this.apxSeries.subscribe((data) => this.loadChart(data));
     this.dashboardService.dashboardCards.subscribe((next) => this.cardsValues = next);
-    this.dashboardService.dashboardNewEntitiesByDay.subscribe((next) => this.loadChart(next));
+    this.dashboardService.dashboardNewEntitiesByDay.subscribe((next) => {
+      this.loadChart(next);
+      this.printDetails = true;
+    });
 
     this.dashboardService.updateCardsValues();
-    this.dashboardService.updateNewEntitiesByDay('machines');
   }
 
   public showNewEntriesByDay(type: string): void
