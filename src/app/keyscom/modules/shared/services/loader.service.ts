@@ -17,7 +17,7 @@ export class LoaderService {
     this.firstShowMoment = moment();
   }
 
-  public hideLoader(uuid?: string, minimumLoaderTime = 400): void {
+  public hideLoader(uuid?: string, minimumLoaderTime = 600): void {
     if (uuid) {
       delete this.uuidArray[uuid];
     } else {
@@ -29,7 +29,8 @@ export class LoaderService {
       console.log(timeToWait);
 
       setTimeout(() => {
-        this.loading.next(false);
+        // The next value is not false because is possible that while wait timeout increment the array
+        this.loading.next(Object.keys(this.uuidArray).length !== 0);
       }, timeToWait);
     }
   }
