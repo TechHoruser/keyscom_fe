@@ -11,49 +11,39 @@ const MINIMUM_LOADER_TIME = 400;
 export class LoaderService {
   private uuidArray: { [uuid: string]: Moment };
   public loading: BehaviorSubject<boolean>;
+  private firstShowMoment: Moment;
 
   constructor() {
     this.uuidArray = {};
     this.loading = new BehaviorSubject<boolean>(true);
+    this.firstShowMoment = moment();
   }
 
-  public async hideLoader(uuid?: string): Promise<void> {
-    let momentWhenCreateLoader: Moment;
+  public hideLoader(uuid?: string): void {
     if (uuid) {
-      if (this.uuidArray[uuid] !== undefined) {
-        momentWhenCreateLoader = this.uuidArray[uuid];
-        delete this.uuidArray[uuid];
-      }
+      delete this.uuidArray[uuid];
     } else {
-      Object.values(this.uuidArray).forEach(
-        (createdMoment) => {
-          momentWhenCreateLoader = (
-            (momentWhenCreateLoader !== undefined && momentWhenCreateLoader.diff(createdMoment) < 0) ?
-              momentWhenCreateLoader : createdMoment
-          );
-        }
-      );
       this.uuidArray = {};
     }
 
-    let timeToWait = MINIMUM_LOADER_TIME;
-    if (momentWhenCreateLoader !== undefined) {
-      const lapsedTimeBetweenCreationLoading = moment().diff(momentWhenCreateLoader);
-      timeToWait = MINIMUM_LOADER_TIME - lapsedTimeBetweenCreationLoading;
-    }
+    if (Object.keys(this.uuidArray).length === 0) {
+      const timeToWait = MINIMUM_LOADER_TIME - moment().diff(this.firstShowMoment);
+      console.log(timeToWait);
 
-    setTimeout(() => {
-      const newValue = Object.keys(this.uuidArray).length > 0;
-      if (this.loading.value !== newValue) {
-        this.loading.next(newValue);
-      }
-    }, timeToWait);
+      setTimeout(() => {
+        this.loading.next(false);
+      }, timeToWait);
+    }
   }
 
   public showLoader(): string {
-    this.loading.next(true);
     const uuid = uuidv4();
-    this.uuidArray[uuid] = moment();
+    const showMoment = moment();
+    if (!this.loading.value) {
+      this.firstShowMoment = showMoment;
+      this.loading.next(true);
+    }
+    this.uuidArray[uuid] = showMoment;
     return uuid;
   }
 }
