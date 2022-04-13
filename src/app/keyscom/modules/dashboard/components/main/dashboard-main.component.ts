@@ -35,6 +35,7 @@ export class DashboardMainComponent implements OnInit {
     this.dashboardService.dashboardNewEntitiesByDay.subscribe((next) => this.loadChart(next));
 
     this.dashboardService.updateCardsValues();
+    this.dashboardService.updateNewEntitiesByDay('machines');
   }
 
   public showNewEntriesByDay(type: string): void
@@ -47,7 +48,9 @@ export class DashboardMainComponent implements OnInit {
     const formatData = this.getSeriesDataEmpty();
     Object.keys(data).map((day) => {
       const momentDay = moment(day);
-      formatData[momentDay.day()][this.getWeek(momentDay)] = data[day];
+      if (formatData[momentDay.day()][this.getYearWeekStringFormat(momentDay)] !== undefined) {
+        formatData[momentDay.day()][this.getYearWeekStringFormat(momentDay)] = data[day];
+      }
     });
 
     const series: { name?: string; type?: string; color?: string; data: { x: string, y: number }[] }[] =
@@ -58,7 +61,7 @@ export class DashboardMainComponent implements OnInit {
           name: weekdayName[0].toUpperCase() + weekdayName.slice(1).toLowerCase(),
           data: Object.keys(weekdayValue).map((weekKey) => {
             return {
-              x: 'W' + weekKey,
+              x: 'W' + weekKey.split('-')[1],
               y: Number(weekdayValue[weekKey]),
             };
           }),
@@ -77,18 +80,17 @@ export class DashboardMainComponent implements OnInit {
       colors: ['#008FFB'],
       title: {
         text: 'New entries details'
-      }
+      },
     };
   }
 
-  private getSeriesDataEmpty(): {} {
-    const numberOfWeeksThisYear = this.getNumberOfWeekByYear();
-    const arrayWithWeeksNumber = Array.from({length: numberOfWeeksThisYear}, (_, i) => i + 1);
+  private getSeriesDataEmpty(year = moment().year()): {} {
     const arrayWithWeekdaysNumber = Array.from({length: 7}, (_, i) => i);
+    const arrayWithWeeks = this.getWeeksOfTheYear(year);
 
     return arrayWithWeekdaysNumber.reduce(
       (weekdayAcc, weekdayCurr) => {
-        weekdayAcc[weekdayCurr] = arrayWithWeeksNumber.reduce(
+        weekdayAcc[weekdayCurr] = arrayWithWeeks.reduce(
           (weekAcc, weekCurr) => {
             weekAcc[weekCurr] = 0;
             return weekAcc;
@@ -99,21 +101,35 @@ export class DashboardMainComponent implements OnInit {
     );
   }
 
-  private getNumberOfWeekByYear(
-    year = moment().year()
-  ): number
+  private getWeeksOfTheYear(year: number): string[]
   {
-    let lastDayForLastWeek = moment().set('y', year).endOf('year');
-    let hasAdditionalWeek = false;
-    while (lastDayForLastWeek.weeks() === 1) {
-      hasAdditionalWeek = true;
-      lastDayForLastWeek = lastDayForLastWeek.add(-1, 'day');
-    }
-    return lastDayForLastWeek.weeks() + (hasAdditionalWeek ? 1 : 0);
+    let currentDay = moment().set('y', year).startOf('year');
+    const lastDay = moment().set('y', year).endOf('year');
+    const weekSet = new Set<string>();
+    do {
+      weekSet.add(this.getYearWeekStringFormat(currentDay));
+      currentDay = currentDay.add(1, 'day');
+    } while (!currentDay.isSame(lastDay, 'day'));
+
+    return Array.from(weekSet);
   }
 
-  private getWeek(date: Moment): number
+  private getYearWeekStringFormat(date: Moment): string
   {
-    return (date.weeks() !== 1 || date.month() !== 11) ? date.weeks() : this.getNumberOfWeekByYear(date.year());
+    const year = date.year()
+      - (this.isDateInWeekOfPreviousYear(date) ? 1 : 0)
+      + (this.isDateInWeekOfNextYear(date) ? 1 : 0);
+
+    return `${year}-${date.weeks()}`;
+  }
+
+  private isDateInWeekOfPreviousYear(date: Moment): boolean
+  {
+    return (date.month() === 0 && date.weeks() > 50);
+  }
+
+  private isDateInWeekOfNextYear(date: Moment): boolean
+  {
+    return (date.month() === 11 && date.weeks() === 1);
   }
 }

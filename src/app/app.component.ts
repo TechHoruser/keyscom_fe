@@ -12,7 +12,8 @@ export class AppComponent {
     // This line establish the language on moment objects and Monday as first day of week
     moment.updateLocale('es', {
       week: {
-        dow: 1,
+        dow: 0,
+        // dow: 1, // Problem with first week of the year include sunday
       },
     });
   }
