@@ -30,85 +30,43 @@ export class DashboardMainComponent implements OnInit {
 
   public ngOnInit(): void {
     this.apxSeries = new BehaviorSubject({});
-    this.apxSeries.subscribe(() => this.loadChart());
+    this.apxSeries.subscribe((data) => this.loadChart(data));
     this.dashboardService.dashboardCards.subscribe((next) => this.cardsValues = next);
+    this.dashboardService.dashboardNewEntitiesByDay.subscribe((next) => this.loadChart(next));
 
     this.dashboardService.updateCardsValues();
-    // setInterval(() => this.apxSeries.next(this.getSeriesDataEmpty()), 5000);
   }
 
-  private generateData(count, yrange): { x, y }[] {
-    let i = 0;
-    const series = [];
-    while (i < count) {
-      const x = 'w' + (i + 1).toString();
-      const y =
-        Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-
-      series.push({
-        x,
-        y
-      });
-      i++;
-    }
-    return series;
-  }
-
-  private loadChart(): void
+  public showNewEntriesByDay(type: string): void
   {
-    const count = this.getNumberOfWeekByYear();
+    this.dashboardService.updateNewEntitiesByDay(type);
+  }
+
+  private loadChart(data: { [day: string]: number }): void
+  {
+    const formatData = this.getSeriesDataEmpty();
+    Object.keys(data).map((day) => {
+      const momentDay = moment(day);
+      formatData[momentDay.day()][this.getWeek(momentDay)] = data[day];
+    });
+
+    const series: { name?: string; type?: string; color?: string; data: { x: string, y: number }[] }[] =
+      Object.keys(formatData).map((weekdayKey) => {
+        const weekdayValue = formatData[weekdayKey];
+        const weekdayName = moment().startOf('week').add(weekdayKey, 'days').format('dddd');
+        return {
+          name: weekdayName[0].toUpperCase() + weekdayName.slice(1).toLowerCase(),
+          data: Object.keys(weekdayValue).map((weekKey) => {
+            return {
+              x: 'W' + weekKey,
+              y: Number(weekdayValue[weekKey]),
+            };
+          }),
+        };
+      });
+
     this.chartOptions = {
-      series: [
-        {
-          name: 'Sunday',
-          data: this.generateData(count, {
-            min: 0,
-            max: 90
-          })
-        },
-        {
-          name: 'Saturday',
-          data: this.generateData(count, {
-            min: 0,
-            max: 90
-          })
-        },
-        {
-          name: 'Friday',
-          data: this.generateData(count, {
-            min: 0,
-            max: 90
-          })
-        },
-        {
-          name: 'Tuesday',
-          data: this.generateData(count, {
-            min: 0,
-            max: 90
-          })
-        },
-        {
-          name: 'Wednesday',
-          data: this.generateData(count, {
-            min: 0,
-            max: 90
-          })
-        },
-        {
-          name: 'Thursday',
-          data: this.generateData(count, {
-            min: 0,
-            max: 90
-          })
-        },
-        {
-          name: 'Monday',
-          data: this.generateData(count, {
-            min: 0,
-            max: 90
-          })
-        },
-      ],
+      series,
       chart: {
         height: 350,
         type: 'heatmap'
@@ -157,10 +115,5 @@ export class DashboardMainComponent implements OnInit {
   private getWeek(date: Moment): number
   {
     return (date.weeks() !== 1 || date.month() !== 11) ? date.weeks() : this.getNumberOfWeekByYear(date.year());
-  }
-
-  private initializeHetmapArray(): void
-  {
-
   }
 }
