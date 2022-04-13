@@ -44,8 +44,8 @@ export class LayoutComponent implements OnInit, AfterContentChecked {
       this.mobileQuery.addListener(this.mobileQueryListener);
     }
 
-    this.loading = true;
     this.loaderService.loading.subscribe(next => this.loading = next);
+    this.loaderService.hideLoader();
 
     this.user = this.authService.currentUserValue;
     this.opened = JSON.parse(localStorage.getItem(SIDENAV_IS_OPEN)) ?? !this.mobileQuery.matches;
