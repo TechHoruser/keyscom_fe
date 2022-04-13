@@ -59,5 +59,6 @@ export class LayoutComponent implements OnInit, AfterContentChecked {
   {
     this.opened = !this.opened;
     localStorage.setItem(SIDENAV_IS_OPEN, String(this.opened));
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 200);
   }
 }
