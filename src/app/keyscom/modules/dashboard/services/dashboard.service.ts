@@ -25,7 +25,6 @@ export class DashboardService {
     this.http.get<DashboardCards>(`${environment.API_HOST}${DASHBOARD_CARD}`)
       .subscribe(async res => {
         this.dashboardCards.next(res);
-        await (new Promise(resolve => setTimeout(resolve, 350)));
         this.loaderService.hideLoader(loaderUuidForDashboardCards);
       });
   }
@@ -40,7 +39,6 @@ export class DashboardService {
     )
       .subscribe(async res => {
         this.dashboardNewEntitiesByDay.next(res);
-        await (new Promise(resolve => setTimeout(resolve, 350)));
         this.loaderService.hideLoader(loaderUuidForNewEntitiesByDay);
       });
   }
