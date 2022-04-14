@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {faPencilAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -12,10 +11,9 @@ import {UserService} from '../../services/user.service';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit, OnDestroy {
+export class UserListComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
-  private subs = new Subscription();
 
   displayedColumns: string[] = ['email', 'firstName', 'lastName', 'actions'];
 
@@ -24,23 +22,17 @@ export class UserListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  private dataArray: any;
-
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.subs.add(this.userService.getAll()
-      .subscribe((res) => {
-        this.dataArray = res.results;
-        this.dataSource = new MatTableDataSource<User>(this.dataArray);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }));
-  }
-
-  ngOnDestroy(): void {
-    if (this.subs) {
-      this.subs.unsubscribe();
-    }
+    this.userService.users
+      .subscribe((users) => {
+        if (users) {
+          this.dataSource = new MatTableDataSource<User>(users);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      });
+    this.userService.updateUsers();
   }
 }

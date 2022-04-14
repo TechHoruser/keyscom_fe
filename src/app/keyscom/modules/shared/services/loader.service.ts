@@ -26,7 +26,6 @@ export class LoaderService {
 
     if (Object.keys(this.uuidArray).length === 0) {
       const timeToWait = minimumLoaderTime - moment().diff(this.firstShowMoment);
-      console.log(timeToWait);
 
       setTimeout(() => {
         // The next value is not false because is possible that while wait timeout increment the array

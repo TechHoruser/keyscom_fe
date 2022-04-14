@@ -1,16 +1,29 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {PaginationModel} from '../../../models/pagination.model';
-import {User} from '../../../models/user.model';
+import {Project} from '../../../models/project.model';
 import {environment} from '../../../../../environments/environment';
 import {PROJECT_LIST} from '../../../api.endpoints';
+import {LoaderService} from '../../shared/services/loader.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
-  constructor(private http: HttpClient) { }
+  public projects: BehaviorSubject<Project[]>;
 
-  getAll(): Observable<PaginationModel<User>> {
-    return this.http.get<PaginationModel<User>>(`${environment.API_HOST}${PROJECT_LIST}`);
+  constructor(
+    private http: HttpClient,
+    private loaderService: LoaderService,
+  ) {
+    this.projects = new BehaviorSubject([]);
+  }
+
+  updateProjects(): void {
+    const loaderUuid = this.loaderService.showLoader();
+    this.http.get<PaginationModel<Project>>(`${environment.API_HOST}${PROJECT_LIST}`)
+      .subscribe((res) => {
+        this.projects.next(res.results);
+        this.loaderService.hideLoader(loaderUuid);
+      });
   }
 }

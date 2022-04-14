@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {faListAlt, faPencilAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -13,11 +12,10 @@ import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.serv
   templateUrl: './client-list.component.html',
   styleUrls: ['./client-list.component.scss']
 })
-export class ClientListComponent implements OnInit, OnDestroy {
+export class ClientListComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
   faListAlt = faListAlt;
-  private subs = new Subscription();
 
   displayedColumns: string[] = ['name', 'actions'];
 
@@ -26,27 +24,22 @@ export class ClientListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  private dataArray: any;
-
   constructor(
     private clientService: ClientService,
     private dialogService: ConfirmDialogService,
   ) { }
 
   ngOnInit(): void {
-    this.subs.add(this.clientService.getAll()
-      .subscribe((res) => {
-        this.dataArray = res.results;
-        this.dataSource = new MatTableDataSource<Client>(this.dataArray);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }));
-  }
+    this.clientService.clients
+      .subscribe((clients) => {
+        if (clients) {
+          this.dataSource = new MatTableDataSource<Client>(clients);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      });
 
-  ngOnDestroy(): void {
-    if (this.subs) {
-      this.subs.unsubscribe();
-    }
+    this.clientService.updateClients();
   }
 
   delete(): void

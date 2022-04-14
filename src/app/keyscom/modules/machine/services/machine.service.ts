@@ -5,13 +5,16 @@ import {environment} from '../../../../../environments/environment';
 import {MACHINE_LIST} from '../../../api.endpoints';
 import {Machine} from '../../../models/machine.model';
 import {BehaviorSubject} from 'rxjs';
+import {LoaderService} from '../../shared/services/loader.service';
 
 @Injectable({ providedIn: 'root' })
 export class MachineService {
   public machines: BehaviorSubject<Machine[]>;
 
-  constructor(private http: HttpClient)
-  {
+  constructor(
+    private http: HttpClient,
+    private loaderService: LoaderService,
+  ) {
     this.machines = new BehaviorSubject([]);
   }
 
@@ -40,14 +43,16 @@ export class MachineService {
     return returnParams;
   }
 
-  updateMachines(filters?: object): void
-  {
+  updateMachines(filters?: object): void {
+    const loaderUuid = this.loaderService.showLoader();
     const options = filters !== undefined ? {
       params: this.convertAnyToHttp({filters}),
     } : {};
-    this.http.get<PaginationModel<Machine>>(
-      `${environment.API_HOST}${MACHINE_LIST}`,
-      options,
-    ).subscribe(res => this.machines.next(res.results));
+
+    this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE_LIST}`, options)
+      .subscribe((res) => {
+        this.machines.next(res.results);
+        this.loaderService.hideLoader(loaderUuid);
+      });
   }
 }

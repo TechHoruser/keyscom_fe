@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {faListAlt, faPencilAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -14,11 +13,10 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss']
 })
-export class ProjectListComponent implements OnInit, OnDestroy {
+export class ProjectListComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
   faListAlt = faListAlt;
-  private subs = new Subscription();
   filterProject: FormGroup;
 
   displayedColumns: string[] = ['name', 'startDate', 'endDate', 'actions'];
@@ -27,8 +25,6 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
-  private dataArray: any;
 
   constructor(
     private projectService: ProjectService,
@@ -40,19 +36,17 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       name: new FormControl('Name', Validators.minLength(2)),
       startDate: new FormControl(),
     });
-    this.subs.add(this.projectService.getAll()
-      .subscribe((res) => {
-        this.dataArray = res.results;
-        this.dataSource = new MatTableDataSource<Project>(this.dataArray);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }));
-  }
 
-  ngOnDestroy(): void {
-    if (this.subs) {
-      this.subs.unsubscribe();
-    }
+    this.projectService.projects
+      .subscribe((projects) => {
+        if (projects) {
+          this.dataSource = new MatTableDataSource<Project>(projects);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      });
+
+    this.projectService.updateProjects();
   }
 
   delete(): void

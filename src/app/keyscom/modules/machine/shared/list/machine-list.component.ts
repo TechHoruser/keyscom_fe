@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {debounceTime, distinctUntilChanged, Subscription} from 'rxjs';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {debounceTime, distinctUntilChanged} from 'rxjs';
 import {faListAlt, faPencilAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -14,11 +14,10 @@ import {FormControl, FormGroup} from '@angular/forms';
   templateUrl: './machine-list.component.html',
   styleUrls: ['./machine-list.component.scss']
 })
-export class MachineListComponent implements OnInit, OnDestroy {
+export class MachineListComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
   faListAlt = faListAlt;
-  private subs = new Subscription();
   filterMachine: FormGroup;
 
   displayedColumns: string[] = ['name', 'domain', 'ip', 'type', 'actions'];
@@ -28,8 +27,6 @@ export class MachineListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  private dataArray: any;
-
   private filterMachineLastRawValue: string;
 
   constructor(
@@ -38,13 +35,14 @@ export class MachineListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.subs.add(this.machineService.machines
-      .subscribe((data) => {
-        this.dataArray = data;
-        this.dataSource = new MatTableDataSource<Machine>(this.dataArray);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }));
+    this.machineService.machines
+      .subscribe((machines) => {
+        if (machines) {
+          this.dataSource = new MatTableDataSource<Machine>(machines);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      });
 
     this.machineService.updateMachines();
 
@@ -73,12 +71,6 @@ export class MachineListComponent implements OnInit, OnDestroy {
           this.filterMachineLastRawValue = filterMachineCurrentRawValue;
         }
       });
-  }
-
-  ngOnDestroy(): void {
-    if (this.subs) {
-      this.subs.unsubscribe();
-    }
   }
 
   delete(): void
