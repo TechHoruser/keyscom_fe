@@ -5,7 +5,6 @@ import {environment} from '../../../../../environments/environment';
 import {MACHINE_LIST} from '../../../api.endpoints';
 import {Machine} from '../../../models/machine.model';
 import {BehaviorSubject} from 'rxjs';
-import {LoaderService} from '../../shared/services/loader.service';
 
 @Injectable({ providedIn: 'root' })
 export class MachineService {
@@ -13,7 +12,6 @@ export class MachineService {
 
   constructor(
     private http: HttpClient,
-    private loaderService: LoaderService,
   ) {
     this.machines = new BehaviorSubject([]);
   }
@@ -44,15 +42,9 @@ export class MachineService {
   }
 
   updateMachines(filters?: object): void {
-    const loaderUuid = this.loaderService.showLoader();
-    const options = filters !== undefined ? {
-      params: this.convertAnyToHttp({filters}),
-    } : {};
+    const options = filters !== undefined ? { params: this.convertAnyToHttp({filters}) } : {};
 
     this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE_LIST}`, options)
-      .subscribe((res) => {
-        this.machines.next(res.results);
-        this.loaderService.hideLoader(loaderUuid);
-      });
+      .subscribe((res) => this.machines.next(res.results));
   }
 }

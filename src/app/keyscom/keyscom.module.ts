@@ -11,6 +11,7 @@ import {ClientModule} from './modules/client/client.module';
 import {DialogModule} from './modules/dialog/dialog.module';
 import {ProjectModule} from './modules/project/project.module';
 import {MachineModule} from './modules/machine/machine.module';
+import {LoaderInterceptor} from './modules/dashboard/services/loader.interceptor';
 
 @NgModule({
   imports: [
@@ -26,6 +27,11 @@ import {MachineModule} from './modules/machine/machine.module';
     KeyscomRoutingModule,
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

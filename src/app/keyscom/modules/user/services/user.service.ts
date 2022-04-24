@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {PaginationModel} from '../../../models/pagination.model';
 import {User} from '../../../models/user.model';
 import {environment} from '../../../../../environments/environment';
-import {USER_LIST} from '../../../api.endpoints';
-import {LoaderService} from '../../shared/services/loader.service';
+import {USER_CREATE, USER_LIST} from '../../../api.endpoints';
+import {CreateUserEntity} from '../shared/create-user.entity';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -13,17 +13,17 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private loaderService: LoaderService,
   ) {
     this.users = new BehaviorSubject([]);
   }
 
   updateUsers(): void {
-    const loaderUuid = this.loaderService.showLoader();
     this.http.get<PaginationModel<User>>(`${environment.API_HOST}${USER_LIST}`)
-      .subscribe((res) => {
-        this.users.next(res.results);
-        this.loaderService.hideLoader(loaderUuid);
-      });
+      .subscribe((res) => this.users.next(res.results));
+  }
+
+  createUser(user: CreateUserEntity): Observable<any>
+  {
+    return this.http.post<User>(`${environment.API_HOST}${USER_CREATE}`, user);
   }
 }

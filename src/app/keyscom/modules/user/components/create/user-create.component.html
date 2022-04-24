@@ -1,19 +1,23 @@
 <div>
-  <mat-form-field appearance="legacy">
-    <mat-label>First Name</mat-label>
-    <input matInput placeholder="First Name">
-  </mat-form-field>
-  <mat-form-field appearance="legacy">
-    <mat-label>Last Name</mat-label>
-    <input matInput placeholder="Last Name">
-  </mat-form-field>
-  <mat-form-field appearance="legacy">
-    <mat-label>Email</mat-label>
-    <input matInput placeholder="Email">
-  </mat-form-field>
-  <div class="row p-3">
-    <div class="d-flex justify-content-end">
-      <button routerLink="create" mat-raised-button color="primary" (click)="saveUser()">Guardar</button>
+  <form [formGroup]="form">
+    <mat-form-field appearance="legacy">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Email">
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" placeholder="First Name">
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" placeholder="Last Name">
+    </mat-form-field>
+    <div class="row p-3">
+      <div class="d-flex justify-content-end">
+        <button mat-raised-button color="primary" (click)="saveUser()" class="btn btn-primary">
+          Create
+        </button>
+      </div>
     </div>
-  </div>
+  </form>
 </div>
