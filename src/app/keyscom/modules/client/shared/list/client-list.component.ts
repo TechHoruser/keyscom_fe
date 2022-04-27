@@ -42,13 +42,18 @@ export class ClientListComponent implements OnInit {
     this.clientService.updateClients();
   }
 
-  delete(): void
+  delete(client: Client): void
   {
-    this.dialogService.open({
-      title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
-      message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
-      cancelText: 'CONFIRM.DOWNLOAD.JOB.CANCELTEXT',
-      confirmText: 'CONFIRM.DOWNLOAD.JOB.CONFIRMTEXT',
-    });
+    this.dialogService.open(
+      {
+        title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
+        message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
+        cancelText: 'CONFIRM.DOWNLOAD.JOB.CANCELTEXT',
+        confirmText: 'CONFIRM.DOWNLOAD.JOB.CONFIRMTEXT',
+      },
+      () => this.clientService.deleteByUuid(client.uuid).subscribe(
+        () => this.clientService.updateClients()
+      ),
+    );
   }
 }

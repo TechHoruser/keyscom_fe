@@ -73,13 +73,18 @@ export class MachineListComponent implements OnInit {
       });
   }
 
-  delete(): void
+  delete(machine: Machine): void
   {
-    this.dialogService.open({
-      title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
-      message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
-      cancelText: 'CONFIRM.DOWNLOAD.JOB.CANCELTEXT',
-      confirmText: 'CONFIRM.DOWNLOAD.JOB.CONFIRMTEXT',
-    });
+    this.dialogService.open(
+      {
+        title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
+        message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
+        cancelText: 'CONFIRM.DOWNLOAD.JOB.CANCELTEXT',
+        confirmText: 'CONFIRM.DOWNLOAD.JOB.CONFIRMTEXT',
+      },
+      () => this.machineService.deleteByUuid(machine.uuid).subscribe(
+        () => this.machineService.updateMachines()
+      ),
+    );
   }
 }

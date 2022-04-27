@@ -49,13 +49,18 @@ export class ProjectListComponent implements OnInit {
     this.projectService.updateProjects();
   }
 
-  delete(): void
+  delete(project: Project): void
   {
-    this.dialogService.open({
-      title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
-      message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
-      cancelText: 'CONFIRM.DOWNLOAD.JOB.CANCELTEXT',
-      confirmText: 'CONFIRM.DOWNLOAD.JOB.CONFIRMTEXT',
-    });
+    this.dialogService.open(
+      {
+        title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
+        message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
+        cancelText: 'CONFIRM.DOWNLOAD.JOB.CANCELTEXT',
+        confirmText: 'CONFIRM.DOWNLOAD.JOB.CONFIRMTEXT',
+      },
+      () => this.projectService.deleteByUuid(project.uuid).subscribe(
+        () => this.projectService.updateProjects()
+      ),
+    );
   }
 }

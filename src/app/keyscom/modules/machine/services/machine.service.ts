@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {PaginationModel} from '../../../models/pagination.model';
 import {environment} from '../../../../../environments/environment';
-import {MACHINE_LIST} from '../../../api.endpoints';
+import {MACHINE_DELETE, MACHINE_LIST} from '../../../api.endpoints';
 import {Machine} from '../../../models/machine.model';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MachineService {
@@ -46,5 +46,11 @@ export class MachineService {
 
     this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE_LIST}`, options)
       .subscribe((res) => this.machines.next(res.results));
+  }
+
+  deleteByUuid(machineUuid: string): Observable<any>
+  {
+    console.log('asdf');
+    return this.http.delete<void>(`${environment.API_HOST}${MACHINE_DELETE}`.replace(':machineUuid', machineUuid));
   }
 }

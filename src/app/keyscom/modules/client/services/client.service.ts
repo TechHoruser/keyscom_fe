@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {PaginationModel} from '../../../models/pagination.model';
 import {environment} from '../../../../../environments/environment';
-import {CLIENT_LIST} from '../../../api.endpoints';
+import {CLIENT_DELETE, CLIENT_LIST} from '../../../api.endpoints';
 import {Client} from '../../../models/client.model';
 
 @Injectable({ providedIn: 'root' })
@@ -19,5 +19,10 @@ export class ClientService {
   updateClients(): void {
     this.http.get<PaginationModel<Client>>(`${environment.API_HOST}${CLIENT_LIST}`)
       .subscribe((res) => this.clients.next(res.results));
+  }
+
+  deleteByUuid(clientUuid: string): Observable<any>
+  {
+    return this.http.delete<void>(`${environment.API_HOST}${CLIENT_DELETE}`.replace(':clientUuid', clientUuid));
   }
 }

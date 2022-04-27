@@ -10,7 +10,7 @@
       <td *matCellDef="let element" class="mat-cell cdk-cell mat-column-actions">
         <fa-icon class="icon text-primary" [icon]="faListAlt"></fa-icon>
         <fa-icon class="icon text-primary" [icon]="faPencilAlt"></fa-icon>
-        <fa-icon class="icon text-danger" [icon]="faTrashAlt" (click)="delete()"></fa-icon>
+        <fa-icon class="icon text-danger" [icon]="faTrashAlt" (click)="delete(element)"></fa-icon>
       </td>
     </ng-container>
 
