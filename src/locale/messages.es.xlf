@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="es">
+  <file id="ngi18n" original="ng.template">
+    <unit id="8953033926734869941">
+      <notes>
+        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:4</note>
+      </notes>
+      <segment state="initial">
+        <source>Name</source>
+        <target>Name</target>
+      </segment>
+    </unit>
+    <unit id="6302903762785466130">
+      <notes>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:56</note>
+      </notes>
+      <segment state="initial">
+        <source>Delete Project</source>
+        <target>Delete Project</target>
+      </segment>
+    </unit>
+    <unit id="3811729936237804220">
+      <notes>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:57</note>
+      </notes>
+      <segment state="initial">
+        <source>Delete "<ph id="0" equiv="name" disp="project.name"/>"?</source>
+        <target>Delete "<ph id="0" equiv="name" disp="project.name"/>"?</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

@@ -14,8 +14,8 @@ export class ConfirmDialogService {
       data: {
         title: options.title,
         message: options.message,
-        cancelText: options.cancelText,
-        confirmText: options.confirmText
+        cancelText: options.cancelText ?? $localize`CANCEL`,
+        confirmText: options.confirmText ?? $localize`CONFIRM`,
       }
     })
     .afterClosed()

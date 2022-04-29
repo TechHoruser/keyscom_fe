@@ -1,7 +1,7 @@
 <div class="mat-elevation-z1">
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Name </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="name" i18n>Name</th>
       <td mat-cell *matCellDef="let element" class="left-text"> {{element.name}} </td>
     </ng-container>
 

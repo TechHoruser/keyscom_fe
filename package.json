@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "i18n:extract": "scripts/i18n-extract.sh"
   },
   "private": true,
   "dependencies": {
@@ -18,6 +19,7 @@
     "@angular/core": "*",
     "@angular/flex-layout": "^13.0.0-beta.38",
     "@angular/forms": "*",
+    "@angular/localize": "^13.3.5",
     "@angular/material": "*",
     "@angular/material-moment-adapter": "*",
     "@angular/platform-browser": "*",
@@ -51,6 +53,7 @@
     "karma-coverage-istanbul-reporter": "*",
     "karma-jasmine": "*",
     "karma-jasmine-html-reporter": "*",
+    "ngx-i18nsupport": "^0.17.1",
     "protractor": "*",
     "ts-node": "*",
     "typescript": "*"
