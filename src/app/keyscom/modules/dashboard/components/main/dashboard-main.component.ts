@@ -77,7 +77,7 @@ export class DashboardMainComponent implements OnInit {
       },
       colors: ['#008FFB'],
       title: {
-        text: 'New entries details'
+        text: $localize`New entries details`
       },
     };
   }

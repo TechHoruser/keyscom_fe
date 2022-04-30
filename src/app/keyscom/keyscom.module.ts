@@ -12,6 +12,9 @@ import {DialogModule} from './modules/dialog/dialog.module';
 import {ProjectModule} from './modules/project/project.module';
 import {MachineModule} from './modules/machine/machine.module';
 import {LoaderInterceptor} from './modules/dashboard/services/loader.interceptor';
+import {MatPaginatorIntl} from '@angular/material/paginator';
+import {TranslateService} from '@ngx-translate/core';
+import {PaginatorI18n} from './modules/shared/services/paginator-i18n';
 
 @NgModule({
   imports: [
@@ -46,6 +49,10 @@ import {LoaderInterceptor} from './modules/dashboard/services/loader.interceptor
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptorInternalServer,
       multi: true,
+    },
+    {
+      provide: MatPaginatorIntl, deps: [TranslateService],
+      useFactory: () => new PaginatorI18n().getPaginatorIntl()
     },
   ],
 })

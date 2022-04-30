@@ -1,17 +1,17 @@
 <div class="mat-elevation-z1">
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="firstName"> First Name </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="firstName" i18n>First Name</th>
       <td mat-cell *matCellDef="let element" class="left-text"> {{element.firstName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="lastName"> Last Name </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="lastName" i18n>Last Name</th>
       <td mat-cell *matCellDef="let element" class="left-text"> {{element.lastName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="email"> Email </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="email" i18n>Email</th>
       <td mat-cell *matCellDef="let element" class="left-text"> {{element.email}} </td>
     </ng-container>
 

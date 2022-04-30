@@ -4,10 +4,24 @@
     <unit id="8953033926734869941">
       <notes>
         <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:4</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:6</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:4</note>
       </notes>
       <segment state="final">
         <source>Name</source>
         <target>Nombre</target>
+      </segment>
+    </unit>
+    <unit id="7861389751355579174">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:5</note>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:19</note>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:33</note>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:47</note>
+      </notes>
+      <segment state="final">
+        <source>Analytics</source>
+        <target>Análisis</target>
       </segment>
     </unit>
     <unit id="6943486270557756671">
@@ -28,6 +42,60 @@
         <target>CONFIRMAR</target>
       </segment>
     </unit>
+    <unit id="4163272119298020373">
+      <notes>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:2</note>
+      </notes>
+      <segment state="final">
+        <source>Filters</source>
+        <target>Filtros</target>
+      </segment>
+    </unit>
+    <unit id="966975180773840600">
+      <notes>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:11</note>
+      </notes>
+      <segment state="final">
+        <source>Domain</source>
+        <target>Dominio</target>
+      </segment>
+    </unit>
+    <unit id="512712988274106243">
+      <notes>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:16</note>
+      </notes>
+      <segment state="final">
+        <source>IP</source>
+        <target>IP</target>
+      </segment>
+    </unit>
+    <unit id="3604386807230411192">
+      <notes>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:9</note>
+      </notes>
+      <segment state="final">
+        <source>Start Date</source>
+        <target>Fecha Inicio</target>
+      </segment>
+    </unit>
+    <unit id="7379726829888309084">
+      <notes>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:14</note>
+      </notes>
+      <segment state="final">
+        <source>End Date</source>
+        <target>Fecha Fin</target>
+      </segment>
+    </unit>
+    <unit id="3193976279273491157">
+      <notes>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:19</note>
+      </notes>
+      <segment state="final">
+        <source>Actions</source>
+        <target>Acciones</target>
+      </segment>
+    </unit>
     <unit id="6302903762785466130">
       <notes>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:56</note>
@@ -44,6 +112,187 @@
       <segment state="final">
         <source>Delete "<ph id="0" equiv="name" disp="project.name"/>"?</source>
         <target>Eliminar "<ph id="0" equiv="name" disp="project.name"/>"?</target>
+      </segment>
+    </unit>
+    <unit id="6570363013146073520">
+      <notes>
+        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:23</note>
+      </notes>
+      <segment state="final">
+        <source>Dashboard</source>
+        <target>Inicio</target>
+      </segment>
+    </unit>
+    <unit id="4555457172864212828">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:6</note>
+        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:28</note>
+      </notes>
+      <segment state="final">
+        <source>Users</source>
+        <target>Usuarios</target>
+      </segment>
+    </unit>
+    <unit id="575919591041213158">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:12</note>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:26</note>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:40</note>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:54</note>
+      </notes>
+      <segment state="final">
+        <source>VIEW</source>
+        <target>VER</target>
+      </segment>
+    </unit>
+    <unit id="9029527477775109908">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:13</note>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:27</note>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:41</note>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:55</note>
+      </notes>
+      <segment state="final">
+        <source>CURRENT YEAR</source>
+        <target>AÑO ACTUAL</target>
+      </segment>
+    </unit>
+    <unit id="5910845130937645353">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:20</note>
+        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:33</note>
+      </notes>
+      <segment state="final">
+        <source>Clients</source>
+        <target>Clientes</target>
+      </segment>
+    </unit>
+    <unit id="7091571651222742304">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:34</note>
+        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:38</note>
+      </notes>
+      <segment state="final">
+        <source>Projects</source>
+        <target>Proyectos</target>
+      </segment>
+    </unit>
+    <unit id="6935250775030622228">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:48</note>
+        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:43</note>
+      </notes>
+      <segment state="final">
+        <source>Machines</source>
+        <target>Máquinas</target>
+      </segment>
+    </unit>
+    <unit id="2745570639275310090">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.ts:80</note>
+      </notes>
+      <segment state="final">
+        <source>New entries details</source>
+        <target>Detalles de nuevas entradas</target>
+      </segment>
+    </unit>
+    <unit id="4915431133669985304">
+      <notes>
+        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:48</note>
+      </notes>
+      <segment state="final">
+        <source>Profile</source>
+        <target>Perfil</target>
+      </segment>
+    </unit>
+    <unit id="308872120879242051">
+      <notes>
+        <note category="location">src/app/keyscom/modules/shared/services/paginator-i18n.ts:6</note>
+      </notes>
+      <segment state="final">
+        <source>ITEMS_PER_PAGE_LABEL</source>
+        <target>Artículos por página</target>
+      </segment>
+    </unit>
+    <unit id="6430682216052641089">
+      <notes>
+        <note category="location">src/app/keyscom/modules/shared/services/paginator-i18n.ts:7</note>
+      </notes>
+      <segment state="final">
+        <source>NEXT_PAGE_LABEL</source>
+        <target>Siguiente</target>
+      </segment>
+    </unit>
+    <unit id="4285566473992741088">
+      <notes>
+        <note category="location">src/app/keyscom/modules/shared/services/paginator-i18n.ts:8</note>
+      </notes>
+      <segment state="final">
+        <source>PREVIOUS_PAGE_LABEL</source>
+        <target>Anterior</target>
+      </segment>
+    </unit>
+    <unit id="7270198226563010416">
+      <notes>
+        <note category="location">src/app/keyscom/modules/shared/services/paginator-i18n.ts:9</note>
+      </notes>
+      <segment state="final">
+        <source>FIRST_PAGE_LABEL</source>
+        <target>Primera Página</target>
+      </segment>
+    </unit>
+    <unit id="4879439319995166463">
+      <notes>
+        <note category="location">src/app/keyscom/modules/shared/services/paginator-i18n.ts:10</note>
+      </notes>
+      <segment state="final">
+        <source>LAST_PAGE_LABEL</source>
+        <target>Última Página</target>
+      </segment>
+    </unit>
+    <unit id="217965241848642753">
+      <notes>
+        <note category="location">src/app/keyscom/modules/shared/services/paginator-i18n.ts:17</note>
+      </notes>
+      <segment state="final">
+        <source>RANGE_EMPTY_PAGE_LABEL</source>
+        <target>0 de 0</target>
+      </segment>
+    </unit>
+    <unit id="2946540789111148589">
+      <notes>
+        <note category="location">src/app/keyscom/modules/shared/services/paginator-i18n.ts:23</note>
+      </notes>
+      <segment state="initial">
+        <source>RANGE_PAGE_LABEL <ph id="0" equiv="startIndex" disp="startIndex + 1"/> <ph id="1" equiv="endIndex" disp="endIndex"/> <ph id="2" equiv="length" disp="length"/></source>
+        <target>RANGE_PAGE_LABEL <ph id="0" equiv="startIndex" disp="startIndex + 1"/> <ph id="1" equiv="endIndex" disp="endIndex"/> <ph id="2" equiv="length" disp="length"/></target>
+      </segment>
+    </unit>
+    <unit id="6028371114637047813">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:4</note>
+      </notes>
+      <segment state="final">
+        <source>First Name</source>
+        <target>Nombre</target>
+      </segment>
+    </unit>
+    <unit id="4407559560004943843">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:9</note>
+      </notes>
+      <segment state="final">
+        <source>Last Name</source>
+        <target>Apellidos</target>
+      </segment>
+    </unit>
+    <unit id="4768749765465246664">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:14</note>
+      </notes>
+      <segment state="final">
+        <source>Email</source>
+        <target>Email</target>
       </segment>
     </unit>
   </file>
