@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import moment from 'moment/moment';
+import {$localize} from '@angular/localize/init';
 
 @Component({
   selector: 'app-root',
