@@ -10,6 +10,24 @@
         <target>Name</target>
       </segment>
     </unit>
+    <unit id="6943486270557756671">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dialog/services/confirm-dialog.service.ts:17</note>
+      </notes>
+      <segment state="final">
+        <source>CANCEL</source>
+        <target>CANCEL</target>
+      </segment>
+    </unit>
+    <unit id="4851730314523807064">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dialog/services/confirm-dialog.service.ts:18</note>
+      </notes>
+      <segment state="final">
+        <source>CONFIRM</source>
+        <target>CONFIRM</target>
+      </segment>
+    </unit>
     <unit id="6302903762785466130">
       <notes>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:56</note>

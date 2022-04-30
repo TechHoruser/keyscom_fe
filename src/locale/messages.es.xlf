@@ -5,27 +5,45 @@
       <notes>
         <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:4</note>
       </notes>
-      <segment state="initial">
+      <segment state="final">
         <source>Name</source>
-        <target>Name</target>
+        <target>Nombre</target>
+      </segment>
+    </unit>
+    <unit id="6943486270557756671">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dialog/services/confirm-dialog.service.ts:17</note>
+      </notes>
+      <segment state="final">
+        <source>CANCEL</source>
+        <target>CANCELAR</target>
+      </segment>
+    </unit>
+    <unit id="4851730314523807064">
+      <notes>
+        <note category="location">src/app/keyscom/modules/dialog/services/confirm-dialog.service.ts:18</note>
+      </notes>
+      <segment state="final">
+        <source>CONFIRM</source>
+        <target>CONFIRMAR</target>
       </segment>
     </unit>
     <unit id="6302903762785466130">
       <notes>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:56</note>
       </notes>
-      <segment state="initial">
+      <segment state="final">
         <source>Delete Project</source>
-        <target>Delete Project</target>
+        <target>Eliminar Proyecto</target>
       </segment>
     </unit>
     <unit id="3811729936237804220">
       <notes>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:57</note>
       </notes>
-      <segment state="initial">
+      <segment state="final">
         <source>Delete "<ph id="0" equiv="name" disp="project.name"/>"?</source>
-        <target>Delete "<ph id="0" equiv="name" disp="project.name"/>"?</target>
+        <target>Eliminar "<ph id="0" equiv="name" disp="project.name"/>"?</target>
       </segment>
     </unit>
   </file>
