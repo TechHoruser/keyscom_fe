@@ -5,7 +5,7 @@ import {PaginationModel} from '../../../models/pagination.model';
 import {Project} from '../../../models/project.model';
 import {environment} from '../../../../../environments/environment';
 import {PROJECT_DELETE, PROJECT_LIST} from '../../../api.endpoints';
-import {LoaderService} from '../../shared/services/loader.service';
+import {HttpHelperService} from '../../shared/services/http-helper.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
@@ -13,18 +13,18 @@ export class ProjectService {
 
   constructor(
     private http: HttpClient,
-    private loaderService: LoaderService,
+    private httpHelperService: HttpHelperService,
   ) {
     this.projects = new BehaviorSubject([]);
   }
 
-  updateProjects(): void {
-    const loaderUuid = this.loaderService.showLoader();
-    this.http.get<PaginationModel<Project>>(`${environment.API_HOST}${PROJECT_LIST}`)
-      .subscribe((res) => {
-        this.projects.next(res.results);
-        this.loaderService.hideLoader(loaderUuid);
-      });
+  updateProjects(filters?: object): void {
+    const options = filters !== undefined ?
+      { params: this.httpHelperService.convertAnyToHttpParams({filters}) } :
+      {};
+
+    this.http.get<PaginationModel<Project>>(`${environment.API_HOST}${PROJECT_LIST}`, options)
+      .subscribe((res) => this.projects.next(res.results));
   }
 
   deleteByUuid(projectUuid: string): Observable<any>

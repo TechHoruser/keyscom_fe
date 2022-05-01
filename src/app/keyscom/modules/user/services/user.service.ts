@@ -6,6 +6,7 @@ import {User} from '../../../models/user.model';
 import {environment} from '../../../../../environments/environment';
 import {USER_CREATE, USER_DELETE, USER_LIST} from '../../../api.endpoints';
 import {CreateUserEntity} from '../shared/create-user.entity';
+import {HttpHelperService} from '../../shared/services/http-helper.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -13,12 +14,17 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
+    private httpHelperService: HttpHelperService,
   ) {
     this.users = new BehaviorSubject([]);
   }
 
-  updateUsers(): void {
-    this.http.get<PaginationModel<User>>(`${environment.API_HOST}${USER_LIST}`)
+  updateUsers(filters?: object): void {
+    const options = filters !== undefined ?
+      { params: this.httpHelperService.convertAnyToHttpParams({filters}) } :
+      {};
+
+    this.http.get<PaginationModel<User>>(`${environment.API_HOST}${USER_LIST}`, options)
       .subscribe((res) => this.users.next(res.results));
   }
 

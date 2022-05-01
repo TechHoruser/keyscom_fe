@@ -3,9 +3,15 @@
   <file id="ngi18n" original="ng.template">
     <unit id="8953033926734869941">
       <notes>
-        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:4</note>
+        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:6</note>
+        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:7</note>
+        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:15</note>
         <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:6</note>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:4</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:7</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:25</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:6</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:7</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:15</note>
       </notes>
       <segment state="final">
         <source>Name</source>
@@ -44,7 +50,10 @@
     </unit>
     <unit id="4163272119298020373">
       <notes>
+        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:2</note>
         <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:2</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:2</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:2</note>
       </notes>
       <segment state="final">
         <source>Filters</source>
@@ -54,6 +63,8 @@
     <unit id="966975180773840600">
       <notes>
         <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:11</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:12</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:30</note>
       </notes>
       <segment state="final">
         <source>Domain</source>
@@ -63,15 +74,26 @@
     <unit id="512712988274106243">
       <notes>
         <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:16</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:17</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:35</note>
       </notes>
       <segment state="final">
         <source>IP</source>
         <target>IP</target>
       </segment>
     </unit>
+    <unit id="8650499415827640724">
+      <notes>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:40</note>
+      </notes>
+      <segment state="final">
+        <source>Type</source>
+        <target>Type</target>
+      </segment>
+    </unit>
     <unit id="3604386807230411192">
       <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:9</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:20</note>
       </notes>
       <segment state="final">
         <source>Start Date</source>
@@ -80,7 +102,7 @@
     </unit>
     <unit id="7379726829888309084">
       <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:14</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:25</note>
       </notes>
       <segment state="final">
         <source>End Date</source>
@@ -89,7 +111,8 @@
     </unit>
     <unit id="3193976279273491157">
       <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:19</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:45</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:30</note>
       </notes>
       <segment state="final">
         <source>Actions</source>
@@ -98,7 +121,7 @@
     </unit>
     <unit id="6302903762785466130">
       <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:56</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:85</note>
       </notes>
       <segment state="final">
         <source>Delete Project</source>
@@ -107,7 +130,7 @@
     </unit>
     <unit id="3811729936237804220">
       <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:57</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:86</note>
       </notes>
       <segment state="final">
         <source>Delete "<ph id="0" equiv="name" disp="project.name"/>"?</source>
@@ -270,7 +293,9 @@
     </unit>
     <unit id="6028371114637047813">
       <notes>
-        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:4</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:10</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:11</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:23</note>
       </notes>
       <segment state="final">
         <source>First Name</source>
@@ -279,7 +304,9 @@
     </unit>
     <unit id="4407559560004943843">
       <notes>
-        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:9</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:14</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:15</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:28</note>
       </notes>
       <segment state="final">
         <source>Last Name</source>
@@ -288,11 +315,32 @@
     </unit>
     <unit id="4768749765465246664">
       <notes>
-        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:14</note>
+        <note category="location">src/app/keyscom/modules/auth/component/login/login.component.html:15</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:6</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:7</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:33</note>
       </notes>
       <segment state="final">
         <source>Email</source>
         <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="1431416938026210429">
+      <notes>
+        <note category="location">src/app/keyscom/modules/auth/component/login/login.component.html:26</note>
+      </notes>
+      <segment state="final">
+        <source>Password</source>
+        <target>Password</target>
+      </segment>
+    </unit>
+    <unit id="2454050363478003966">
+      <notes>
+        <note category="location">src/app/keyscom/modules/auth/component/login/login.component.html:31</note>
+      </notes>
+      <segment state="final">
+        <source>Login</source>
+        <target>Login</target>
       </segment>
     </unit>
   </file>

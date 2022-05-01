@@ -5,6 +5,7 @@ import {environment} from '../../../../../environments/environment';
 import {MACHINE_DELETE, MACHINE_LIST} from '../../../api.endpoints';
 import {Machine} from '../../../models/machine.model';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpHelperService} from '../../shared/services/http-helper.service';
 
 @Injectable({ providedIn: 'root' })
 export class MachineService {
@@ -12,37 +13,15 @@ export class MachineService {
 
   constructor(
     private http: HttpClient,
+    private httpHelperService: HttpHelperService,
   ) {
     this.machines = new BehaviorSubject([]);
   }
 
-  convertAnyToHttp(params: object, isRoot: boolean = true): { [param: string]: string | string[]; }
-  {
-    const returnParams = {};
-    Object.keys(params).forEach(paramKey => {
-      const paramValue = params[paramKey];
-      paramKey = isRoot ? paramKey : `[${paramKey}]`;
-      if (typeof paramValue === 'object') {
-        const queryStringArray = this.convertAnyToHttp(paramValue, false);
-        Object.keys(queryStringArray).forEach(queryStringArrayKey => {
-          returnParams[`${paramKey}${queryStringArrayKey}`] = queryStringArray[queryStringArrayKey];
-        });
-      } else if (Array.isArray(paramValue)) {
-        paramValue.forEach((paramSubValue, paramSubValueIndex) => {
-          const queryStringArray = this.convertAnyToHttp(paramSubValue, false);
-          Object.keys(queryStringArray).forEach(queryStringArrayKey => {
-            returnParams[`[${paramSubValueIndex}]${queryStringArrayKey}`] = queryStringArray[queryStringArrayKey];
-          });
-        });
-      } else {
-        returnParams[paramKey] = paramValue;
-      }
-    });
-    return returnParams;
-  }
-
   updateMachines(filters?: object): void {
-    const options = filters !== undefined ? { params: this.convertAnyToHttp({filters}) } : {};
+    const options = filters !== undefined ?
+      { params: this.httpHelperService.convertAnyToHttpParams({filters}) } :
+      {};
 
     this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE_LIST}`, options)
       .subscribe((res) => this.machines.next(res.results));
@@ -50,7 +29,6 @@ export class MachineService {
 
   deleteByUuid(machineUuid: string): Observable<any>
   {
-    console.log('asdf');
     return this.http.delete<void>(`${environment.API_HOST}${MACHINE_DELETE}`.replace(':machineUuid', machineUuid));
   }
 }

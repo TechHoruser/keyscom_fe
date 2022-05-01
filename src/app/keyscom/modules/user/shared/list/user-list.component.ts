@@ -6,6 +6,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {User} from '../../../../models/user.model';
 import {UserService} from '../../services/user.service';
 import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.service';
+import {FormControl, FormGroup} from '@angular/forms';
+import {debounceTime, distinctUntilChanged} from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -15,6 +17,8 @@ import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.serv
 export class UserListComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
+  filters: FormGroup;
+  private filtersLastRawValue: string;
 
   displayedColumns: string[] = ['email', 'firstName', 'lastName', 'actions'];
 
@@ -38,6 +42,33 @@ export class UserListComponent implements OnInit {
         }
       });
     this.userService.updateUsers();
+
+    this.initializeFilterForm();
+  }
+
+  private initializeFilterForm(): void
+  {
+    this.filters = new FormGroup({
+      email: new FormControl(''),
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+    });
+
+    this.filtersLastRawValue = JSON.stringify(this.filters.getRawValue());
+
+    this.filters.valueChanges
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .subscribe(() => {
+        console.log(this.filters.getRawValue());
+        const filterMachineCurrentRawValue = JSON.stringify(this.filters.getRawValue());
+        if (this.filtersLastRawValue !== filterMachineCurrentRawValue) {
+          this.userService.updateUsers(this.filters.getRawValue());
+          this.filtersLastRawValue = filterMachineCurrentRawValue;
+        }
+      });
   }
 
   delete(user: User): void
@@ -46,8 +77,6 @@ export class UserListComponent implements OnInit {
       {
         title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
         message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
-        cancelText: 'CONFIRM.DOWNLOAD.JOB.CANCELTEXT',
-        confirmText: 'CONFIRM.DOWNLOAD.JOB.CONFIRMTEXT',
       },
       () => this.userService.deleteByUuid(user.uuid).subscribe(
         () => this.userService.updateUsers()

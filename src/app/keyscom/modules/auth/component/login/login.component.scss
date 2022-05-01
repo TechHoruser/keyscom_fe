@@ -29,11 +29,14 @@
     text-align: center;
     width: 100%;
     display: block;
-    font-weight: 700;
 
     mat-card-title {
       font-size: 30px;
       margin: 0;
+    }
+
+    img {
+      width: 100%;
     }
   }
 

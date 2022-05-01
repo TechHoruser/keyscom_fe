@@ -6,6 +6,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Client} from '../../../../models/client.model';
 import {ClientService} from '../../services/client.service';
 import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.service';
+import {FormControl, FormGroup} from '@angular/forms';
+import {debounceTime, distinctUntilChanged} from 'rxjs';
 
 @Component({
   selector: 'app-client-list',
@@ -16,6 +18,8 @@ export class ClientListComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
   faListAlt = faListAlt;
+  filters: FormGroup;
+  private filtersLastRawValue: string;
 
   displayedColumns: string[] = ['name', 'actions'];
 
@@ -40,6 +44,31 @@ export class ClientListComponent implements OnInit {
       });
 
     this.clientService.updateClients();
+
+    this.initializeFilterForm();
+  }
+
+  private initializeFilterForm(): void
+  {
+    this.filters = new FormGroup({
+      name: new FormControl(''),
+    });
+
+    this.filtersLastRawValue = JSON.stringify(this.filters.getRawValue());
+
+    this.filters.valueChanges
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .subscribe(() => {
+        console.log(this.filters.getRawValue());
+        const filterMachineCurrentRawValue = JSON.stringify(this.filters.getRawValue());
+        if (this.filtersLastRawValue !== filterMachineCurrentRawValue) {
+          this.clientService.updateClients(this.filters.getRawValue());
+          this.filtersLastRawValue = filterMachineCurrentRawValue;
+        }
+      });
   }
 
   delete(client: Client): void
@@ -48,8 +77,6 @@ export class ClientListComponent implements OnInit {
       {
         title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
         message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
-        cancelText: 'CONFIRM.DOWNLOAD.JOB.CANCELTEXT',
-        confirmText: 'CONFIRM.DOWNLOAD.JOB.CONFIRMTEXT',
       },
       () => this.clientService.deleteByUuid(client.uuid).subscribe(
         () => this.clientService.updateClients()

@@ -7,6 +7,7 @@ import {Project} from '../../../../models/project.model';
 import {ProjectService} from '../../services/project.service';
 import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {debounceTime, distinctUntilChanged} from 'rxjs';
 
 @Component({
   selector: 'app-project-list',
@@ -17,7 +18,8 @@ export class ProjectListComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
   faListAlt = faListAlt;
-  filterProject: FormGroup;
+  filters: FormGroup;
+  private filtersLastRawValue: string;
 
   displayedColumns: string[] = ['name', 'startDate', 'endDate', 'actions'];
 
@@ -32,8 +34,8 @@ export class ProjectListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.filterProject = new FormGroup({
-      name: new FormControl('Name', Validators.minLength(2)),
+    this.filters = new FormGroup({
+      name: new FormControl('', Validators.minLength(2)),
       startDate: new FormControl(),
     });
 
@@ -47,6 +49,33 @@ export class ProjectListComponent implements OnInit {
       });
 
     this.projectService.updateProjects();
+
+    this.initializeFilterForm();
+  }
+
+  private initializeFilterForm(): void
+  {
+    this.filters = new FormGroup({
+      name: new FormControl(''),
+      startDate: new FormControl(''),
+      endDate: new FormControl(''),
+    });
+
+    this.filtersLastRawValue = JSON.stringify(this.filters.getRawValue());
+
+    this.filters.valueChanges
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .subscribe(() => {
+        console.log(this.filters.getRawValue());
+        const filterMachineCurrentRawValue = JSON.stringify(this.filters.getRawValue());
+        if (this.filtersLastRawValue !== filterMachineCurrentRawValue) {
+          this.projectService.updateProjects(this.filters.getRawValue());
+          this.filtersLastRawValue = filterMachineCurrentRawValue;
+        }
+      });
   }
 
   delete(project: Project): void

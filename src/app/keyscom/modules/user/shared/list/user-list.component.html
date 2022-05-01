@@ -1,31 +1,49 @@
-<div class="mat-elevation-z1">
-  <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="firstName" i18n>First Name</th>
-      <td mat-cell *matCellDef="let element" class="left-text"> {{element.firstName}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="lastName" i18n>Last Name</th>
-      <td mat-cell *matCellDef="let element" class="left-text"> {{element.lastName}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="email" i18n>Email</th>
-      <td mat-cell *matCellDef="let element" class="left-text"> {{element.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
-      <td *matCellDef="let element" class="mat-cell cdk-cell mat-column-actions">
-        <fa-icon class="icon text-primary" [icon]="faPencilAlt"></fa-icon>
-        <fa-icon class="icon text-danger" [icon]="faTrashAlt" (click)="delete(element)"></fa-icon>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[20]"></mat-paginator>
+<div class="filter-form p-2">
+  <h2 i18n>Filters</h2>
+  <form [formGroup]="filters">
+    <div class="row">
+      <div class="col-lg-4 col-md-12"><mat-form-field appearance="legacy">
+        <mat-label i18n>Email</mat-label>
+        <input matInput i18n-placeholder placeholder="Email" formControlName="email">
+      </mat-form-field></div>
+      <div class="col-lg-4 col-md-12"><mat-form-field appearance="legacy">
+        <mat-label i18n>First Name</mat-label>
+        <input matInput i18n-placeholder placeholder="First Name" formControlName="firstName">
+      </mat-form-field></div>
+      <div class="col-lg-4 col-md-12"><mat-form-field appearance="legacy">
+        <mat-label i18n>Last Name</mat-label>
+        <input matInput i18n-placeholder placeholder="Last Name" formControlName="lastName">
+      </mat-form-field></div>
+    </div>
+  </form>
 </div>
+
+<table mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="firstName" i18n>First Name</th>
+    <td mat-cell *matCellDef="let element" class="left-text"> {{element.firstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="lastName" i18n>Last Name</th>
+    <td mat-cell *matCellDef="let element" class="left-text"> {{element.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="email" i18n>Email</th>
+    <td mat-cell *matCellDef="let element" class="left-text"> {{element.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td *matCellDef="let element" class="mat-cell cdk-cell mat-column-actions">
+      <fa-icon class="icon text-primary" [icon]="faPencilAlt"></fa-icon>
+      <fa-icon class="icon text-danger" [icon]="faTrashAlt" (click)="delete(element)"></fa-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[20]"></mat-paginator>

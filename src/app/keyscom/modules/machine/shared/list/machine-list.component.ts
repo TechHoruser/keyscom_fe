@@ -18,7 +18,8 @@ export class MachineListComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
   faListAlt = faListAlt;
-  filterMachine: FormGroup;
+  filters: FormGroup;
+  private filtersLastRawValue: string;
 
   displayedColumns: string[] = ['name', 'domain', 'ip', 'type', 'actions'];
 
@@ -26,8 +27,6 @@ export class MachineListComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
-  private filterMachineLastRawValue: string;
 
   constructor(
     private machineService: MachineService,
@@ -51,24 +50,24 @@ export class MachineListComponent implements OnInit {
 
   private initializeFilterForm(): void
   {
-    this.filterMachine = new FormGroup({
+    this.filters = new FormGroup({
       name: new FormControl(''),
       domain: new FormControl(''),
       ip: new FormControl(''),
     });
 
-    this.filterMachineLastRawValue = JSON.stringify(this.filterMachine.getRawValue());
+    this.filtersLastRawValue = JSON.stringify(this.filters.getRawValue());
 
-    this.filterMachine.valueChanges
+    this.filters.valueChanges
       .pipe(
         debounceTime(400),
         distinctUntilChanged()
       )
       .subscribe(() => {
-        const filterMachineCurrentRawValue = JSON.stringify(this.filterMachine.getRawValue());
-        if (this.filterMachineLastRawValue !== filterMachineCurrentRawValue) {
-          this.machineService.updateMachines(this.filterMachine.getRawValue());
-          this.filterMachineLastRawValue = filterMachineCurrentRawValue;
+        const filterMachineCurrentRawValue = JSON.stringify(this.filters.getRawValue());
+        if (this.filtersLastRawValue !== filterMachineCurrentRawValue) {
+          this.machineService.updateMachines(this.filters.getRawValue());
+          this.filtersLastRawValue = filterMachineCurrentRawValue;
         }
       });
   }
@@ -79,8 +78,6 @@ export class MachineListComponent implements OnInit {
       {
         title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
         message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
-        cancelText: 'CONFIRM.DOWNLOAD.JOB.CANCELTEXT',
-        confirmText: 'CONFIRM.DOWNLOAD.JOB.CONFIRMTEXT',
       },
       () => this.machineService.deleteByUuid(machine.uuid).subscribe(
         () => this.machineService.updateMachines()
