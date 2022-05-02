@@ -5,7 +5,7 @@ import {PaginationModel} from '../../../models/pagination.model';
 import {Project} from '../../../models/project.model';
 import {environment} from '../../../../../environments/environment';
 import {PROJECT_DELETE, PROJECT_LIST} from '../../../api.endpoints';
-import {HttpHelperService} from '../../shared/services/http-helper.service';
+import {ApiHelperService} from '../../shared/services/api-helper.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
@@ -13,7 +13,7 @@ export class ProjectService {
 
   constructor(
     private http: HttpClient,
-    private httpHelperService: HttpHelperService,
+    private httpHelperService: ApiHelperService,
   ) {
     this.projects = new BehaviorSubject([]);
   }

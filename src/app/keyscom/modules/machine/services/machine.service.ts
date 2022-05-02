@@ -5,7 +5,7 @@ import {environment} from '../../../../../environments/environment';
 import {MACHINE_DELETE, MACHINE_LIST} from '../../../api.endpoints';
 import {Machine} from '../../../models/machine.model';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpHelperService} from '../../shared/services/http-helper.service';
+import {ApiHelperService} from '../../shared/services/api-helper.service';
 
 @Injectable({ providedIn: 'root' })
 export class MachineService {
@@ -13,7 +13,7 @@ export class MachineService {
 
   constructor(
     private http: HttpClient,
-    private httpHelperService: HttpHelperService,
+    private httpHelperService: ApiHelperService,
   ) {
     this.machines = new BehaviorSubject([]);
   }

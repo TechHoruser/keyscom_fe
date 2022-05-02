@@ -1,7 +1,11 @@
 import {Injectable} from '@angular/core';
+import {isMoment, Moment} from 'moment/moment';
 
 @Injectable({ providedIn: 'root' })
-export class HttpHelperService {
+export class ApiHelperService {
+  private readonly DATE_API_FORMAT = 'YYYY-MM-DD';
+  private readonly DATE_RANGE_SEPARATOR = '/';
+
   convertAnyToHttpParams(params: object, isRoot: boolean = true): { [param: string]: string | string[]; }
   {
     const returnParams = {};
@@ -26,4 +30,14 @@ export class HttpHelperService {
     });
     return returnParams;
   }
+
+  convertMomentRangeToFilterString(moment1?: Moment, moment2?: Moment): string
+  {
+    const momentRange = `${this.getStringFromMoment(moment1)}${this.DATE_RANGE_SEPARATOR}${this.getStringFromMoment(moment2)}`;
+
+    return momentRange !== this.DATE_RANGE_SEPARATOR ? momentRange : this.DATE_RANGE_SEPARATOR;
+  }
+
+  private getStringFromMoment =
+    (moment?: Moment) => (moment && isMoment(moment)) ? moment.format(this.DATE_API_FORMAT) : ''
 }

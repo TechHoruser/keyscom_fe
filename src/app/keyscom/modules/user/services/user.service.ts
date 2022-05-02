@@ -6,7 +6,7 @@ import {User} from '../../../models/user.model';
 import {environment} from '../../../../../environments/environment';
 import {USER_CREATE, USER_DELETE, USER_LIST} from '../../../api.endpoints';
 import {CreateUserEntity} from '../shared/create-user.entity';
-import {HttpHelperService} from '../../shared/services/http-helper.service';
+import {ApiHelperService} from '../../shared/services/api-helper.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private httpHelperService: HttpHelperService,
+    private httpHelperService: ApiHelperService,
   ) {
     this.users = new BehaviorSubject([]);
   }
