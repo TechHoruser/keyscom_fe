@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ErrorMainComponent} from './components/main/error-main.component';
+import {InternalErrorComponent} from './components/internal-error/internal-error.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ErrorMainComponent,
+    component: InternalErrorComponent,
   },
 ];
 

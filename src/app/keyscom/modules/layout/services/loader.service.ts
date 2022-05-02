@@ -3,9 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import {v4 as uuidv4} from 'uuid';
 import moment, {Moment} from 'moment/moment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class LoaderService {
   private uuidArray: { [uuid: string]: Moment };
   public loading: BehaviorSubject<boolean>;

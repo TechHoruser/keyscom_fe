@@ -37,6 +37,9 @@ export class UserCreateComponent implements OnInit {
   }
 
   public saveUser(): void {
-    this.userService.createUser(this.form.value as CreateUserEntity).subscribe( () => this.router.navigate(['/user']));
+    if (this.form.valid) {
+      this.userService.createUser(this.form.value as CreateUserEntity)
+        .subscribe(() => this.router.navigate(['/user']));
+    }
   }
 }

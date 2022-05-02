@@ -68,6 +68,7 @@
       <fa-icon [icon]="faAngleRight"></fa-icon>
     </div>
     <div class="p-5" [ngClass]="draw.opened?'sidenav-opened':'sidenav-closed'">
+      <app-alert></app-alert>
       <router-outlet></router-outlet>
     </div>
     <div *ngIf="loading">

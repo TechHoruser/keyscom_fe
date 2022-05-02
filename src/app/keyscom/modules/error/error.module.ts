@@ -1,13 +1,24 @@
 import {NgModule} from '@angular/core';
-import {ErrorMainComponent} from './components/main/error-main.component';
+import {InternalErrorComponent} from './components/internal-error/internal-error.component';
 import {SharedModule} from '../shared/shared.module';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {ErrorInterceptor} from './services/error.interceptor';
 
 @NgModule({
   declarations: [
-    ErrorMainComponent,
+    InternalErrorComponent,
   ],
   imports: [
     SharedModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+  ],
+  exports: [
   ],
 })
 

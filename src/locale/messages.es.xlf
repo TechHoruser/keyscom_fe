@@ -139,7 +139,7 @@
     </unit>
     <unit id="6570363013146073520">
       <notes>
-        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:23</note>
+        <note category="location">src/app/keyscom/modules/layout/components/layout/layout.component.html:23</note>
       </notes>
       <segment state="final">
         <source>Dashboard</source>
@@ -149,7 +149,7 @@
     <unit id="4555457172864212828">
       <notes>
         <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:6</note>
-        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:28</note>
+        <note category="location">src/app/keyscom/modules/layout/components/layout/layout.component.html:28</note>
       </notes>
       <segment state="final">
         <source>Users</source>
@@ -183,7 +183,7 @@
     <unit id="5910845130937645353">
       <notes>
         <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:20</note>
-        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:33</note>
+        <note category="location">src/app/keyscom/modules/layout/components/layout/layout.component.html:33</note>
       </notes>
       <segment state="final">
         <source>Clients</source>
@@ -193,7 +193,7 @@
     <unit id="7091571651222742304">
       <notes>
         <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:34</note>
-        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:38</note>
+        <note category="location">src/app/keyscom/modules/layout/components/layout/layout.component.html:38</note>
       </notes>
       <segment state="final">
         <source>Projects</source>
@@ -203,7 +203,7 @@
     <unit id="6935250775030622228">
       <notes>
         <note category="location">src/app/keyscom/modules/dashboard/components/main/dashboard-main.component.html:48</note>
-        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:43</note>
+        <note category="location">src/app/keyscom/modules/layout/components/layout/layout.component.html:43</note>
       </notes>
       <segment state="final">
         <source>Machines</source>
@@ -221,7 +221,7 @@
     </unit>
     <unit id="4915431133669985304">
       <notes>
-        <note category="location">src/app/keyscom/modules/shared/components/layout/layout.component.html:48</note>
+        <note category="location">src/app/keyscom/modules/layout/components/layout/layout.component.html:48</note>
       </notes>
       <segment state="final">
         <source>Profile</source>
@@ -291,8 +291,19 @@
         <target><ph id="0" equiv="startIndex" disp="startIndex + 1"/> - <ph id="1" equiv="endIndex" disp="endIndex"/> de <ph id="2" equiv="length" disp="length"/></target>
       </segment>
     </unit>
+    <unit id="5674286808255988565">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user/components/create/user-create.component.html:17</note>
+      </notes>
+      <segment state="final">
+        <source>Create</source>
+        <target>Crear</target>
+      </segment>
+    </unit>
     <unit id="6028371114637047813">
       <notes>
+        <note category="location">src/app/keyscom/modules/user/components/create/user-create.component.html:8</note>
+        <note category="location">src/app/keyscom/modules/user/components/create/user-create.component.html:9</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:10</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:11</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:23</note>
@@ -304,6 +315,8 @@
     </unit>
     <unit id="4407559560004943843">
       <notes>
+        <note category="location">src/app/keyscom/modules/user/components/create/user-create.component.html:12</note>
+        <note category="location">src/app/keyscom/modules/user/components/create/user-create.component.html:13</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:14</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:15</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:28</note>

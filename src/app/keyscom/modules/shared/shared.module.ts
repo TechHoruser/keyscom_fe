@@ -1,10 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpClient} from '@angular/common/http';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -26,19 +23,18 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {environment} from '../../../../environments/environment';
-import {LayoutComponent} from './components/layout/layout.component';
 import {RouterModule} from '@angular/router';
 import {MatDialogModule} from '@angular/material/dialog';
 import {BindQueryParamsDirective} from './services/bind-query-params.directive';
 import {IConfig, NgxMaskModule} from 'ngx-mask';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import {PaginatorI18n} from './services/paginator-i18n';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
-    LayoutComponent,
     BindQueryParamsDirective,
   ],
   imports: [
@@ -69,14 +65,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     ReactiveFormsModule,
     RouterModule,
     NgApexchartsModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json'),
-        deps: [HttpClient]
-      }
-    }),
     NgxMaskModule.forRoot(options),
   ],
   exports: [
@@ -105,14 +93,17 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatToolbarModule,
     ReactiveFormsModule,
     RouterModule,
-    TranslateModule,
     NgApexchartsModule,
     NgxMaskModule,
     BindQueryParamsDirective,
   ],
   providers: [
     {provide: MAT_DATE_FORMATS, useValue: environment.MATERIAL_DATEPICKER_FORMATS},
-    {provide: MAT_DATE_LOCALE, useValue: environment.LANG_DEFAULT}
+    {provide: MAT_DATE_LOCALE, useValue: environment.LANG_DEFAULT},
+    {
+      provide: MatPaginatorIntl, deps: [],
+      useFactory: () => new PaginatorI18n().getPaginatorIntl()
+    },
   ]
 })
 export class SharedModule {}

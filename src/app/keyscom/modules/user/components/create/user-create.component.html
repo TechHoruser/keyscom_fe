@@ -1,22 +1,20 @@
-<div>
+<div class="mat-elevation-z10 p-3">
   <form [formGroup]="form">
     <mat-form-field appearance="legacy">
       <mat-label>Email</mat-label>
       <input matInput formControlName="email" placeholder="Email">
     </mat-form-field>
     <mat-form-field appearance="legacy">
-      <mat-label>First Name</mat-label>
-      <input matInput formControlName="firstName" placeholder="First Name">
+      <mat-label i18n>First Name</mat-label>
+      <input matInput formControlName="firstName" placeholder="First Name" i18n-placeholder>
     </mat-form-field>
     <mat-form-field appearance="legacy">
-      <mat-label>Last Name</mat-label>
-      <input matInput formControlName="lastName" placeholder="Last Name">
+      <mat-label i18n>Last Name</mat-label>
+      <input matInput formControlName="lastName" placeholder="Last Name" i18n-placeholder>
     </mat-form-field>
     <div class="row p-3">
       <div class="d-flex justify-content-end">
-        <button mat-raised-button color="primary" (click)="saveUser()" class="btn btn-primary">
-          Create
-        </button>
+        <button mat-raised-button color="primary" (click)="saveUser()" class="btn btn-primary" i18n>Create</button>
       </div>
     </div>
   </form>

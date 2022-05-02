@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable, tap, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {LoaderService} from '../../shared/services/loader.service';
+import {LoaderService} from './loader.service';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class LoaderInterceptor implements HttpInterceptor {
   constructor(
     private loaderService: LoaderService,
