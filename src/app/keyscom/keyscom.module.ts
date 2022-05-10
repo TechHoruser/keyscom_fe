@@ -9,6 +9,7 @@ import {ProjectModule} from './modules/project/project.module';
 import {MachineModule} from './modules/machine/machine.module';
 import {LayoutModule} from './modules/layout/layout.module';
 import {ErrorModule} from './modules/error/error.module';
+import {ProfileModule} from './modules/profile/profile.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {ErrorModule} from './modules/error/error.module';
     DialogModule,
     LayoutModule,
     ErrorModule,
+    ProfileModule,
   ],
   exports: [
     KeyscomRoutingModule,

@@ -62,7 +62,6 @@ export class ClientListComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe(() => {
-        console.log(this.filters.getRawValue());
         const filterMachineCurrentRawValue = JSON.stringify(this.filters.getRawValue());
         if (this.filtersLastRawValue !== filterMachineCurrentRawValue) {
           this.clientService.updateClients(this.filters.getRawValue());

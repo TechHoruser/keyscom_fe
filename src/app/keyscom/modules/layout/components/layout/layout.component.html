@@ -52,7 +52,7 @@
         </mat-accordion>
       </div>
       <div class="sidenav-bottom">
-        <div>
+        <div routerLink="/profile">
           <h4 *ngIf="user">{{user.username}}</h4>
         </div>
         <a mat-icon-button aria-label="Logout" routerLink="/logout">

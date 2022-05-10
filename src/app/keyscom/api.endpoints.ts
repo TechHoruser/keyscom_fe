@@ -1,8 +1,13 @@
 export const DASHBOARD_CARD = '/dashboard-card';
 export const DASHBOARD_NEW_ENTITIES_BY_DAY = '/dashboard-current-year';
+export const PERMISSION_RELATED_TO_ENTITY = '/permission-related-to-entity';
+export const ASSIGMENT_PERMISSION = '/assigment-permission';
+export const USER = '/user/:userUuid';
 export const USER_CREATE = '/user';
 export const USER_DELETE = '/user/:userUuid';
 export const USER_LIST = '/user';
+export const PROFILE_UPDATE = '/user';
+export const CLIENT = '/client/:clientUuid';
 export const CLIENT_LIST = '/client';
 export const CLIENT_DELETE = '/client/:clientUuid';
 export const PROJECT_LIST = '/project';

@@ -8,6 +8,7 @@ import {ProjectService} from '../../services/project.service';
 import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs';
+import {ApiHelperService} from '../../../shared/services/api-helper.service';
 
 @Component({
   selector: 'app-project-list',
@@ -31,6 +32,7 @@ export class ProjectListComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private dialogService: ConfirmDialogService,
+    private apiHelperService: ApiHelperService,
   ) { }
 
   ngOnInit(): void {
@@ -57,11 +59,13 @@ export class ProjectListComponent implements OnInit {
   {
     this.filters = new FormGroup({
       name: new FormControl(''),
-      startDate: new FormControl(''),
-      endDate: new FormControl(''),
+      startDateStartRange: new FormControl(''),
+      startDateEndRange: new FormControl(''),
+      endDateStartRange: new FormControl(''),
+      endDateEndRange: new FormControl(''),
     });
 
-    this.filtersLastRawValue = JSON.stringify(this.filters.getRawValue());
+    this.filtersLastRawValue = JSON.stringify(this.getFilterFromForm());
 
     this.filters.valueChanges
       .pipe(
@@ -69,13 +73,35 @@ export class ProjectListComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe(() => {
-        console.log(this.filters.getRawValue());
-        const filterMachineCurrentRawValue = JSON.stringify(this.filters.getRawValue());
+        // tslint:disable-next-line:no-shadowed-variable
+        const filters = this.getFilterFromForm();
+        const filterMachineCurrentRawValue = JSON.stringify(filters);
         if (this.filtersLastRawValue !== filterMachineCurrentRawValue) {
-          this.projectService.updateProjects(this.filters.getRawValue());
+          this.projectService.updateProjects(filters);
           this.filtersLastRawValue = filterMachineCurrentRawValue;
         }
       });
+  }
+
+  private getFilterFromForm(): object
+  {
+    const filters = this.filters.getRawValue();
+
+    filters.startDate = this.apiHelperService.convertMomentRangeToFilterString(
+      filters.startDateStartRange,
+      filters.startDateEndRange,
+    );
+    delete filters.startDateStartRange;
+    delete filters.startDateEndRange;
+
+    filters.endDate = this.apiHelperService.convertMomentRangeToFilterString(
+      filters.endDateStartRange,
+      filters.endDateEndRange,
+    );
+    delete filters.endDateStartRange;
+    delete filters.endDateEndRange;
+
+    return filters;
   }
 
   delete(project: Project): void

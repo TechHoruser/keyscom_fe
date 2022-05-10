@@ -62,7 +62,6 @@ export class UserListComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe(() => {
-        console.log(this.filters.getRawValue());
         const filterMachineCurrentRawValue = JSON.stringify(this.filters.getRawValue());
         if (this.filtersLastRawValue !== filterMachineCurrentRawValue) {
           this.userService.updateUsers(this.filters.getRawValue());

@@ -21,7 +21,7 @@ export class MachineListComponent implements OnInit {
   filters: FormGroup;
   private filtersLastRawValue: string;
 
-  displayedColumns: string[] = ['name', 'domain', 'ip', 'type', 'actions'];
+  displayedColumns: string[] = ['name', 'domain', 'ip', 'actions'];
 
   public dataSource: MatTableDataSource<Machine>;
 

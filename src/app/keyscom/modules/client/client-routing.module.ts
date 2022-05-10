@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ClientMainComponent} from './components/main/client-main.component';
 import {ClientCreateComponent} from './components/create/client-create.component';
+import {ClientModifyComponent} from './components/modify/client-modify.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: ClientCreateComponent,
+  },
+  {
+    path: `:uuid`,
+    component: ClientModifyComponent,
   },
 ];
 

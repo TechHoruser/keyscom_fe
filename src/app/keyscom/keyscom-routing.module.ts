@@ -49,6 +49,13 @@ const routes: Routes = [
       import('./modules/machine/machine-routing.module').then(m => m.MachineRoutingModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'profile',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./modules/profile/profile-routing.module').then(m => m.ProfileRoutingModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

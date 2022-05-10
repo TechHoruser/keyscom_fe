@@ -6,6 +6,26 @@
         <mat-label i18n>Name</mat-label>
         <input matInput i18n-placeholder placeholder="Name" formControlName="name">
       </mat-form-field></div>
+      <div class="col-lg-4 col-md-12"><mat-form-field appearance="legacy">
+        <mat-label i18n>Start Date Interval</mat-label>
+        <mat-date-range-input [rangePicker]="startDatePicker">
+          <input matStartDate placeholder="Start date" i18n-placeholder formControlName="startDateStartRange">
+          <input matEndDate placeholder="End date" i18n-placeholder formControlName="startDateEndRange">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #startDatePicker></mat-date-range-picker>
+      </mat-form-field></div>
+      <div class="col-lg-4 col-md-12"><mat-form-field appearance="legacy">
+        <mat-label i18n>End Date Interval</mat-label>
+        <mat-date-range-input [rangePicker]="endDatePicker">
+          <input matStartDate placeholder="Start date" i18n-placeholder formControlName="endDateStartRange">
+          <input matEndDate placeholder="End date" i18n-placeholder formControlName="endDateEndRange">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #endDatePicker></mat-date-range-picker>
+      </mat-form-field></div>
     </div>
   </form>
 </div>
