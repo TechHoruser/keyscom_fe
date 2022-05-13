@@ -1,0 +1,21 @@
+<div>
+  <form [formGroup]="form">
+    <mat-form-field appearance="legacy">
+      <mat-label i18n>Email</mat-label>
+      <input matInput placeholder="Email" formControlName="email" i18n-placeholder>
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label i18n>First Name</mat-label>
+      <input matInput placeholder="First Name" formControlName="firstName" i18n-placeholder>
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label i18n>Last Name</mat-label>
+      <input matInput placeholder="Last Name" formControlName="lastName" i18n-placeholder>
+    </mat-form-field>
+  </form>
+  <div class="row p-3">
+    <div class="d-flex justify-content-end">
+      <button mat-raised-button color="primary" (click)="updateUser()" i18n>Save</button>
+    </div>
+  </div>
+</div>

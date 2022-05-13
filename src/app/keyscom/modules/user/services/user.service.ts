@@ -7,7 +7,7 @@ import {environment} from '../../../../../environments/environment';
 import {PROFILE_UPDATE, USER, USER_CREATE, USER_DELETE, USER_LIST} from '../../../api.endpoints';
 import {CreateUserEntity} from '../shared/create-user.entity';
 import {ApiHelperService} from '../../shared/services/api-helper.service';
-import {UpdateProfileEntity} from '../../client/shared/update-profile.entity';
+import {UpdateProfileEntity} from '../../profile/shared/update-profile.entity';
 import {Client} from '../../../models/client.model';
 
 @Injectable({ providedIn: 'root' })
@@ -49,6 +49,11 @@ export class UserService {
   createUser(user: CreateUserEntity): Observable<any>
   {
     return this.http.post<User>(`${environment.API_HOST}${USER_CREATE}`, user);
+  }
+
+  updateUser(userUuid: string, user: CreateUserEntity): Observable<any>
+  {
+    return this.http.put<User>(`${environment.API_HOST}${USER}`.replace(':userUuid', userUuid), user);
   }
 
   deleteByUuid(userUuid: string): Observable<any>

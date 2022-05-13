@@ -23,6 +23,14 @@ export class ClientService {
     return this.http.get<Client>(`${environment.API_HOST}${CLIENT}`.replace(':clientUuid', clientUuid));
   }
 
+  getClients(filters?: object): Observable<PaginationModel<Client>> {
+    const options = filters !== undefined ?
+      { params: this.httpHelperService.convertAnyToHttpParams({filters}) } :
+      {};
+
+    return this.http.get<PaginationModel<Client>>(`${environment.API_HOST}${CLIENT_LIST}`, options);
+  }
+
   updateClients(filters?: object): void {
     const options = filters !== undefined ?
       { params: this.httpHelperService.convertAnyToHttpParams({filters}) } :

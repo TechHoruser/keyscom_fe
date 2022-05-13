@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../../auth/services/authentication.service';
-import {UpdateProfileEntity} from '../../../client/shared/update-profile.entity';
+import {UpdateProfileEntity} from '../../shared/update-profile.entity';
 import {UserService} from '../../../user/services/user.service';
 
 @Component({

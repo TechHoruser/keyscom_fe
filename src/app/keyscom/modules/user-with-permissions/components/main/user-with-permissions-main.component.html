@@ -27,7 +27,7 @@
                     !parentPermission.value.permissionRelatedEntity ? faBolt
                     : parentPermission.value.permissionRelatedEntity == 'client' ? faUserTie
                     : parentPermission.value.permissionRelatedEntity == 'project' ? faBriefcase
-                    : faUserTie
+                    : faServer
                   "></fa-icon>
               </div>
               <div class="vertical-line" *ngIf="userMap.value.hasAdminPermission || userMap.value.hasSshPermission"></div>
@@ -60,30 +60,31 @@
       </mat-autocomplete>
     </mat-form-field>
   </form>
-<!--  <mat-list #childrenPermissions>-->
-<!--    <mat-list-item *ngFor="let permission of listChildPermissions">-->
-<!--      <div class="d-flex w-100 justify-content-between">-->
-<!--        <div class="d-flex align-items-center">-->
-<!--          <fa-icon *ngIf="!permission.permissionRelatedEntity" class="icon text-primary" [icon]="faBolt"></fa-icon>-->
-<!--          <fa-icon *ngIf="permission.permissionRelatedEntity == 'client'" class="icon text-primary" [icon]="faUserTie"></fa-icon>-->
-<!--          <fa-icon *ngIf="permission.permissionRelatedEntity == 'project'" class="icon text-primary" [icon]="faBriefcase"></fa-icon>-->
-<!--          <fa-icon *ngIf="permission.permissionRelatedEntity == 'machine'" class="icon text-primary" [icon]="faServer"></fa-icon>-->
-<!--          <div class="vertical-line"></div>-->
-<!--          <p style="margin: 0;">{{permission.user.firstName}} {{permission.user.lastName}}</p>-->
-<!--          <div class="vertical-line"></div>-->
-<!--          <small style="font-size: small">{{permission.user.email}}</small>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <mat-chip-list aria-label="Dog selection">-->
-<!--            <mat-chip style="background-color: springgreen" *ngIf="permission.userPermissionType == 'ssh'">-->
-<!--              ssh-->
-<!--            </mat-chip>-->
-<!--            <mat-chip style="background-color: cornflowerblue" *ngIf="permission.userPermissionType == 'admin'">-->
-<!--              admin-->
-<!--            </mat-chip>-->
-<!--          </mat-chip-list>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </mat-list-item>-->
-<!--  </mat-list>-->
+  <mat-list *ngIf="childrenPermissions">
+    <mat-list-item *ngFor="let permission of childrenPermissions">
+      <div class="d-flex w-100 justify-content-between">
+        <div class="d-flex align-items-center">
+          <fa-icon *ngIf="!permission.permissionRelatedEntity" class="icon text-primary" [icon]="faBolt"></fa-icon>
+          <fa-icon *ngIf="permission.permissionRelatedEntity == 'client'" class="icon text-primary" [icon]="faUserTie"></fa-icon>
+          <fa-icon *ngIf="permission.permissionRelatedEntity == 'project'" class="icon text-primary" [icon]="faBriefcase"></fa-icon>
+          <fa-icon *ngIf="permission.permissionRelatedEntity == 'machine'" class="icon text-primary" [icon]="faServer"></fa-icon>
+          <ng-container *ngIf="permission.permissionRelatedEntity">
+          <div class="vertical-line"></div>
+          <a [routerLink]="'/'+permission.permissionRelatedEntity+'/'+permission.permissionRelatedEntityUuid"
+          >{{maps[permission.permissionRelatedEntity].get(permission.permissionRelatedEntityUuid)?.name}}</a>
+          </ng-container>
+        </div>
+        <div>
+          <mat-chip-list aria-label="Dog selection">
+            <mat-chip style="background-color: springgreen" *ngIf="permission.userPermissionType == 'ssh'">
+              ssh
+            </mat-chip>
+            <mat-chip style="background-color: cornflowerblue" *ngIf="permission.userPermissionType == 'admin'">
+              admin
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+    </mat-list-item>
+  </mat-list>
 </div>

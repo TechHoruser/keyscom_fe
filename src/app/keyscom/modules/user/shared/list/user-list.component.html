@@ -35,10 +35,20 @@
   </ng-container>
 
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef i18n>Actions</th>
+    <th mat-header-cell *matHeaderCellDef></th>
     <td *matCellDef="let element" class="mat-cell cdk-cell mat-column-actions">
-      <fa-icon class="icon text-primary" [icon]="faPencilAlt"></fa-icon>
-      <fa-icon class="icon text-danger" [icon]="faTrashAlt" (click)="delete(element)"></fa-icon>
+      <fa-icon class="icon text-primary"
+               [routerLink]="'/user/'+element.uuid"
+               [icon]="faListAlt"
+               i18n-matTooltip
+               matTooltip="Details"
+      ></fa-icon>
+      <fa-icon class="icon text-danger"
+               [icon]="faTrashAlt"
+               (click)="delete(element)"
+               i18n-matTooltip
+               matTooltip="Delete"
+      ></fa-icon>
     </td>
   </ng-container>
 

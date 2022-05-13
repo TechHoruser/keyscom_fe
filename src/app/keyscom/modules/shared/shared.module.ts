@@ -31,6 +31,7 @@ import {NgApexchartsModule} from 'ng-apexcharts';
 import {PaginatorI18n} from './services/paginator-i18n';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -66,6 +67,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     RouterModule,
     NgApexchartsModule,
@@ -97,6 +99,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     RouterModule,
     NgApexchartsModule,

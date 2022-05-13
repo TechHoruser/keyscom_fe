@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {faListAlt, faPencilAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {faListAlt, faPencilAlt, faTrashAlt, faUserTie} from '@fortawesome/free-solid-svg-icons';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -9,6 +9,9 @@ import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.serv
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs';
 import {ApiHelperService} from '../../../shared/services/api-helper.service';
+import {Client} from '../../../../models/client.model';
+import {ClientService} from '../../../client/services/client.service';
+import {StringHelperService} from '../../../shared/services/string-helper.service';
 
 @Component({
   selector: 'app-project-list',
@@ -19,8 +22,11 @@ export class ProjectListComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
   faListAlt = faListAlt;
+  faUserTie = faUserTie;
   filters: FormGroup;
   private filtersLastRawValue: string;
+  private clientList: Client[];
+  public filteredClientList: Client[];
 
   displayedColumns: string[] = ['name', 'startDate', 'endDate', 'actions'];
 
@@ -31,8 +37,10 @@ export class ProjectListComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
+    private clientService: ClientService,
     private dialogService: ConfirmDialogService,
     private apiHelperService: ApiHelperService,
+    private stringHelperService: StringHelperService,
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +60,12 @@ export class ProjectListComponent implements OnInit {
 
     this.projectService.updateProjects();
 
+    this.clientService.getClients()
+      .subscribe((paginationClient) => {
+        this.clientList = paginationClient.results;
+        this.filteredClientList = paginationClient.results;
+      });
+
     this.initializeFilterForm();
   }
 
@@ -63,9 +77,16 @@ export class ProjectListComponent implements OnInit {
       startDateEndRange: new FormControl(''),
       endDateStartRange: new FormControl(''),
       endDateEndRange: new FormControl(''),
+      clientFilter: new FormControl(''),
+      'client.uuid': new FormControl(''),
     });
 
     this.filtersLastRawValue = JSON.stringify(this.getFilterFromForm());
+
+    this.filters.controls.clientFilter.valueChanges
+      .subscribe((value) => this.filteredClientList = this.clientList.filter(
+        (client) => this.stringHelperService.contains(client.name, value)
+      ));
 
     this.filters.valueChanges
       .pipe(
@@ -73,7 +94,6 @@ export class ProjectListComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe(() => {
-        // tslint:disable-next-line:no-shadowed-variable
         const filters = this.getFilterFromForm();
         const filterMachineCurrentRawValue = JSON.stringify(filters);
         if (this.filtersLastRawValue !== filterMachineCurrentRawValue) {
@@ -81,6 +101,13 @@ export class ProjectListComponent implements OnInit {
           this.filtersLastRawValue = filterMachineCurrentRawValue;
         }
       });
+  }
+
+  public selectClient(client?: Client): void {
+    this.filters.patchValue({
+      clientFilter: client?.name,
+      'client.uuid': client?.uuid,
+    });
   }
 
   private getFilterFromForm(): object
@@ -100,6 +127,11 @@ export class ProjectListComponent implements OnInit {
     );
     delete filters.endDateStartRange;
     delete filters.endDateEndRange;
+
+    delete filters.clientFilter;
+    if (!filters['client.uuid']) {
+      delete filters['client.uuid'];
+    }
 
     return filters;
   }

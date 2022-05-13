@@ -26,6 +26,24 @@
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
         <mat-date-range-picker #endDatePicker></mat-date-range-picker>
       </mat-form-field></div>
+      <div class="col-lg-4 col-md-12">
+        <mat-form-field appearance="legacy">
+          <mat-label i18n>Select a Client</mat-label>
+          <input type="text"
+                 i18n-placeholder
+                 placeholder="Select a Client"
+                 matInput
+                 [matAutocomplete]="auto"
+                 formControlName="clientFilter"
+          >
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option (click)="selectClient()" i18n>No Selection</mat-option>
+            <mat-option *ngFor="let client of filteredClientList" (click)="selectClient(client)">
+              {{client.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
     </div>
   </form>
 </div>
@@ -47,11 +65,25 @@
   </ng-container>
 
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef i18n>Actions</th>
+    <th mat-header-cell *matHeaderCellDef></th>
     <td *matCellDef="let element" class="mat-cell cdk-cell mat-column-actions">
-      <fa-icon class="icon text-primary" [icon]="faListAlt"></fa-icon>
-      <fa-icon class="icon text-primary" [icon]="faPencilAlt"></fa-icon>
-      <fa-icon class="icon text-danger" [icon]="faTrashAlt" (click)="delete(element)"></fa-icon>
+      <fa-icon class="icon text-primary"
+               [routerLink]="'/client/' + element.client.uuid"
+               [icon]="faUserTie"
+               [matTooltip]="element.client.name"
+      ></fa-icon>
+      <fa-icon class="icon text-primary"
+               [routerLink]="'/project/'+element.uuid"
+               [icon]="faListAlt"
+               i18n-matTooltip
+               matTooltip="Details"
+      ></fa-icon>
+      <fa-icon class="icon text-danger"
+               [icon]="faTrashAlt"
+               (click)="delete(element)"
+               i18n-matTooltip
+               matTooltip="Delete"
+      ></fa-icon>
     </td>
   </ng-container>
 

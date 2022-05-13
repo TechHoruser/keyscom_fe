@@ -6,6 +6,10 @@ import {Permission} from '../../../../models/permission.model';
 import {UserService} from '../../../user/services/user.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BehaviorSubject, combineLatestWith, debounceTime, distinctUntilChanged} from 'rxjs';
+import {StringHelperService} from '../../../shared/services/string-helper.service';
+import {MapProjectService} from '../../../project/services/map-project.service';
+import {MapClientService} from '../../../client/services/map-client.service';
+import {MapMachineService} from '../../../machine/services/map-machine.service';
 
 type UsersWithPermissionsMap = Map<string, {
   user: User,
@@ -27,6 +31,7 @@ export class UserWithPermissionsMainComponent implements OnInit
   userList: BehaviorSubject<User[]>;
   permissionList: BehaviorSubject<Permission[]>;
   usersWithPermissionsMap: UsersWithPermissionsMap;
+  childrenPermissions: Permission[];
   faBolt = faBolt;
   faUserTie = faUserTie;
   faBriefcase = faBriefcase;
@@ -35,9 +40,19 @@ export class UserWithPermissionsMainComponent implements OnInit
   filters: FormGroup;
   private filtersLastRawValue: string;
 
+  public maps = {
+    client: this.mapClients,
+    project: this.mapProjects,
+    machine: this.mapMachines,
+  };
+
   constructor(
     private userWithPermissionsService: UserWithPermissionsService,
     private userService: UserService,
+    private stringHelperService: StringHelperService,
+    private mapClients: MapClientService,
+    private mapProjects: MapProjectService,
+    private mapMachines: MapMachineService,
   ) {
     this.userList = new BehaviorSubject([]);
     this.permissionList = new BehaviorSubject([]);
@@ -98,7 +113,7 @@ export class UserWithPermissionsMainComponent implements OnInit
 
   public showChildrenPermissions(userUuid: string): void
   {
-
+    this.childrenPermissions = Array.from(this.usersWithPermissionsMap.get(userUuid).childrenPermissions.values());
   }
 
   private updateUsersWithPermissionsMap(): void
@@ -106,21 +121,15 @@ export class UserWithPermissionsMainComponent implements OnInit
     const generateFilteredUsersWithPermissionsMap = (): UsersWithPermissionsMap => {
       const usersWithPermissionsMap = new Map();
 
-      const normalize = (str?: string): string => {
-        if (str) {
-          return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        }
-      };
-
-      const userFilter = normalize(this.filters.controls.name.value);
+      const userFilter = this.stringHelperService.normalize(this.filters.controls.name.value);
 
       this.userList.value.forEach((user) => {
         // Filter by the form field
         if (
           !userFilter
-          || normalize(user.firstName).includes(userFilter)
-          || normalize(user.lastName).includes(userFilter)
-          || normalize(user.email).includes(userFilter)
+          || this.stringHelperService.normalize(user.firstName).includes(userFilter)
+          || this.stringHelperService.normalize(user.lastName).includes(userFilter)
+          || this.stringHelperService.normalize(user.email).includes(userFilter)
         ) {
           usersWithPermissionsMap.set(user.uuid, {
             user,

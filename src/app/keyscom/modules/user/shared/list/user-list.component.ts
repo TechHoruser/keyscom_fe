@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {faPencilAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {faListAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -15,7 +15,7 @@ import {debounceTime, distinctUntilChanged} from 'rxjs';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  faPencilAlt = faPencilAlt;
+  faListAlt = faListAlt;
   faTrashAlt = faTrashAlt;
   filters: FormGroup;
   private filtersLastRawValue: string;
