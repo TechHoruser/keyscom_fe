@@ -8,11 +8,6 @@ import {Machine} from '../../../../models/machine.model';
 import {MachineService} from '../../services/machine.service';
 import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.service';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Client} from '../../../../models/client.model';
-import {Project} from '../../../../models/project.model';
-import {StringHelperService} from '../../../shared/services/string-helper.service';
-import {ClientService} from '../../../client/services/client.service';
-import {ProjectService} from '../../../project/services/project.service';
 
 @Component({
   selector: 'app-machine-list',
@@ -27,10 +22,6 @@ export class MachineListComponent implements OnInit {
   faBriefcase = faBriefcase;
   filters: FormGroup;
   private filtersLastRawValue: string;
-  private clientList: Client[];
-  public filteredClientList: Client[];
-  private projectList: Project[];
-  public filteredProjectList: Project[];
 
   displayedColumns: string[] = ['name', 'domain', 'ip', 'actions'];
 
@@ -42,9 +33,6 @@ export class MachineListComponent implements OnInit {
   constructor(
     private machineService: MachineService,
     private dialogService: ConfirmDialogService,
-    private clientService: ClientService,
-    private projectService: ProjectService,
-    private stringHelperService: StringHelperService,
   ) { }
 
   ngOnInit(): void {
@@ -59,18 +47,6 @@ export class MachineListComponent implements OnInit {
 
     this.machineService.updateMachines();
 
-    this.clientService.getClients()
-      .subscribe((paginationClient) => {
-        this.clientList = paginationClient.results;
-        this.filteredClientList = paginationClient.results;
-      });
-
-    this.projectService.getProjects({}, ['client'])
-      .subscribe((paginationProject) => {
-        this.projectList = paginationProject.results;
-        this.filteredProjectList = paginationProject.results;
-      });
-
     this.initializeFilterForm();
   }
 
@@ -80,31 +56,16 @@ export class MachineListComponent implements OnInit {
       name: new FormControl(''),
       domain: new FormControl(''),
       ip: new FormControl(''),
-      clientFilter: new FormControl(''),
       'project.client.uuid': new FormControl(''),
-      projectFilter: new FormControl(''),
       'project.uuid': new FormControl(''),
     });
 
     this.filters.controls.projectFilter.disable();
     this.filtersLastRawValue = JSON.stringify(this.getFilterFromForm());
 
-    const filterProjects = () => {
-      this.filteredProjectList = this.projectList.filter(
-        (project) =>
-          this.stringHelperService.contains(project.name, this.filters.controls.projectFilter.value)
-          && project.client.uuid === this.filters.controls['project.client.uuid'].value
-      );
-    };
-
-    const filterClients = () => {
-      this.filteredClientList = this.clientList.filter(
-        (client) => this.stringHelperService.contains(client.name, this.filters.controls.clientFilter.value)
-      );
-    };
-
-    this.filters.controls.clientFilter.valueChanges.subscribe(() => filterClients());
-    this.filters.controls.projectFilter.valueChanges.subscribe(() => filterProjects());
+    this.filters.controls['project.client.uuid'].valueChanges.subscribe(() => {
+      // TODO: call change client into
+    });
 
     this.filters.valueChanges
       .pipe(
@@ -125,12 +86,10 @@ export class MachineListComponent implements OnInit {
   {
     const filters = this.filters.getRawValue();
 
-    delete filters.clientFilter;
     if (!filters['project.client.uuid']) {
       delete filters['project.client.uuid'];
     }
 
-    delete filters.projectFilter;
     if (!filters['project.uuid']) {
       delete filters['project.uuid'];
     }
@@ -138,25 +97,21 @@ export class MachineListComponent implements OnInit {
     return filters;
   }
 
-  public selectClient(client?: Client): void {
-    if (client) {
+  public changeSelectedClient(clientUuid?: string): void {
+    if (clientUuid) {
       this.filters.controls.projectFilter.enable();
     } else {
       this.filters.controls.projectFilter.disable();
     }
-
     this.filters.patchValue({
-      clientFilter: client?.name,
-      'project.client.uuid': client?.uuid,
-      projectFilter: '',
+      'project.client.uuid': clientUuid,
       'project.uuid': '',
     });
   }
 
-  public selectProject(project?: Project): void {
+  public changeSelectedProject(projectUuid?: string): void {
     this.filters.patchValue({
-      projectFilter: project?.name,
-      'project.uuid': project?.uuid,
+      'project.uuid': projectUuid ?? '',
     });
   }
 

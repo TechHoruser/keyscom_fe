@@ -18,41 +18,11 @@
       </mat-form-field></div>
 
       <div class="col-lg-4 col-md-12">
-        <mat-form-field appearance="legacy">
-          <mat-label i18n>Select a Client</mat-label>
-          <input type="text"
-                 i18n-placeholder
-                 placeholder="Select a Client"
-                 matInput
-                 [matAutocomplete]="autoClient"
-                 formControlName="clientFilter"
-          >
-          <mat-autocomplete #autoClient="matAutocomplete">
-            <mat-option (click)="selectClient()" i18n>No Selection</mat-option>
-            <mat-option *ngFor="let client of filteredClientList" (click)="selectClient(client)">
-              {{client.name}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
+        <app-client-select-list></app-client-select-list>
       </div>
 
       <div class="col-lg-4 col-md-12">
-        <mat-form-field appearance="legacy">
-          <mat-label i18n>Select a Project</mat-label>
-          <input type="text"
-                 i18n-placeholder
-                 placeholder="Select a Project"
-                 matInput
-                 [matAutocomplete]="autoProject"
-                 formControlName="projectFilter"
-          >
-          <mat-autocomplete #autoProject="matAutocomplete">
-            <mat-option (click)="selectProject()" i18n>No Selection</mat-option>
-            <mat-option *ngFor="let project of filteredProjectList" (click)="selectProject(project)">
-              {{project.name}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
+        <app-project-select-list></app-project-select-list>
       </div>
     </div>
   </form>

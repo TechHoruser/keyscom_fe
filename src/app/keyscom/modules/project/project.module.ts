@@ -6,6 +6,7 @@ import {SharedModule} from '../shared/shared.module';
 import {ProjectModifyComponent} from './components/modify/project-modify.component';
 import {UserWithPermissionsModule} from '../user-with-permissions/user-with-permissions.module';
 import {ClientModule} from '../client/client.module';
+import {ProjectSelectListComponent} from './shared/select-list/project-select-list.component';
 
 @NgModule({
   declarations: [
@@ -13,12 +14,16 @@ import {ClientModule} from '../client/client.module';
     ProjectMainComponent,
     ProjectCreateComponent,
     ProjectModifyComponent,
+    ProjectSelectListComponent,
   ],
   imports: [
     SharedModule,
     UserWithPermissionsModule,
     ClientModule,
   ],
+  exports: [
+    ProjectSelectListComponent
+  ]
 })
 
 export class ProjectModule {}

@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<ng-container [formGroup]="form">
   <mat-form-field appearance="legacy">
     <mat-label i18n>Select a Client</mat-label>
     <input type="text"
@@ -8,6 +8,7 @@
            [matAutocomplete]="auto"
            formControlName="clientFilter"
     >
+    <mat-error *ngIf="form.controls.clientUuid.errors">asdf</mat-error>
     <mat-autocomplete #auto="matAutocomplete" (closed)="closeAutocomplete()">
       <mat-option (click)="selectClient()" i18n>No Selection</mat-option>
       <mat-option *ngFor="let client of filteredClientList" (click)="selectClient(client)">
@@ -15,4 +16,4 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-</form>
+</ng-container>

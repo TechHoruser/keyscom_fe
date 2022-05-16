@@ -77,6 +77,7 @@ export class ClientSelectListComponent implements OnInit {
       this.form.patchValue({clientFilter: ''});
     }
 
+    this.form.controls.clientFilter.markAsTouched();
     return this.form.valid;
   }
 

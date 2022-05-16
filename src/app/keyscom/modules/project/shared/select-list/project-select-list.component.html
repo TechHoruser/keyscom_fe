@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="legacy">
+    <mat-label i18n>Select a Project</mat-label>
+    <input type="text"
+           i18n-placeholder
+           placeholder="Select a Project"
+           matInput
+           [matAutocomplete]="auto"
+           formControlName="projectFilter"
+    >
+    <mat-autocomplete #auto="matAutocomplete" (closed)="closeAutocomplete()">
+      <mat-option (click)="selectProject()" i18n>No Selection</mat-option>
+      <mat-option *ngFor="let project of filteredProjectList" (click)="selectProject(project)">
+        {{project.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
