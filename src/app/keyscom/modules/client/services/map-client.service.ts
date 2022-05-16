@@ -2,34 +2,41 @@ import {Injectable} from '@angular/core';
 import {Client} from '../../../models/client.model';
 import {ClientService} from './client.service';
 import {AlertService} from '../../layout/services/alert.service';
+import {firstValueFrom} from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MapClientService {
-  public clients: Map<string, Client>;
+  private clients: Map<string, Client>;
 
   constructor(
     private clientService: ClientService,
     private alertService: AlertService,
-  ) {
-    this.clients = new Map<string, Client>();
-    this.updateClients();
-  }
+  ) {}
 
-  private updateClients(): void
+  private async updateClients(): Promise<void>
   {
-    this.clients.clear();
-    this.clientService.getClients().subscribe(
-      (paginationUser) => paginationUser.results.map(
-        (client) => this.clients.set(client.uuid, client)
-      )
-    );
+    const paginationClient = await firstValueFrom(this.clientService.getClients());
+    const newMap = new Map<string, Client>();
+    paginationClient.results.map((client) => newMap.set(client.uuid, client));
+    this.clients = newMap;
   }
 
-  get(uuid: string): Client {
+  async get(uuid: string): Promise<Client> {
+    if (!this.clients) {
+      await this.updateClients();
+    }
+
     const client = this.clients.get(uuid);
     if (!client) {
       this.alertService.error($localize`Client doesn't exist`);
     }
-    return client;
+    return Promise.resolve(client);
+  }
+
+  async getValues(): Promise<Client[]> {
+    if (this.clients === undefined) {
+      await this.updateClients();
+    }
+    return Promise.resolve(Array.from(this.clients.values()));
   }
 }

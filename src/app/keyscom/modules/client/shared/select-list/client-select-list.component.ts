@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../../../../models/client.model';
 import {StringHelperService} from '../../../shared/services/string-helper.service';
-import {ClientService} from '../../services/client.service';
 import {MapClientService} from '../../services/map-client.service';
 
 @Component({
@@ -19,17 +18,15 @@ export class ClientSelectListComponent implements OnInit {
   public filteredClientList: Client[];
 
   constructor(
-    private clientService: ClientService,
     private mapClientService: MapClientService,
     private stringHelperService: StringHelperService,
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.initForm();
-    this.clientService.getClients().subscribe((paginationClients) => {
-      this.clientList = paginationClients.results;
-      this.filteredClientList = paginationClients.results;
-    });
+    const clientList = await this.mapClientService.getValues();
+    this.clientList = clientList;
+    this.filteredClientList = clientList;
   }
 
   private initForm(): void
@@ -60,9 +57,10 @@ export class ClientSelectListComponent implements OnInit {
     this.changeSelectedClient.emit(client?.uuid);
   }
 
-  public closeAutocomplete(): void {
+  public async closeAutocomplete(): Promise<void> {
     if (this.form.controls.clientUuid.value) {
-      const selectedClientName = this.mapClientService.get(this.form.controls.clientUuid.value).name;
+      const selectedClient = await (this.mapClientService.get(this.form.controls.clientUuid.value));
+      const selectedClientName = selectedClient.name;
       if (selectedClientName === this.form.controls.clientFilter.value) {
         return;
       }
