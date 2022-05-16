@@ -5,6 +5,7 @@ import {ProjectCreateComponent} from './components/create/project-create.compone
 import {SharedModule} from '../shared/shared.module';
 import {ProjectModifyComponent} from './components/modify/project-modify.component';
 import {UserWithPermissionsModule} from '../user-with-permissions/user-with-permissions.module';
+import {ClientModule} from '../client/client.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {UserWithPermissionsModule} from '../user-with-permissions/user-with-perm
   imports: [
     SharedModule,
     UserWithPermissionsModule,
+    ClientModule,
   ],
 })
 

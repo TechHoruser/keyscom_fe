@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="legacy">
+    <mat-label i18n>Select a Client</mat-label>
+    <input type="text"
+           i18n-placeholder
+           placeholder="Select a Client"
+           matInput
+           [matAutocomplete]="auto"
+           formControlName="clientFilter"
+    >
+    <mat-autocomplete #auto="matAutocomplete" (closed)="closeAutocomplete()">
+      <mat-option (click)="selectClient()" i18n>No Selection</mat-option>
+      <mat-option *ngFor="let client of filteredClientList" (click)="selectClient(client)">
+        {{client.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

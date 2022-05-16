@@ -38,6 +38,5 @@ export class ApiHelperService {
     return momentRange !== this.DATE_RANGE_SEPARATOR ? momentRange : this.DATE_RANGE_SEPARATOR;
   }
 
-  private getStringFromMoment =
-    (moment?: Moment) => (moment && isMoment(moment)) ? moment.format(this.DATE_API_FORMAT) : ''
+  getStringFromMoment = (moment?: Moment) => (moment && isMoment(moment)) ? moment.format(this.DATE_API_FORMAT) : '';
 }

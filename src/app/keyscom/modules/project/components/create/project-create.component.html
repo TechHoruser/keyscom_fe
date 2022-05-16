@@ -1,11 +1,36 @@
 <div>
-  <mat-form-field appearance="legacy">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Name">
-  </mat-form-field>
-  <div class="row p-3">
-    <div class="d-flex justify-content-end">
-      <button routerLink="create" mat-raised-button color="primary" (click)="saveProject()">Guardar</button>
+  <form [formGroup]="form">
+    <mat-form-field appearance="legacy">
+      <mat-label i18n>Name</mat-label>
+      <input matInput i18n-placeholder placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n>Start date</mat-label>
+      <input matInput
+             placeholder="Start date" i18n-placeholder
+             formControlName="startDate"
+             [matDatepicker]="startDatePicker"
+      >
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n>End date</mat-label>
+      <input matInput
+             placeholder="End date" i18n-placeholder
+             formControlName="endDate"
+             [matDatepicker]="endDatePicker"
+      >
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+    <app-client-select-list [required]="true"></app-client-select-list>
+    <div class="row p-3">
+      <div class="d-flex justify-content-end">
+        <button mat-raised-button color="primary" (click)="saveProject()">Guardar</button>
+      </div>
     </div>
-  </div>
+  </form>
 </div>

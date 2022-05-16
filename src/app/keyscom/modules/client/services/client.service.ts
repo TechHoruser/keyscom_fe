@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {PaginationModel} from '../../../models/pagination.model';
 import {environment} from '../../../../../environments/environment';
-import {CLIENT, CLIENT_DELETE, CLIENT_LIST} from '../../../api.endpoints';
+import {CLIENT, CLIENT_UUID} from '../../../api.endpoints';
 import {Client} from '../../../models/client.model';
 import {ApiHelperService} from '../../shared/services/api-helper.service';
 import {CreateClientEntity} from '../shared/create-client.entity';
@@ -20,7 +20,7 @@ export class ClientService {
   }
 
   getClient(clientUuid: string): Observable<Client> {
-    return this.http.get<Client>(`${environment.API_HOST}${CLIENT}`.replace(':clientUuid', clientUuid));
+    return this.http.get<Client>(`${environment.API_HOST}${CLIENT_UUID}`.replace(':clientUuid', clientUuid));
   }
 
   getClients(filters?: object): Observable<PaginationModel<Client>> {
@@ -28,7 +28,7 @@ export class ClientService {
       { params: this.httpHelperService.convertAnyToHttpParams({filters}) } :
       {};
 
-    return this.http.get<PaginationModel<Client>>(`${environment.API_HOST}${CLIENT_LIST}`, options);
+    return this.http.get<PaginationModel<Client>>(`${environment.API_HOST}${CLIENT}`, options);
   }
 
   updateClients(filters?: object): void {
@@ -36,17 +36,17 @@ export class ClientService {
       { params: this.httpHelperService.convertAnyToHttpParams({filters}) } :
       {};
 
-    this.http.get<PaginationModel<Client>>(`${environment.API_HOST}${CLIENT_LIST}`, options)
+    this.http.get<PaginationModel<Client>>(`${environment.API_HOST}${CLIENT}`, options)
       .subscribe((res) => this.clients.next(res.results));
   }
 
   updateClient(clientUuid: string, client: CreateClientEntity): Observable<any>
   {
-    return this.http.put<Client>(`${environment.API_HOST}${CLIENT}`.replace(':clientUuid', clientUuid), client);
+    return this.http.put<Client>(`${environment.API_HOST}${CLIENT_UUID}`.replace(':clientUuid', clientUuid), client);
   }
 
   deleteByUuid(clientUuid: string): Observable<any>
   {
-    return this.http.delete<void>(`${environment.API_HOST}${CLIENT_DELETE}`.replace(':clientUuid', clientUuid));
+    return this.http.delete<void>(`${environment.API_HOST}${CLIENT_UUID}`.replace(':clientUuid', clientUuid));
   }
 }

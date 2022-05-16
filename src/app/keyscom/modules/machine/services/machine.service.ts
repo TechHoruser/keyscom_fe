@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {PaginationModel} from '../../../models/pagination.model';
 import {environment} from '../../../../../environments/environment';
-import {MACHINE, MACHINE_DELETE, MACHINE_LIST} from '../../../api.endpoints';
+import {MACHINE, MACHINE_UUID} from '../../../api.endpoints';
 import {Machine} from '../../../models/machine.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ApiHelperService} from '../../shared/services/api-helper.service';
@@ -22,12 +22,12 @@ export class MachineService {
   updateMachines(filters: object = {}, embeds: string[] = ['project.client']): void {
     const options = { params: this.httpHelperService.convertAnyToHttpParams({filters, embeds}) };
 
-    this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE_LIST}`, options)
+    this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE}`, options)
       .subscribe((res) => this.machines.next(res.results));
   }
 
   getMachine(machineUuid: string): Observable<Machine> {
-    return this.http.get<Machine>(`${environment.API_HOST}${MACHINE}`.replace(':machineUuid', machineUuid));
+    return this.http.get<Machine>(`${environment.API_HOST}${MACHINE_UUID}`.replace(':machineUuid', machineUuid));
   }
 
   getMachines(filters?: object, embeds?: string[]): Observable<PaginationModel<Machine>> {
@@ -35,16 +35,16 @@ export class MachineService {
       { params: this.httpHelperService.convertAnyToHttpParams({filters, embeds}) } :
       {};
 
-    return this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE_LIST}`, options);
+    return this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE}`, options);
   }
 
   updateMachine(machineUuid: string, machine: CreateMachineEntity): Observable<any>
   {
-    return this.http.put<Machine>(`${environment.API_HOST}${MACHINE}`.replace(':machineUuid', machineUuid), machine);
+    return this.http.put<Machine>(`${environment.API_HOST}${MACHINE_UUID}`.replace(':machineUuid', machineUuid), machine);
   }
 
   deleteByUuid(machineUuid: string): Observable<any>
   {
-    return this.http.delete<void>(`${environment.API_HOST}${MACHINE_DELETE}`.replace(':machineUuid', machineUuid));
+    return this.http.delete<void>(`${environment.API_HOST}${MACHINE_UUID}`.replace(':machineUuid', machineUuid));
   }
 }

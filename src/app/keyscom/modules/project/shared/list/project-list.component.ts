@@ -84,9 +84,12 @@ export class ProjectListComponent implements OnInit {
     this.filtersLastRawValue = JSON.stringify(this.getFilterFromForm());
 
     this.filters.controls.clientFilter.valueChanges
-      .subscribe((value) => this.filteredClientList = this.clientList.filter(
-        (client) => this.stringHelperService.contains(client.name, value)
-      ));
+      .subscribe((value) => {
+        this.filters.patchValue({'client.uuid': ''});
+        this.filteredClientList = this.clientList.filter(
+          (client) => this.stringHelperService.contains(client.name, value)
+        );
+      });
 
     this.filters.valueChanges
       .pipe(
