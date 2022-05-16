@@ -6,12 +6,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Project} from '../../../../models/project.model';
 import {ProjectService} from '../../services/project.service';
 import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs';
 import {ApiHelperService} from '../../../shared/services/api-helper.service';
-import {Client} from '../../../../models/client.model';
-import {ClientService} from '../../../client/services/client.service';
-import {StringHelperService} from '../../../shared/services/string-helper.service';
+import {ClientSelectListComponent} from '../../../client/shared/select-list/client-select-list.component';
 
 @Component({
   selector: 'app-project-list',
@@ -19,36 +17,28 @@ import {StringHelperService} from '../../../shared/services/string-helper.servic
   styleUrls: ['./project-list.component.scss']
 })
 export class ProjectListComponent implements OnInit {
+  @ViewChild(ClientSelectListComponent) clientSelector: ClientSelectListComponent;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
   faListAlt = faListAlt;
   faUserTie = faUserTie;
   filters: FormGroup;
   private filtersLastRawValue: string;
-  private clientList: Client[];
-  public filteredClientList: Client[];
 
   displayedColumns: string[] = ['name', 'startDate', 'endDate', 'actions'];
 
   public dataSource: MatTableDataSource<Project>;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-
   constructor(
     private projectService: ProjectService,
-    private clientService: ClientService,
     private dialogService: ConfirmDialogService,
     private apiHelperService: ApiHelperService,
-    private stringHelperService: StringHelperService,
   ) { }
 
   ngOnInit(): void {
-    this.filters = new FormGroup({
-      name: new FormControl('', Validators.minLength(2)),
-      startDate: new FormControl(),
-    });
-
     this.projectService.projects
       .subscribe((projects) => {
         if (projects) {
@@ -59,12 +49,6 @@ export class ProjectListComponent implements OnInit {
       });
 
     this.projectService.updateProjects();
-
-    this.clientService.getClients()
-      .subscribe((paginationClient) => {
-        this.clientList = paginationClient.results;
-        this.filteredClientList = paginationClient.results;
-      });
 
     this.initializeFilterForm();
   }
@@ -77,19 +61,10 @@ export class ProjectListComponent implements OnInit {
       startDateEndRange: new FormControl(''),
       endDateStartRange: new FormControl(''),
       endDateEndRange: new FormControl(''),
-      clientFilter: new FormControl(''),
       'client.uuid': new FormControl(''),
     });
 
     this.filtersLastRawValue = JSON.stringify(this.getFilterFromForm());
-
-    this.filters.controls.clientFilter.valueChanges
-      .subscribe((value) => {
-        this.filters.patchValue({'client.uuid': ''});
-        this.filteredClientList = this.clientList.filter(
-          (client) => this.stringHelperService.contains(client.name, value)
-        );
-      });
 
     this.filters.valueChanges
       .pipe(
@@ -106,11 +81,8 @@ export class ProjectListComponent implements OnInit {
       });
   }
 
-  public selectClient(client?: Client): void {
-    this.filters.patchValue({
-      clientFilter: client?.name,
-      'client.uuid': client?.uuid,
-    });
+  updateClientUuid(clientUuid: string | null): void {
+    this.filters.patchValue({'client.uuid': clientUuid});
   }
 
   private getFilterFromForm(): object
@@ -131,8 +103,7 @@ export class ProjectListComponent implements OnInit {
     delete filters.endDateStartRange;
     delete filters.endDateEndRange;
 
-    delete filters.clientFilter;
-    if (!filters['client.uuid']) {
+    if (!filters['client.uuid']){
       delete filters['client.uuid'];
     }
 
