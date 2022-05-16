@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../../../../models/client.model';
 import {StringHelperService} from '../../../shared/services/string-helper.service';
@@ -12,6 +12,7 @@ import {MapClientService} from '../../services/map-client.service';
 })
 export class ClientSelectListComponent implements OnInit {
   @Input() required = false;
+  @Output() changeSelectedClient = new EventEmitter<string | null>();
 
   form: FormGroup;
   private clientList: Client[];
@@ -55,6 +56,8 @@ export class ClientSelectListComponent implements OnInit {
       clientFilter: client?.name,
       clientUuid: client?.uuid,
     });
+
+    this.changeSelectedClient.emit(client?.uuid);
   }
 
   public closeAutocomplete(): void {
