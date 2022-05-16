@@ -58,15 +58,15 @@ export class ClientSelectListComponent implements OnInit {
   }
 
   public closeAutocomplete(): void {
-    console.log(this.form.controls.clientUuid.value);
     if (this.form.controls.clientUuid.value) {
-      const selectedClientName = this.mapClientService.get(this.form.controls.clientUuid.value);
+      const selectedClientName = this.mapClientService.get(this.form.controls.clientUuid.value).name;
       if (selectedClientName === this.form.controls.clientFilter.value) {
         return;
       }
       this.form.patchValue({clientFilter: selectedClientName});
+    } else {
+      this.form.patchValue({clientFilter: ''});
     }
-    this.form.patchValue({clientFilter: ''});
   }
 
   public isValid(): boolean {
