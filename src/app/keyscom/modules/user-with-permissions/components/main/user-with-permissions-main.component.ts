@@ -10,6 +10,7 @@ import {StringHelperService} from '../../../shared/services/string-helper.servic
 import {MapProjectService} from '../../../project/services/map-project.service';
 import {MapClientService} from '../../../client/services/map-client.service';
 import {MapMachineService} from '../../../machine/services/map-machine.service';
+import {AlertService} from '../../../layout/services/alert.service';
 
 type UsersWithPermissionsMap = Map<string, {
   user: User,
@@ -53,6 +54,7 @@ export class UserWithPermissionsMainComponent implements OnInit
     private mapClients: MapClientService,
     private mapProjects: MapProjectService,
     private mapMachines: MapMachineService,
+    private alertService: AlertService,
   ) {
     this.userList = new BehaviorSubject([]);
     this.permissionList = new BehaviorSubject([]);
@@ -127,9 +129,9 @@ export class UserWithPermissionsMainComponent implements OnInit
         // Filter by the form field
         if (
           !userFilter
-          || this.stringHelperService.normalize(user.firstName).includes(userFilter)
-          || this.stringHelperService.normalize(user.lastName).includes(userFilter)
-          || this.stringHelperService.normalize(user.email).includes(userFilter)
+          || this.stringHelperService.contains(user.firstName, userFilter)
+          || this.stringHelperService.contains(user.lastName, userFilter)
+          || this.stringHelperService.contains(user.email, userFilter)
         ) {
           usersWithPermissionsMap.set(user.uuid, {
             user,
@@ -151,20 +153,19 @@ export class UserWithPermissionsMainComponent implements OnInit
 
       const newUserWithPermissionsMap = new Map(userWithPermissionsMap);
       this.permissionList.value.forEach((permission) => {
-        // skip if user is filtered
         const userWithPermissions = newUserWithPermissionsMap.get(permission.user.uuid);
-        if (userWithPermissions) {
-          if (sameOrParentRelatedEntities[this.permissionRelatedEntity].includes(permission.permissionRelatedEntity)) {
-            userWithPermissions.parentPermissions.set(permission.uuid, permission);
-          } else {
-            userWithPermissions.childrenPermissions.set(permission.uuid, permission);
-          }
-
+        if (!userWithPermissions) {
+          this.alertService.error($localize`Error on load data please reload the page`);
+        }
+        if (sameOrParentRelatedEntities[this.permissionRelatedEntity].includes(permission.permissionRelatedEntity)) {
+          userWithPermissions.parentPermissions.set(permission.uuid, permission);
           if (permission.userPermissionType === 'ssh') {
             userWithPermissions.hasSshPermission = true;
           } else if (permission.userPermissionType === 'admin') {
             userWithPermissions.hasAdminPermission = true;
           }
+        } else {
+          userWithPermissions.childrenPermissions.set(permission.uuid, permission);
         }
       });
 

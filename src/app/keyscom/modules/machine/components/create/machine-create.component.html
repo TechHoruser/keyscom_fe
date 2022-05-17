@@ -1,11 +1,23 @@
 <div>
-  <mat-form-field appearance="legacy">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Name">
-  </mat-form-field>
-  <div class="row p-3">
-    <div class="d-flex justify-content-end">
-      <button routerLink="create" mat-raised-button color="primary" (click)="saveMachine()">Guardar</button>
+  <form [formGroup]="form">
+    <mat-form-field appearance="legacy">
+      <mat-label i18n>Name</mat-label>
+      <input matInput i18n-placeholder placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label i18n>Domain</mat-label>
+      <input matInput i18n-placeholder placeholder="Domain" formControlName="domain">
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label i18n>IP</mat-label>
+      <input matInput i18n-placeholder placeholder="IP" formControlName="ip">
+    </mat-form-field>
+    <app-client-select-list [required]="true" (changeSelectedClient)="changeSelectedClient($event)"></app-client-select-list>
+    <app-project-select-list [required]="true" [disabled]="true"></app-project-select-list>
+    <div class="row p-3">
+      <div class="d-flex justify-content-end">
+        <button mat-raised-button color="primary" (click)="saveMachine()">Guardar</button>
+      </div>
     </div>
-  </div>
+  </form>
 </div>

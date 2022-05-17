@@ -8,6 +8,8 @@ import {Machine} from '../../../../models/machine.model';
 import {MachineService} from '../../services/machine.service';
 import {ConfirmDialogService} from '../../../dialog/services/confirm-dialog.service';
 import {FormControl, FormGroup} from '@angular/forms';
+import {ClientSelectListComponent} from '../../../client/shared/select-list/client-select-list.component';
+import {ProjectSelectListComponent} from '../../../project/shared/select-list/project-select-list.component';
 
 @Component({
   selector: 'app-machine-list',
@@ -15,6 +17,11 @@ import {FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./machine-list.component.scss']
 })
 export class MachineListComponent implements OnInit {
+  @ViewChild(ClientSelectListComponent) clientSelector: ClientSelectListComponent;
+  @ViewChild(ProjectSelectListComponent) projectSelector: ProjectSelectListComponent;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   faPencilAlt = faPencilAlt;
   faTrashAlt = faTrashAlt;
   faListAlt = faListAlt;
@@ -26,9 +33,6 @@ export class MachineListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'domain', 'ip', 'actions'];
 
   public dataSource: MatTableDataSource<Machine>;
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private machineService: MachineService,
@@ -60,11 +64,10 @@ export class MachineListComponent implements OnInit {
       'project.uuid': new FormControl(''),
     });
 
-    this.filters.controls.projectFilter.disable();
     this.filtersLastRawValue = JSON.stringify(this.getFilterFromForm());
 
-    this.filters.controls['project.client.uuid'].valueChanges.subscribe(() => {
-      // TODO: call change client into
+    this.filters.controls['project.client.uuid'].valueChanges.subscribe((newClientUuid) => {
+      this.projectSelector.updateClientUuid(newClientUuid);
     });
 
     this.filters.valueChanges
@@ -99,13 +102,13 @@ export class MachineListComponent implements OnInit {
 
   public changeSelectedClient(clientUuid?: string): void {
     if (clientUuid) {
-      this.filters.controls.projectFilter.enable();
+      this.projectSelector.enable();
     } else {
-      this.filters.controls.projectFilter.disable();
+      this.projectSelector.disable();
     }
+    this.projectSelector.updateClientUuid(clientUuid);
     this.filters.patchValue({
-      'project.client.uuid': clientUuid,
-      'project.uuid': '',
+      'project.client.uuid': clientUuid ?? '',
     });
   }
 

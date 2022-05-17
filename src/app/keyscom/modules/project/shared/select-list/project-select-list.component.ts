@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Project} from '../../../../models/project.model';
 import {StringHelperService} from '../../../shared/services/string-helper.service';
-import {ProjectService} from '../../services/project.service';
 import {MapProjectService} from '../../services/map-project.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-project-select-list',
@@ -12,24 +12,41 @@ import {MapProjectService} from '../../services/map-project.service';
 })
 export class ProjectSelectListComponent implements OnInit {
   @Input() required = false;
+  @Input() disabled = false;
   @Output() changeSelectedProject = new EventEmitter<string | null>();
 
   form: FormGroup;
   private projectList: Project[];
   public filteredProjectList: Project[];
+  private clientUuid?: BehaviorSubject<string | null>;
 
   constructor(
-    private projectService: ProjectService,
     private mapProjectService: MapProjectService,
     private stringHelperService: StringHelperService,
-  ) {}
+  ) {
+    this.clientUuid = new BehaviorSubject(null);
+  }
 
   async ngOnInit(): Promise<void> {
     this.initForm();
-    this.projectService.getProjects().subscribe((paginationProjects) => {
-      this.projectList = paginationProjects.results;
-      this.filteredProjectList = paginationProjects.results;
+    this.projectList = await this.mapProjectService.getValues();
+    this.filteredProjectList = this.projectList;
+
+    this.clientUuid.subscribe(async (newClientUuid) => {
+      this.form.patchValue({projectFilter: '', projectUuid: ''});
+      this.projectList = (await this.mapProjectService.getValues())
+        .filter((project) => project.client.uuid === newClientUuid);
+      this.filteredProjectList = this.projectList;
+      if (newClientUuid) {
+        this.enable();
+      } else {
+        this.disable();
+      }
     });
+
+    if (this.disabled) {
+      this.disable();
+    }
   }
 
   private initForm(): void
@@ -49,27 +66,41 @@ export class ProjectSelectListComponent implements OnInit {
           (project) => this.stringHelperService.contains(project.name, value)
         );
       });
+
+    this.form.controls.projectUuid.valueChanges.subscribe((value) => this.changeSelectedProject.emit(value));
   }
 
   public selectProject(project?: Project): void {
     this.form.patchValue({
-      projectFilter: project?.name,
-      projectUuid: project?.uuid,
+      projectFilter: project?.name ?? '',
+      projectUuid: project?.uuid ?? '',
     });
-
-    this.changeSelectedProject.emit(project?.uuid);
   }
 
-  public closeAutocomplete(): void {
-    if (this.form.controls.projectUuid.value) {
-      const selectedProjectName = this.mapProjectService.get(this.form.controls.projectUuid.value).name;
-      if (selectedProjectName === this.form.controls.projectFilter.value) {
-        return;
-      }
-      this.form.patchValue({projectFilter: selectedProjectName});
-    } else {
-      this.form.patchValue({projectFilter: ''});
-    }
+  public enable(): void {
+    this.form.controls.projectFilter.enable();
+  }
+
+  public disable(): void {
+    this.form.controls.projectFilter.disable();
+    this.form.patchValue({projectFilter: '', projectUuid: ''});
+  }
+
+  public updateClientUuid(clientUuid?: string): void {
+    this.clientUuid.next(clientUuid);
+  }
+
+  // Unuse async problem with selectProject method
+  public async closeAutocomplete(): Promise<void> {
+    // if (this.form.controls.projectUuid.value) {
+    //   const selectedProjectName = (await this.mapProjectService.get(this.form.controls.projectUuid.value)).name;
+    //   if (selectedProjectName === this.form.controls.projectFilter.value) {
+    //     return;
+    //   }
+    //   this.form.patchValue({projectFilter: selectedProjectName});
+    // } else {
+    //   this.form.patchValue({projectFilter: ''});
+    // }
   }
 
   public isValid(): boolean {
@@ -77,6 +108,7 @@ export class ProjectSelectListComponent implements OnInit {
       this.form.patchValue({projectFilter: ''});
     }
 
+    this.form.markAsTouched();
     return this.form.valid;
   }
 

@@ -19,6 +19,6 @@ export class StringHelperService {
       return false;
     }
 
-    return this.normalize(haystack).includes(this.normalize(str));
+    return this.normalize(haystack).toLowerCase().includes(this.normalize(str).toLowerCase());
   }
 }

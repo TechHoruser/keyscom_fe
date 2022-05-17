@@ -46,6 +46,9 @@ export class ClientSelectListComponent implements OnInit {
           (client) => this.stringHelperService.contains(client.name, value)
         );
       });
+
+    this.form.controls.clientUuid.valueChanges
+      .subscribe((newClientUuid) => this.changeSelectedClient.emit(newClientUuid));
   }
 
   public selectClient(client?: Client): void {
@@ -53,21 +56,20 @@ export class ClientSelectListComponent implements OnInit {
       clientFilter: client?.name,
       clientUuid: client?.uuid,
     });
-
-    this.changeSelectedClient.emit(client?.uuid);
   }
 
+  // Unuse async problem with selectClient method
   public async closeAutocomplete(): Promise<void> {
-    if (this.form.controls.clientUuid.value) {
-      const selectedClient = await (this.mapClientService.get(this.form.controls.clientUuid.value));
-      const selectedClientName = selectedClient.name;
-      if (selectedClientName === this.form.controls.clientFilter.value) {
-        return;
-      }
-      this.form.patchValue({clientFilter: selectedClientName});
-    } else {
-      this.form.patchValue({clientFilter: ''});
-    }
+    // if (this.form.controls.clientUuid.value) {
+    //   const selectedClient = await (this.mapClientService.get(this.form.controls.clientUuid.value));
+    //   const selectedClientName = selectedClient.name;
+    //   if (selectedClientName === this.form.controls.clientFilter.value) {
+    //     return;
+    //   }
+    //   this.form.patchValue({clientFilter: selectedClientName});
+    // } else {
+    //   this.form.patchValue({clientFilter: ''});
+    // }
   }
 
   public isValid(): boolean {
@@ -75,7 +77,7 @@ export class ClientSelectListComponent implements OnInit {
       this.form.patchValue({clientFilter: ''});
     }
 
-    this.form.controls.clientFilter.markAsTouched();
+    this.form.markAsTouched();
     return this.form.valid;
   }
 

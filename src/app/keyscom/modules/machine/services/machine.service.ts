@@ -38,6 +38,11 @@ export class MachineService {
     return this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE}`, options);
   }
 
+  createMachine(machine: CreateMachineEntity): Observable<any>
+  {
+    return this.http.post<Machine>(`${environment.API_HOST}${MACHINE}`, machine);
+  }
+
   updateMachine(machineUuid: string, machine: CreateMachineEntity): Observable<any>
   {
     return this.http.put<Machine>(`${environment.API_HOST}${MACHINE_UUID}`.replace(':machineUuid', machineUuid), machine);

@@ -18,11 +18,11 @@
       </mat-form-field></div>
 
       <div class="col-lg-4 col-md-12">
-        <app-client-select-list></app-client-select-list>
+        <app-client-select-list (changeSelectedClient)="changeSelectedClient($event)"></app-client-select-list>
       </div>
 
       <div class="col-lg-4 col-md-12">
-        <app-project-select-list></app-project-select-list>
+        <app-project-select-list [disabled]="true" (changeSelectedProject)="changeSelectedProject($event)"></app-project-select-list>
       </div>
     </div>
   </form>
