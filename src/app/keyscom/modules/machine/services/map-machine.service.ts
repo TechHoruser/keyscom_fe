@@ -25,11 +25,36 @@ export class MapMachineService {
     );
   }
 
-  get(uuid: string): Machine {
+  async get(uuid: string): Promise<Machine> {
+    if (!this.machines) {
+      await this.updateMachines();
+    }
+
     const machine = this.machines.get(uuid);
     if (!machine) {
       this.alertService.error($localize`Machine doesn't exist`);
     }
-    return machine;
+    return Promise.resolve(machine);
+  }
+
+  async getValues(): Promise<Machine[]> {
+    if (this.machines === undefined) {
+      await this.updateMachines();
+    }
+    return Promise.resolve(Array.from(this.machines.values()));
+  }
+
+  async getMap(): Promise<Map<string, Machine>> {
+    if (this.machines === undefined) {
+      await this.updateMachines();
+    }
+    return Promise.resolve(this.machines);
+  }
+
+  async isLoaded(): Promise<true> {
+    if (this.machines === undefined) {
+      await this.updateMachines();
+    }
+    return Promise.resolve(true);
   }
 }

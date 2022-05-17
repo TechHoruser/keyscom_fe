@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {faUserTie} from '@fortawesome/free-solid-svg-icons';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProjectService} from '../../services/project.service';
 import {CreateProjectEntity} from '../../shared/create-project.entity';
+import {Project} from '../../../../models/project.model';
 
 @Component({
   selector: 'app-project-modify',
@@ -12,6 +14,8 @@ import {CreateProjectEntity} from '../../shared/create-project.entity';
 export class ProjectModifyComponent implements OnInit {
   form: FormGroup;
   uuid: string;
+  project?: Project;
+  faUserTie = faUserTie;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,8 +32,9 @@ export class ProjectModifyComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.uuid = params.uuid;
-      this.projectService.getProject(this.uuid).subscribe(project => {
+      this.projectService.getProject(this.uuid, ['client']).subscribe(project => {
         this.form.patchValue({name: project.name});
+        this.project = project;
       });
     });
   }

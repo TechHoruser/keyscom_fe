@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {faBriefcase, faUserTie} from '@fortawesome/free-solid-svg-icons';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MachineService} from '../../services/machine.service';
 import {CreateMachineEntity} from '../../shared/create-machine.entity';
+import {Machine} from '../../../../models/machine.model';
 
 @Component({
   selector: 'app-machine-modify',
@@ -12,6 +14,9 @@ import {CreateMachineEntity} from '../../shared/create-machine.entity';
 export class MachineModifyComponent implements OnInit {
   form: FormGroup;
   uuid: string;
+  machine?: Machine;
+  faUserTie = faUserTie;
+  faBriefcase = faBriefcase;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +33,8 @@ export class MachineModifyComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.uuid = params.uuid;
-      this.machineService.getMachine(this.uuid).subscribe(machine => {
+      this.machineService.getMachine(this.uuid, ['project.client']).subscribe(machine => {
+        this.machine = machine;
         this.form.patchValue({name: machine.name});
       });
     });

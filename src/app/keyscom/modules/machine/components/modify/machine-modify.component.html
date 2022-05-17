@@ -1,4 +1,10 @@
 <div>
+  <mat-button-toggle-group style="margin-bottom: 3em">
+    <mat-button-toggle [routerLink]="'/client/' + machine?.project.client.uuid"
+    ><fa-icon [icon]="faUserTie"></fa-icon> {{machine?.project.client.name}}</mat-button-toggle>
+    <mat-button-toggle [routerLink]="'/project/' + machine?.project.uuid"
+    ><fa-icon [icon]="faBriefcase"></fa-icon> {{machine?.project.name}}</mat-button-toggle>
+  </mat-button-toggle-group>
   <form [formGroup]="form">
     <mat-form-field appearance="legacy">
       <mat-label i18n>Name</mat-label>

@@ -20,6 +20,13 @@ type UsersWithPermissionsMap = Map<string, {
   hasAdminPermission: boolean,
 }>;
 
+type ChildPermission = {
+  route: string,
+  type: string,
+  relatedEntityType: string,
+  name: string,
+};
+
 @Component({
   selector: 'app-user-with-permissions-main',
   templateUrl: './user-with-permissions-main.component.html',
@@ -32,7 +39,7 @@ export class UserWithPermissionsMainComponent implements OnInit
   userList: BehaviorSubject<User[]>;
   permissionList: BehaviorSubject<Permission[]>;
   usersWithPermissionsMap: UsersWithPermissionsMap;
-  childrenPermissions: Permission[];
+  childrenPermissions: ChildPermission[];
   faBolt = faBolt;
   faUserTie = faUserTie;
   faBriefcase = faBriefcase;
@@ -40,12 +47,6 @@ export class UserWithPermissionsMainComponent implements OnInit
 
   filters: FormGroup;
   private filtersLastRawValue: string;
-
-  public maps = {
-    client: this.mapClients,
-    project: this.mapProjects,
-    machine: this.mapMachines,
-  };
 
   constructor(
     private userWithPermissionsService: UserWithPermissionsService,
@@ -113,9 +114,26 @@ export class UserWithPermissionsMainComponent implements OnInit
     });
   }
 
-  public showChildrenPermissions(userUuid: string): void
+  public async showChildrenPermissions(userUuid: string): Promise<void>
   {
-    this.childrenPermissions = Array.from(this.usersWithPermissionsMap.get(userUuid).childrenPermissions.values());
+    Promise.all([
+      this.mapMachines.getMap(),
+      this.mapProjects.getMap(),
+      this.mapClients.getMap(),
+    ]).then(([machinesMap, projectsMap, clientsMap]) => {
+      const maps = {
+        client: clientsMap,
+        project: projectsMap,
+        machine: machinesMap,
+      };
+      this.childrenPermissions = Array.from(this.usersWithPermissionsMap.get(userUuid).childrenPermissions.values())
+        .map( permission => ({
+          name: maps[permission.permissionRelatedEntity].get(permission.permissionRelatedEntityUuid).name,
+          route: `/${permission.permissionRelatedEntity}/${permission.permissionRelatedEntityUuid}`,
+          type: permission.userPermissionType,
+          relatedEntityType: permission.permissionRelatedEntity,
+        }));
+    });
   }
 
   private updateUsersWithPermissionsMap(): void

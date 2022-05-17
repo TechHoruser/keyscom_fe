@@ -26,8 +26,11 @@ export class ProjectService {
       .subscribe((res) => this.projects.next(res.results));
   }
 
-  getProject(projectUuid: string): Observable<Project> {
-    return this.http.get<Project>(`${environment.API_HOST}${PROJECT_UUID}`.replace(':projectUuid', projectUuid));
+  getProject(projectUuid: string, embeds: string[] = []): Observable<Project> {
+    return this.http.get<Project>(
+      `${environment.API_HOST}${PROJECT_UUID}`.replace(':projectUuid', projectUuid),
+      { params: this.httpHelperService.convertAnyToHttpParams({embeds}) },
+    );
   }
 
   getProjects(filters?: object, embeds?: string[]): Observable<PaginationModel<Project>> {

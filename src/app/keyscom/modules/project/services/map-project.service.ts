@@ -29,6 +29,7 @@ export class MapProjectService {
     const project = this.projects.get(uuid);
     if (!project) {
       this.alertService.error($localize`Project doesn't exist`);
+      return Promise.resolve(null);
     }
     return Promise.resolve(project);
   }
@@ -38,5 +39,19 @@ export class MapProjectService {
       await this.updateProjects();
     }
     return Promise.resolve(Array.from(this.projects.values()));
+  }
+
+  async getMap(): Promise<Map<string, Project>> {
+    if (this.projects === undefined) {
+      await this.updateProjects();
+    }
+    return Promise.resolve(this.projects);
+  }
+
+  async isLoaded(): Promise<true> {
+    if (this.projects === undefined) {
+      await this.updateProjects();
+    }
+    return Promise.resolve(true);
   }
 }

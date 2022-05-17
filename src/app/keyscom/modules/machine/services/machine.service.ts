@@ -26,8 +26,11 @@ export class MachineService {
       .subscribe((res) => this.machines.next(res.results));
   }
 
-  getMachine(machineUuid: string): Observable<Machine> {
-    return this.http.get<Machine>(`${environment.API_HOST}${MACHINE_UUID}`.replace(':machineUuid', machineUuid));
+  getMachine(machineUuid: string, embeds: string[] = []): Observable<Machine> {
+    return this.http.get<Machine>(
+      `${environment.API_HOST}${MACHINE_UUID}`.replace(':machineUuid', machineUuid),
+      { params: this.httpHelperService.convertAnyToHttpParams({embeds}) },
+    );
   }
 
   getMachines(filters?: object, embeds?: string[]): Observable<PaginationModel<Machine>> {

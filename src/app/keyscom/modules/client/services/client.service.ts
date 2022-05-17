@@ -40,6 +40,11 @@ export class ClientService {
       .subscribe((res) => this.clients.next(res.results));
   }
 
+  createClient(client: CreateClientEntity): Observable<any>
+  {
+    return this.http.post<Client>(`${environment.API_HOST}${CLIENT}`, client);
+  }
+
   updateClient(clientUuid: string, client: CreateClientEntity): Observable<any>
   {
     return this.http.put<Client>(`${environment.API_HOST}${CLIENT_UUID}`.replace(':clientUuid', clientUuid), client);

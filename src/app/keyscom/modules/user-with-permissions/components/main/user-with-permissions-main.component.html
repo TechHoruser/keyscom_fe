@@ -60,31 +60,23 @@
       </mat-autocomplete>
     </mat-form-field>
   </form>
-  <mat-list *ngIf="childrenPermissions">
-    <mat-list-item *ngFor="let permission of childrenPermissions">
-      <div class="d-flex w-100 justify-content-between">
-        <div class="d-flex align-items-center">
-          <fa-icon *ngIf="!permission.permissionRelatedEntity" class="icon text-primary" [icon]="faBolt"></fa-icon>
-          <fa-icon *ngIf="permission.permissionRelatedEntity == 'client'" class="icon text-primary" [icon]="faUserTie"></fa-icon>
-          <fa-icon *ngIf="permission.permissionRelatedEntity == 'project'" class="icon text-primary" [icon]="faBriefcase"></fa-icon>
-          <fa-icon *ngIf="permission.permissionRelatedEntity == 'machine'" class="icon text-primary" [icon]="faServer"></fa-icon>
-          <ng-container *ngIf="permission.permissionRelatedEntity">
-          <div class="vertical-line"></div>
-          <a [routerLink]="'/'+permission.permissionRelatedEntity+'/'+permission.permissionRelatedEntityUuid"
-          >{{maps[permission.permissionRelatedEntity].get(permission.permissionRelatedEntityUuid)?.name}}</a>
-          </ng-container>
-        </div>
-        <div>
-          <mat-chip-list aria-label="Dog selection">
-            <mat-chip style="background-color: springgreen" *ngIf="permission.userPermissionType == 'ssh'">
-              ssh
-            </mat-chip>
-            <mat-chip style="background-color: cornflowerblue" *ngIf="permission.userPermissionType == 'admin'">
-              admin
-            </mat-chip>
-          </mat-chip-list>
-        </div>
-      </div>
-    </mat-list-item>
-  </mat-list>
+  <div class="d-flex w-100 justify-content-between" *ngIf="childrenPermissions">
+    <mat-chip-list>
+      <mat-chip *ngFor="let childPermission of childrenPermissions"
+                [routerLink]="childPermission.route"
+                [style]="'background-color: ' + (childPermission.type == 'ssh' ? 'springgreen' : 'cornflowerblue') + ';'">
+        <fa-icon *ngIf="childPermission.relatedEntityType == 'client'"
+                 [icon]="faUserTie"
+        ></fa-icon>
+        <fa-icon *ngIf="childPermission.relatedEntityType == 'project'"
+                 [icon]="faBriefcase"
+        ></fa-icon>
+        <fa-icon *ngIf="childPermission.relatedEntityType == 'machine'"
+                 [icon]="faServer"
+        ></fa-icon>
+        <div class="vertical-line"></div>
+        <span>{{childPermission.name}}</span>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
 </div>

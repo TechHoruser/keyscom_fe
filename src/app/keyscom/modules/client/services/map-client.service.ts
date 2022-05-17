@@ -39,4 +39,18 @@ export class MapClientService {
     }
     return Promise.resolve(Array.from(this.clients.values()));
   }
+
+  async getMap(): Promise<Map<string, Client>> {
+    if (this.clients === undefined) {
+      await this.updateClients();
+    }
+    return Promise.resolve(this.clients);
+  }
+
+  async isLoaded(): Promise<true> {
+    if (this.clients === undefined) {
+      await this.updateClients();
+    }
+    return Promise.resolve(true);
+  }
 }
