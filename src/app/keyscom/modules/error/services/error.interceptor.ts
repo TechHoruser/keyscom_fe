@@ -20,10 +20,10 @@ export class ErrorInterceptor implements HttpInterceptor {
           return res;
         }),
         catchError((res) => {
-          if (res.error.code === HttpStatusCode.InternalServerError) {
+          if (res?.error?.code === HttpStatusCode.InternalServerError) {
             this.route.navigate(['/error']);
           }
-          if (res.error.message) {
+          if (res?.error?.message) {
             this.alertService.error(res.error.message);
             return throwError(res);
           }
