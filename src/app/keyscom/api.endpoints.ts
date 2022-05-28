@@ -2,6 +2,7 @@ export const DASHBOARD_CARD = '/dashboard-card';
 export const DASHBOARD_NEW_ENTITIES_BY_DAY = '/dashboard-current-year';
 export const PERMISSION_RELATED_TO_ENTITY = '/permission-related-to-entity';
 export const ASSIGMENT_PERMISSION = '/assigment-permission';
+export const REVOKE_PERMISSIONS = '/revoke-permissions';
 export const USER = '/user';
 export const USER_UUID = '/user/:userUuid';
 export const CLIENT = '/client';

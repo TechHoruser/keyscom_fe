@@ -11,13 +11,16 @@ import {MapProjectService} from '../../../project/services/map-project.service';
 import {MapClientService} from '../../../client/services/map-client.service';
 import {MapMachineService} from '../../../machine/services/map-machine.service';
 import {AlertService} from '../../../layout/services/alert.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 type UsersWithPermissionsMap = Map<string, {
   user: User,
   parentPermissions: Map<string, Permission>,
+  permissionsForThisEntity: Map<string, Permission>,
   childrenPermissions: Map<string, Permission>,
   hasSshPermission: boolean,
   hasAdminPermission: boolean,
+  selectedTypesForRemove: Map<string, boolean>,
 }>;
 
 type ChildPermission = {
@@ -56,6 +59,7 @@ export class UserWithPermissionsMainComponent implements OnInit
     private mapProjects: MapProjectService,
     private mapMachines: MapMachineService,
     private alertService: AlertService,
+    private _snackBar: MatSnackBar,
   ) {
     this.userList = new BehaviorSubject([]);
     this.permissionList = new BehaviorSubject([]);
@@ -101,6 +105,8 @@ export class UserWithPermissionsMainComponent implements OnInit
   }
 
   public addPermission(user: User, type: string): void {
+    this.childrenPermissions = [];
+
     this.userWithPermissionsService.addPermission(
       user.uuid,
       type,
@@ -154,7 +160,9 @@ export class UserWithPermissionsMainComponent implements OnInit
           usersWithPermissionsMap.set(user.uuid, {
             user,
             parentPermissions: new Map<string, Permission>(),
+            permissionsForThisEntity: new Map<string, Permission>(),
             childrenPermissions: new Map<string, Permission>(),
+            selectedTypesForRemove: new Map(),
           });
         }
       });
@@ -177,6 +185,10 @@ export class UserWithPermissionsMainComponent implements OnInit
         }
         if (sameOrParentRelatedEntities[this.permissionRelatedEntity].includes(permission.permissionRelatedEntity)) {
           userWithPermissions.parentPermissions.set(permission.uuid, permission);
+          if (permission.permissionRelatedEntity === this.permissionRelatedEntity) {
+            userWithPermissions.permissionsForThisEntity.set(permission.uuid, permission);
+            userWithPermissions.selectedTypesForRemove.set(permission.userPermissionType, false);
+          }
           if (permission.userPermissionType === 'ssh') {
             userWithPermissions.hasSshPermission = true;
           } else if (permission.userPermissionType === 'admin') {
@@ -184,6 +196,7 @@ export class UserWithPermissionsMainComponent implements OnInit
           }
         } else {
           userWithPermissions.childrenPermissions.set(permission.uuid, permission);
+          userWithPermissions.selectedTypesForRemove.set(permission.userPermissionType, false);
         }
       });
 
@@ -191,5 +204,50 @@ export class UserWithPermissionsMainComponent implements OnInit
     };
 
     this.usersWithPermissionsMap = addPermissionsToUsers(generateFilteredUsersWithPermissionsMap());
+  }
+
+  public selectTypeToRemove($event, userUuid: string, permissionType: string, newStatus: boolean): void
+  {
+    $event.stopPropagation();
+    this.usersWithPermissionsMap.get(userUuid).selectedTypesForRemove.set(permissionType, newStatus);
+  }
+
+  public hasRevokePermissionsButton(userUuid: string): boolean
+  {
+    return this.usersWithPermissionsMap.get(userUuid).selectedTypesForRemove.size > 0;
+  }
+
+  public revokePermissions(userUuid: string): void
+  {
+    const userPermissions = this.usersWithPermissionsMap.get(userUuid);
+
+    const permissionTypes = [];
+    Array.from(userPermissions.selectedTypesForRemove.keys()).forEach(
+      (permissionType) => {
+        if (userPermissions.selectedTypesForRemove.get(permissionType)) {
+          permissionTypes.push(permissionType);
+        }
+      }
+    );
+
+    if (permissionTypes.length === 0) {
+      this._snackBar.open($localize`You need active the permission type to remove`, $localize`Close`)
+      return;
+    }
+
+    const permissionType = permissionTypes.length === 1 ? permissionTypes[0] : null;
+
+    this.userWithPermissionsService.revokePermissions(
+      userUuid,
+      permissionType,
+      this.permissionRelatedEntity,
+      this.permissionRelatedEntityUuid,
+    ).subscribe(() => {
+      this.permissionList.next(this.permissionList.value.filter(
+        (permission) =>
+          userPermissions.childrenPermissions.get(permission.uuid) !== null
+          && userPermissions.permissionsForThisEntity.get(permission.uuid) !== null
+      ));
+    });
   }
 }

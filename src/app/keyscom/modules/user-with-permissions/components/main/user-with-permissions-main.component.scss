@@ -3,3 +3,19 @@
   border-left: 3px solid lightgrey;
   height: 50%;
 }
+
+.revoke-button {
+  display: flex;
+  align-items: center;
+  mat-chip-list {
+    margin-left: 5px;
+    mat-chip {
+      background-color: #ff413c;
+      color: white;
+      opacity: 30%;
+      &.active {
+        opacity: 100%;
+      }
+    }
+  }
+}

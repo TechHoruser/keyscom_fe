@@ -41,7 +41,20 @@
                 mat-raised-button
                 style="background-color: lightgrey; margin: 0 1em;"
                 (click)="showChildrenPermissions(userMap.key)"
+                i18n
               >Children Permissions</button>
+              <button
+                *ngIf="hasRevokePermissionsButton(userMap.key)"
+                mat-raised-button
+                style="background-color: #ff413c; margin: 0 1em;"
+                (click)="revokePermissions(userMap.key)"
+                i18n
+              ><span class="revoke-button">Revoke Permission <mat-chip-list>
+                <mat-chip *ngFor="let permissionTypeMap of this.usersWithPermissionsMap.get(userMap.key).selectedTypesForRemove | keyvalue"
+                          [class]="permissionTypeMap.value ? 'active' : 'deactivated'"
+                          (click)="selectTypeToRemove($event, userMap.key, permissionTypeMap.key, !permissionTypeMap.value)"
+                >{{permissionTypeMap.key}}</mat-chip>
+              </mat-chip-list></span></button>
               <button
                 *ngIf="!userMap.value.hasSshPermission"
                 mat-raised-button

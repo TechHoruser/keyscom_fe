@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../../environments/environment';
-import {ASSIGMENT_PERMISSION, PERMISSION_RELATED_TO_ENTITY} from '../../../api.endpoints';
+import {ASSIGMENT_PERMISSION, PERMISSION_RELATED_TO_ENTITY, REVOKE_PERMISSIONS} from '../../../api.endpoints';
 import {Permission} from '../../../models/permission.model';
 
 @Injectable({ providedIn: 'root' })
@@ -34,6 +34,22 @@ export class UserWithPermissionsService {
       userPermissionType,
       relatedEntity,
       relatedEntityUuid,
+    });
+  }
+
+  revokePermissions(
+    userUuid: string,
+    userPermissionType: string,
+    relatedEntity?: string,
+    relatedEntityUuid?: string,
+  ): Observable<any> {
+    return this.http.delete<any>(`${environment.API_HOST}${REVOKE_PERMISSIONS}`, {
+      body: {
+        userUuid,
+          userPermissionType,
+          relatedEntity,
+          relatedEntityUuid,
+      },
     });
   }
 }
