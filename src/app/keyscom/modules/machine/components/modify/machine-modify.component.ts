@@ -29,13 +29,14 @@ export class MachineModifyComponent implements OnInit {
       name: new FormControl('', [
         Validators.required,
       ]),
+      domain: new FormControl(''),
     });
 
     this.route.params.subscribe(params => {
       this.uuid = params.uuid;
       this.machineService.getMachine(this.uuid, ['project.client']).subscribe(machine => {
         this.machine = machine;
-        this.form.patchValue({name: machine.name});
+        this.form.patchValue({name: machine.name, domain: machine.domain});
       });
     });
   }

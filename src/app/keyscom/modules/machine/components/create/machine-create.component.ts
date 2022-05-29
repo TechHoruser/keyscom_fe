@@ -41,7 +41,8 @@ export class MachineCreateComponent implements OnInit {
   public saveMachine(): void {
     const validateForm = this.form.valid;
     const validateClient = this.clientSelector.isValid();
-    if (validateForm && validateClient) {
+    const validateProject = this.projectSelector.isValid();
+    if (validateForm && validateClient && validateProject) {
       this.machineService.createMachine(this.getCreateMachineEntity())
         .subscribe(() => this.router.navigate(['/machine']));
     }
