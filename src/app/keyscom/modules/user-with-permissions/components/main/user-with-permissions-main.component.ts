@@ -244,9 +244,20 @@ export class UserWithPermissionsMainComponent implements OnInit
       this.permissionRelatedEntityUuid,
     ).subscribe(() => {
       this.permissionList.next(this.permissionList.value.filter(
-        (permission) =>
-          userPermissions.childrenPermissions.get(permission.uuid) !== null
-          && userPermissions.permissionsForThisEntity.get(permission.uuid) !== null
+        (permission) => {
+          const childPermission = userPermissions.childrenPermissions.get(permission.uuid);
+          const permissionsForThisEntity = userPermissions.permissionsForThisEntity.get(permission.uuid);
+
+          if (childPermission === undefined && permissionsForThisEntity === undefined) {
+            return true;
+          }
+
+          if (permissionType === null) {
+            return false;
+          }
+
+          return permission.userPermissionType !== permissionType;
+        }
       ));
     });
   }
