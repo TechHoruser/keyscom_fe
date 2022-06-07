@@ -19,7 +19,7 @@ export class MapMachineService {
   {
     this.machines.clear();
     this.machineService.getMachines().subscribe(
-      (paginationUser) => paginationUser.results.map(
+      (machines) => machines.map(
         (machine) => this.machines.set(machine.uuid, machine)
       )
     );
@@ -51,7 +51,7 @@ export class MapMachineService {
     return Promise.resolve(this.machines);
   }
 
-  async isLoaded(): Promise<true> {
+  async isLoaded(): Promise<boolean> {
     if (this.machines === undefined) {
       await this.updateMachines();
     }

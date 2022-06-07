@@ -7,6 +7,7 @@ import {Machine} from '../../../models/machine.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ApiHelperService} from '../../shared/services/api-helper.service';
 import {CreateMachineEntity} from '../shared/create-machine.entity';
+import {map} from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class MachineService {
@@ -33,12 +34,15 @@ export class MachineService {
     );
   }
 
-  getMachines(filters?: object, embeds?: string[]): Observable<PaginationModel<Machine>> {
+  getMachines(filters?: object, embeds?: string[]): Observable<Machine[]> {
     const options = filters !== undefined ?
-      { params: this.httpHelperService.convertAnyToHttpParams({filters, embeds}) } :
+      {params: this.httpHelperService.convertAnyToHttpParams({filters, embeds})} :
       {};
 
-    return this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE}`, options);
+    return this.http.get<PaginationModel<Machine>>(`${environment.API_HOST}${MACHINE}`, options)
+      .pipe(
+        map((pagination) => pagination.results)
+      );
   }
 
   createMachine(machine: CreateMachineEntity): Observable<any>
