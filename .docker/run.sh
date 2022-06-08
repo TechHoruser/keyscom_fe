@@ -1,4 +1,4 @@
 #!/bin/sh
 
-npm install --also=dev && \
+npm ci && \
 npm start
