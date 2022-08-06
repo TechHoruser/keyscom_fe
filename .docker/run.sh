@@ -1,4 +1,4 @@
 #!/bin/sh
 
-npm ci && \
+npm ci --from-lock-file --force && \
 npm start
