@@ -1,4 +1,3 @@
-import config from './config.json';
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
@@ -8,6 +7,8 @@ import config from './config.json';
  */
 import 'zone.js/dist/zone-error'; // Included with Angular CLI.
 
+const API_PORT = 8080;
+
 export const environment = {
   production: false,
   DEFAULT_PAGINATOR_SIZE: 10,
@@ -16,7 +17,7 @@ export const environment = {
   LANGS_AVAILABLE: ['sp'],
   API_HOST: window.location.protocol + '//' +
     window.location.hostname + ':' +
-    (config.API_PORT ?? window.location.port),
+    (API_PORT ?? window.location.port),
   DATE_FORMAT: 'YYYY-MM-DD',
   DATE_SEPARATOR: '/',
   MATERIAL_DATEPICKER_FORMATS: {
