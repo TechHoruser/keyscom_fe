@@ -6,6 +6,7 @@ import {AuthRoutingModule} from './auth-routing.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from './services/jwt.interceptor';
 import {UnauthorizedInterceptor} from './services/unauthorized.interceptor';
+import {LayoutModule} from '../layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {UnauthorizedInterceptor} from './services/unauthorized.interceptor';
   ],
   imports: [
     SharedModule,
+    LayoutModule,
   ],
   providers: [
     {
