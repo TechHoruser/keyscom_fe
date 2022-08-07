@@ -181,7 +181,7 @@ export class UserWithPermissionsMainComponent implements OnInit
       this.permissionList.value.forEach((permission) => {
         const userWithPermissions = newUserWithPermissionsMap.get(permission.user.uuid);
         if (!userWithPermissions) {
-          this.alertService.error($localize`Error on load data please reload the page`);
+          this.alertService.error($localize`Error on load data, please reload the page`);
         }
         if (sameOrParentRelatedEntities[this.permissionRelatedEntity].includes(permission.permissionRelatedEntity)) {
           userWithPermissions.parentPermissions.set(permission.uuid, permission);

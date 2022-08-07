@@ -3,19 +3,42 @@
   <file id="ngi18n" original="ng.template">
     <unit id="8953033926734869941">
       <notes>
+        <note category="location">src/app/keyscom/modules/client/components/create/client-create.component.html:4</note>
+        <note category="location">src/app/keyscom/modules/client/components/create/client-create.component.html:5</note>
+        <note category="location">src/app/keyscom/modules/client/components/modify/client-modify.component.html:4</note>
+        <note category="location">src/app/keyscom/modules/client/components/modify/client-modify.component.html:5</note>
         <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:6</note>
         <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:7</note>
         <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:15</note>
+        <note category="location">src/app/keyscom/modules/machine/components/create/machine-create.component.html:4</note>
+        <note category="location">src/app/keyscom/modules/machine/components/create/machine-create.component.html:5</note>
+        <note category="location">src/app/keyscom/modules/machine/components/modify/machine-modify.component.html:10</note>
+        <note category="location">src/app/keyscom/modules/machine/components/modify/machine-modify.component.html:11</note>
         <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:6</note>
         <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:7</note>
-        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:25</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:33</note>
+        <note category="location">src/app/keyscom/modules/project/components/create/project-create.component.html:4</note>
+        <note category="location">src/app/keyscom/modules/project/components/create/project-create.component.html:5</note>
+        <note category="location">src/app/keyscom/modules/project/components/modify/project-modify.component.html:8</note>
+        <note category="location">src/app/keyscom/modules/project/components/modify/project-modify.component.html:9</note>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:6</note>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:7</note>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:35</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:38</note>
       </notes>
       <segment state="final">
         <source>Name</source>
         <target>Name</target>
+      </segment>
+    </unit>
+    <unit id="3768927257183755959">
+      <notes>
+        <note category="location">src/app/keyscom/modules/client/components/create/client-create.component.html:9</note>
+        <note category="location">src/app/keyscom/modules/profile/components/main/profile-main.component.html:24</note>
+        <note category="location">src/app/keyscom/modules/user/components/modify/user-modify.component.html:18</note>
+      </notes>
+      <segment state="final">
+        <source>Save</source>
+        <target>Save</target>
       </segment>
     </unit>
     <unit id="7861389751355579174">
@@ -60,11 +83,59 @@
         <target>Filters</target>
       </segment>
     </unit>
+    <unit id="5028777105388019087">
+      <notes>
+        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:26</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:69</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:64</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:44</note>
+      </notes>
+      <segment state="final">
+        <source>Details</source>
+        <target>Details</target>
+      </segment>
+    </unit>
+    <unit id="7022070615528435141">
+      <notes>
+        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:32</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:75</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:70</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:50</note>
+      </notes>
+      <segment state="final">
+        <source>Delete</source>
+        <target>Delete</target>
+      </segment>
+    </unit>
+    <unit id="5448194590429195304">
+      <notes>
+        <note category="location">src/app/keyscom/modules/client/shared/select-list/client-select-list.component.html:3,6</note>
+        <note category="location">src/app/keyscom/modules/client/shared/select-list/client-select-list.component.html:6,9</note>
+      </notes>
+      <segment state="final">
+        <source>Select a Client</source>
+        <target>Select a Client</target>
+      </segment>
+    </unit>
+    <unit id="3514427385994832481">
+      <notes>
+        <note category="location">src/app/keyscom/modules/client/shared/select-list/client-select-list.component.html:13,14</note>
+        <note category="location">src/app/keyscom/modules/project/shared/select-list/project-select-list.component.html:12,13</note>
+      </notes>
+      <segment state="final">
+        <source>No Selection</source>
+        <target>No Selection</target>
+      </segment>
+    </unit>
     <unit id="966975180773840600">
       <notes>
+        <note category="location">src/app/keyscom/modules/machine/components/create/machine-create.component.html:8</note>
+        <note category="location">src/app/keyscom/modules/machine/components/create/machine-create.component.html:9</note>
+        <note category="location">src/app/keyscom/modules/machine/components/modify/machine-modify.component.html:14</note>
+        <note category="location">src/app/keyscom/modules/machine/components/modify/machine-modify.component.html:15</note>
         <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:11</note>
         <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:12</note>
-        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:30</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:38</note>
       </notes>
       <segment state="final">
         <source>Domain</source>
@@ -73,18 +144,29 @@
     </unit>
     <unit id="512712988274106243">
       <notes>
+        <note category="location">src/app/keyscom/modules/machine/components/create/machine-create.component.html:12</note>
+        <note category="location">src/app/keyscom/modules/machine/components/create/machine-create.component.html:13</note>
         <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:16</note>
         <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:17</note>
-        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:35</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:43</note>
       </notes>
       <segment state="final">
         <source>IP</source>
         <target>IP</target>
       </segment>
     </unit>
+    <unit id="545973638013913112">
+      <notes>
+        <note category="location">src/app/keyscom/modules/machine/services/map-machine.service.ts:35</note>
+      </notes>
+      <segment state="final">
+        <source>Machine doesn't exist</source>
+        <target>Machine doesn't exist</target>
+      </segment>
+    </unit>
     <unit id="8650499415827640724">
       <notes>
-        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:40</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:48</note>
       </notes>
       <segment state="final">
         <source>Type</source>
@@ -100,6 +182,15 @@
         <target>Create Project</target>
       </segment>
     </unit>
+    <unit id="7818575095929107750">
+      <notes>
+        <note category="location">src/app/keyscom/modules/project/services/map-project.service.ts:31</note>
+      </notes>
+      <segment state="final">
+        <source>Project doesn't exist</source>
+        <target>Project doesn't exist</target>
+      </segment>
+    </unit>
     <unit id="2227950619547456450">
       <notes>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:10</note>
@@ -111,6 +202,8 @@
     </unit>
     <unit id="888341446683346521">
       <notes>
+        <note category="location">src/app/keyscom/modules/project/components/create/project-create.component.html:8</note>
+        <note category="location">src/app/keyscom/modules/project/components/create/project-create.component.html:10</note>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:12</note>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:22</note>
       </notes>
@@ -121,6 +214,8 @@
     </unit>
     <unit id="126074860850048964">
       <notes>
+        <note category="location">src/app/keyscom/modules/project/components/create/project-create.component.html:19</note>
+        <note category="location">src/app/keyscom/modules/project/components/create/project-create.component.html:21</note>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:13</note>
         <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:23</note>
       </notes>
@@ -140,7 +235,7 @@
     </unit>
     <unit id="3604386807230411192">
       <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:40</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:43</note>
       </notes>
       <segment state="final">
         <source>Start Date</source>
@@ -149,28 +244,16 @@
     </unit>
     <unit id="7379726829888309084">
       <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:45</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:48</note>
       </notes>
       <segment state="final">
         <source>End Date</source>
         <target>End Date</target>
       </segment>
     </unit>
-    <unit id="3193976279273491157">
-      <notes>
-        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.html:20</note>
-        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.html:45</note>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.html:50</note>
-        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:38</note>
-      </notes>
-      <segment state="final">
-        <source>Actions</source>
-        <target>Actions</target>
-      </segment>
-    </unit>
     <unit id="6302903762785466130">
       <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:111</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:117</note>
       </notes>
       <segment state="final">
         <source>Delete Project</source>
@@ -179,11 +262,21 @@
     </unit>
     <unit id="3811729936237804220">
       <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:112</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:118</note>
       </notes>
       <segment state="final">
         <source>Delete "<ph id="0" equiv="name" disp="project.name"/>"?</source>
         <target>Delete "<ph id="0" equiv="name" disp="project.name"/>"?</target>
+      </segment>
+    </unit>
+    <unit id="4202777005695932427">
+      <notes>
+        <note category="location">src/app/keyscom/modules/project/shared/select-list/project-select-list.component.html:3,6</note>
+        <note category="location">src/app/keyscom/modules/project/shared/select-list/project-select-list.component.html:6,9</note>
+      </notes>
+      <segment state="final">
+        <source>Select a Project</source>
+        <target>Select a Project</target>
       </segment>
     </unit>
     <unit id="6570363013146073520">
@@ -340,6 +433,76 @@
         <target><ph id="0" equiv="startIndex" disp="startIndex + 1"/> - <ph id="1" equiv="endIndex" disp="endIndex"/> of <ph id="2" equiv="length" disp="length"/></target>
       </segment>
     </unit>
+    <unit id="3337595223801128508">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user-with-permissions/components/main/user-with-permissions-main.component.html:2,4</note>
+      </notes>
+      <segment state="final">
+        <source>Users with permissions</source>
+        <target>Users with permissions</target>
+      </segment>
+    </unit>
+    <unit id="5918723526444903137">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user-with-permissions/components/main/user-with-permissions-main.component.html:5,8</note>
+        <note category="location">src/app/keyscom/modules/user-with-permissions/components/main/user-with-permissions-main.component.html:8,11</note>
+      </notes>
+      <segment state="final">
+        <source>Add user</source>
+        <target>Add user</target>
+      </segment>
+    </unit>
+    <unit id="6579104021026225847">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user-with-permissions/components/main/user-with-permissions-main.component.html:45,47</note>
+      </notes>
+      <segment state="final">
+        <source>Children Permissions</source>
+        <target>Children Permissions</target>
+      </segment>
+    </unit>
+    <unit id="1408152556365158582">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user-with-permissions/components/main/user-with-permissions-main.component.html:51,57</note>
+      </notes>
+      <segment state="final">
+        <source>Revoke Permission <pc id="0" equivStart="START_TAG_MAT_CHIP_LIST" equivEnd="CLOSE_TAG_MAT_CHIP_LIST" type="other" dispStart="&lt;mat-chip-list>" dispEnd="&lt;/mat-chip-list>"><pc id="1" equivStart="START_TAG_MAT_CHIP" equivEnd="CLOSE_TAG_MAT_CHIP" type="other" dispStart="&lt;mat-chip *ngFor=&quot;let permissionTypeMap of this.usersWithPermissionsMap.get(userMap.key).selectedTypesForRemove | keyvalue&quot;
+                          [class]=&quot;permissionTypeMap.value ? 'active' : 'deactivated'&quot;
+                          (click)=&quot;selectTypeToRemove($event, userMap.key, permissionTypeMap.key, !permissionTypeMap.value)&quot;
+                >"><ph id="2" equiv="INTERPOLATION" disp="}}"/></pc></pc></source>
+        <target>Revoke Permission <pc id="0" equivStart="START_TAG_MAT_CHIP_LIST" equivEnd="CLOSE_TAG_MAT_CHIP_LIST" type="other" dispStart="&lt;mat-chip-list>" dispEnd="&lt;/mat-chip-list>"><pc id="1" equivStart="START_TAG_MAT_CHIP" equivEnd="CLOSE_TAG_MAT_CHIP" type="other" dispStart="&lt;mat-chip *ngFor=&quot;let permissionTypeMap of this.usersWithPermissionsMap.get(userMap.key).selectedTypesForRemove | keyvalue&quot;
+                          [class]=&quot;permissionTypeMap.value ? 'active' : 'deactivated'&quot;
+                          (click)=&quot;selectTypeToRemove($event, userMap.key, permissionTypeMap.key, !permissionTypeMap.value)&quot;
+                >"><ph id="2" equiv="INTERPOLATION" disp="}}"/></pc></pc></target>
+      </segment>
+    </unit>
+    <unit id="9212398708781590704">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user-with-permissions/components/main/user-with-permissions-main.component.ts:184</note>
+      </notes>
+      <segment state="final">
+        <source>Error on load data, please reload the page</source>
+        <target>Error on load data, please reload the page</target>
+      </segment>
+    </unit>
+    <unit id="6078220087342741879">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user-with-permissions/components/main/user-with-permissions-main.component.ts:234</note>
+      </notes>
+      <segment state="final">
+        <source>You need active the permission type to remove</source>
+        <target>You need active the permission type to remove</target>
+      </segment>
+    </unit>
+    <unit id="7819314041543176992">
+      <notes>
+        <note category="location">src/app/keyscom/modules/user-with-permissions/components/main/user-with-permissions-main.component.ts:234</note>
+      </notes>
+      <segment state="final">
+        <source>Close</source>
+        <target>Close</target>
+      </segment>
+    </unit>
     <unit id="5674286808255988565">
       <notes>
         <note category="location">src/app/keyscom/modules/user/components/create/user-create.component.html:17</note>
@@ -351,8 +514,12 @@
     </unit>
     <unit id="6028371114637047813">
       <notes>
+        <note category="location">src/app/keyscom/modules/profile/components/main/profile-main.component.html:9</note>
+        <note category="location">src/app/keyscom/modules/profile/components/main/profile-main.component.html:10</note>
         <note category="location">src/app/keyscom/modules/user/components/create/user-create.component.html:8</note>
         <note category="location">src/app/keyscom/modules/user/components/create/user-create.component.html:9</note>
+        <note category="location">src/app/keyscom/modules/user/components/modify/user-modify.component.html:8</note>
+        <note category="location">src/app/keyscom/modules/user/components/modify/user-modify.component.html:9</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:10</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:11</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:23</note>
@@ -364,8 +531,12 @@
     </unit>
     <unit id="4407559560004943843">
       <notes>
+        <note category="location">src/app/keyscom/modules/profile/components/main/profile-main.component.html:13</note>
+        <note category="location">src/app/keyscom/modules/profile/components/main/profile-main.component.html:14</note>
         <note category="location">src/app/keyscom/modules/user/components/create/user-create.component.html:12</note>
         <note category="location">src/app/keyscom/modules/user/components/create/user-create.component.html:13</note>
+        <note category="location">src/app/keyscom/modules/user/components/modify/user-modify.component.html:12</note>
+        <note category="location">src/app/keyscom/modules/user/components/modify/user-modify.component.html:13</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:14</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:15</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:28</note>
@@ -375,9 +546,23 @@
         <target>Last Name</target>
       </segment>
     </unit>
+    <unit id="5377648337763219893">
+      <notes>
+        <note category="location">src/app/keyscom/modules/profile/components/main/profile-main.component.html:17</note>
+        <note category="location">src/app/keyscom/modules/profile/components/main/profile-main.component.html:18</note>
+      </notes>
+      <segment state="final">
+        <source>Public Key</source>
+        <target>Public Key</target>
+      </segment>
+    </unit>
     <unit id="4768749765465246664">
       <notes>
         <note category="location">src/app/keyscom/modules/auth/component/login/login.component.html:15</note>
+        <note category="location">src/app/keyscom/modules/profile/components/main/profile-main.component.html:5</note>
+        <note category="location">src/app/keyscom/modules/profile/components/main/profile-main.component.html:6</note>
+        <note category="location">src/app/keyscom/modules/user/components/modify/user-modify.component.html:4</note>
+        <note category="location">src/app/keyscom/modules/user/components/modify/user-modify.component.html:5</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:6</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:7</note>
         <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.html:33</note>
@@ -398,11 +583,20 @@
     </unit>
     <unit id="2454050363478003966">
       <notes>
-        <note category="location">src/app/keyscom/modules/auth/component/login/login.component.html:31</note>
+        <note category="location">src/app/keyscom/modules/auth/component/login/login.component.html:32</note>
       </notes>
       <segment state="final">
         <source>Login</source>
         <target>Login</target>
+      </segment>
+    </unit>
+    <unit id="5309698892465444756">
+      <notes>
+        <note category="location">src/app/keyscom/modules/auth/services/authentication.service.ts:34</note>
+      </notes>
+      <segment state="final">
+        <source>Incorrect email or password</source>
+        <target>Incorrect email or password</target>
       </segment>
     </unit>
     <unit id="6325584318421809165">
@@ -412,6 +606,15 @@
       <segment state="final">
         <source>Create Client</source>
         <target>Create Client</target>
+      </segment>
+    </unit>
+    <unit id="2725860816290230118">
+      <notes>
+        <note category="location">src/app/keyscom/modules/client/services/map-client.service.ts:31</note>
+      </notes>
+      <segment state="final">
+        <source>Client doesn't exist</source>
+        <target>Client doesn't exist</target>
       </segment>
     </unit>
   </file>
