@@ -74,8 +74,8 @@ export class UserListComponent implements OnInit {
   {
     this.dialogService.open(
       {
-        title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
-        message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
+        title: $localize`CONFIRM.DELETE.TITLE`,
+        message: $localize`CONFIRM.DELETE.MESSAGE`,
       },
       () => this.userService.deleteByUuid(user.uuid).subscribe(
         () => this.userService.updateUsers()

@@ -74,8 +74,8 @@ export class ClientListComponent implements OnInit {
   {
     this.dialogService.open(
       {
-        title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
-        message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
+        title: $localize`CONFIRM.DELETE.TITLE`,
+        message: $localize`CONFIRM.DELETE.MESSAGE`,
       },
       () => this.clientService.deleteByUuid(client.uuid).subscribe(
         () => this.clientService.updateClients()

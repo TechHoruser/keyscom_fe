@@ -122,8 +122,8 @@ export class MachineListComponent implements OnInit {
   {
     this.dialogService.open(
       {
-        title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
-        message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
+        title: $localize`CONFIRM.DELETE.TITLE`,
+        message: $localize`CONFIRM.DELETE.MESSAGE`,
       },
       () => this.machineService.deleteByUuid(machine.uuid).subscribe(
         () => this.machineService.updateMachines()

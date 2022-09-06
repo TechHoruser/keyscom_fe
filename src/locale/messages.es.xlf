@@ -107,6 +107,30 @@
         <target>Eliminar</target>
       </segment>
     </unit>
+    <unit id="1095534930553121424">
+      <notes>
+        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.ts:77</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.ts:125</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:117</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.ts:77</note>
+      </notes>
+      <segment state="initial">
+        <source>CONFIRM.DELETE.TITLE</source>
+        <target>Eliminar</target>
+      </segment>
+    </unit>
+    <unit id="6578853185911262302">
+      <notes>
+        <note category="location">src/app/keyscom/modules/client/shared/list/client-list.component.ts:78</note>
+        <note category="location">src/app/keyscom/modules/machine/shared/list/machine-list.component.ts:126</note>
+        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:118</note>
+        <note category="location">src/app/keyscom/modules/user/shared/list/user-list.component.ts:78</note>
+      </notes>
+      <segment state="initial">
+        <source>CONFIRM.DELETE.MESSAGE</source>
+        <target>¿Está seguro que desea eliminar?</target>
+      </segment>
+    </unit>
     <unit id="5448194590429195304">
       <notes>
         <note category="location">src/app/keyscom/modules/client/shared/select-list/client-select-list.component.html:3,6</note>
@@ -249,24 +273,6 @@
       <segment state="final">
         <source>End Date</source>
         <target>Fecha Fin</target>
-      </segment>
-    </unit>
-    <unit id="6302903762785466130">
-      <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:117</note>
-      </notes>
-      <segment state="final">
-        <source>Delete Project</source>
-        <target>Eliminar Proyecto</target>
-      </segment>
-    </unit>
-    <unit id="3811729936237804220">
-      <notes>
-        <note category="location">src/app/keyscom/modules/project/shared/list/project-list.component.ts:118</note>
-      </notes>
-      <segment state="final">
-        <source>Delete "<ph id="0" equiv="name" disp="project.name"/>"?</source>
-        <target>Eliminar "<ph id="0" equiv="name" disp="project.name"/>"?</target>
       </segment>
     </unit>
     <unit id="4202777005695932427">
@@ -474,15 +480,6 @@
                           [class]=&quot;permissionTypeMap.value ? 'active' : 'deactivated'&quot;
                           (click)=&quot;selectTypeToRemove($event, userMap.key, permissionTypeMap.key, !permissionTypeMap.value)&quot;
                 >"><ph id="2" equiv="INTERPOLATION" disp="}}"/></pc></pc></target>
-      </segment>
-    </unit>
-    <unit id="9212398708781590704">
-      <notes>
-        <note category="location">src/app/keyscom/modules/user-with-permissions/components/main/user-with-permissions-main.component.ts:184</note>
-      </notes>
-      <segment state="final">
-        <source>Error on load data, please reload the page</source>
-        <target>Error en la carga de datos, por favor recarge la página</target>
       </segment>
     </unit>
     <unit id="6078220087342741879">

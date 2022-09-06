@@ -114,8 +114,8 @@ export class ProjectListComponent implements OnInit {
   {
     this.dialogService.open(
       {
-        title: $localize`Delete Project`,
-        message: $localize`Delete "${project.name}:name:"?`,
+        title: $localize`CONFIRM.DELETE.TITLE`,
+        message: $localize`CONFIRM.DELETE.MESSAGE`,
       },
       () => this.projectService.deleteByUuid(project.uuid).subscribe(
         () => this.projectService.updateProjects()
